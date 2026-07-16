@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rebuilding contract creation by shifting authorship — Aman</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css?v=4">
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a class="logo" href="index.html">aman<span>.</span>pm</a>
+    <div class="nav-links">
+      <a href="index.html#work"><span class="n">01</span>Work</a>
+      <a href="index.html#approach"><span class="n">02</span>Approach</a>
+      <a href="index.html#timeline"><span class="n">03</span>Timeline</a>
+      <a href="index.html#contact"><span class="n">04</span>Contact</a>
+    </div>
+  </div>
+</nav>
+
+<div class="wrap-narrow breadcrumb">
+  <a href="index.html">← All case studies</a> / 04
+</div>
+
+<header class="case-hero wrap-narrow">
+  <div class="eyebrow">Case study 04 · Enterprise workflow</div>
+  <h1>Suppliers knew the real scope. Buyers still owned the contract.</h1>
+  <p class="dek">At $11B in annual spend and 800,000+ contracts a year, contract scoping actually lived in Excel files emailed back and forth — and Scopeworker had quietly become a transcription layer, adding 1–2 weeks before work even began. I re-architected contract creation so suppliers author scope from on-site reality, while buyers keep approval and control.</p>
+
+  <div class="case-meta">
+    <div class="m-item"><div class="l">My role</div><div class="v">PM — strategy, product decision, rollout</div></div>
+    <div class="m-item"><div class="l">Scale</div><div class="v">$11B spend · 800K contracts/yr</div></div>
+    <div class="m-item"><div class="l">Avg contract</div><div class="v">~$14,500</div></div>
+    <div class="m-item"><div class="l">Adoption</div><div class="v hero-stat">~60% moved</div></div>
+  </div>
+
+  <p class="dek" style="margin-top:28px;">The strategic bet was to <strong style="color:var(--text);">separate authorship from authority</strong>: let the people with ground truth — suppliers on site — write the scope, while the paying customer keeps approval, compliance, and downstream control. That single move aligned the system to how work actually happens without shifting any power, and let the platform <em>replace</em> Excel as the system of record instead of competing with it.</p>
+
+  <div class="impact-strip">
+    <div class="imp"><div class="n">$11B</div><div class="l">annual contract spend running through this flow</div></div>
+    <div class="imp"><div class="n">~60%</div><div class="l">of contracts moved to supplier-led authoring</div></div>
+    <div class="imp"><div class="n">1–2 wks</div><div class="l">of scoping cycle, before work even began — cut sharply</div></div>
+    <div class="imp"><div class="n">Excel → SoR</div><div class="l">the platform became the single source of truth</div></div>
+  </div>
+</header>
+
+<div class="case-body-page wrap-narrow">
+
+  <div class="cs-section">
+    <div class="cs-label">Context</div>
+    <h2>The contract is the atomic unit — and creating one was the bottleneck</h2>
+    <p>Scopeworker is the enterprise ERP US telecom operators like T-Mobile and Samsung use to run field execution for network build and maintenance. A <strong>contract</strong> is the core execution unit: it defines what work happens at a site, how it's done, and what the supplier gets paid, then rolls up into POs, invoices, and close-out packages.</p>
+    <p>At the time of this project, one thing was throttling an otherwise scalable platform: <strong>creating those contracts</strong>. Over 800,000 are created a year, averaging ~$14,500 each — north of $11B in spend. The prime client was T-Mobile, the largest US operator.</p>
+  </div>
+
+  <div class="cs-section">
+    <div class="cs-label">The problem</div>
+    <h2>The platform had become a transcription layer</h2>
+    <p>By design, contract creation was <strong>buyer-led</strong>: buyers defined the scope of work in the platform and issued contracts to suppliers. In reality, that's not how the work happened.</p>
+    <p>Suppliers were the ones visiting sites, assessing on-ground conditions, and determining what actually needed doing — and none of that was captured directly in Scopeworker. Suppliers shared findings in <strong>Excel files over email</strong>, which buyers then manually re-typed into contracts.</p>
+
+    <div class="flow">
+      <div class="flow-node friction"><div class="fn-k">Ground truth</div><div class="fn-t">Supplier assesses the site</div><div class="fn-d">Knows what the job actually requires — but has nowhere in-platform to say so.</div></div>
+      <div class="flow-arrow">↓</div>
+      <div class="flow-node friction"><div class="fn-k">Off-platform</div><div class="fn-t">Scope lives in an Excel file, emailed over</div><div class="fn-d">Multiple versions circulate with no clear owner; context gets lost or misread.</div></div>
+      <div class="flow-arrow">↓</div>
+      <div class="flow-node friction"><div class="fn-k">Manual</div><div class="fn-t">Buyer transcribes it into a contract</div><div class="fn-d">Weeks of reconciling inputs before a contract can even be issued.</div></div>
+      <div class="flow-arrow">↓</div>
+      <div class="flow-node"><div class="fn-k">Result</div><div class="fn-t">1–2 weeks gone, before execution starts</div><div class="fn-d">Scopeworker records the outcome — it isn't the source of truth.</div></div>
+    </div>
+
+    <div class="callout warn">
+      <div class="co-label">The real failure</div>
+      <p>The system of record was <strong>an Excel file in someone's inbox</strong>. The platform wasn't where scoping happened — it was where scoping got re-typed after the fact. Every contract started with delay and information loss baked in.</p>
+    </div>
+  </div>
+
+  <div class="cs-section">
+    <div class="cs-label">Why it was hard</div>
+    <h2>This challenged a core assumption, not just a workflow</h2>
+    <p>Fixing it meant touching who does what — which is exactly the kind of change that fails on adoption if you get it wrong.</p>
+    <ol class="reasons">
+      <li><strong>Shift authorship without shifting authority.</strong> Suppliers needed to define scope, but buyers were the paying customers and had to stay in control. Anything that made buyers feel sidelined would die on adoption.</li>
+      <li><strong>Replace Excel without breaking habits.</strong> Excel worked because teams knew it cold. The problem wasn't the grid — it was versioning, ownership, and auditability. We had to replace it as the system of record while keeping the familiarity.</li>
+      <li><strong>Cross-organization collaboration.</strong> Multiple users across buyer and supplier orgs editing one scope meant real version control, conflicting edits, approval states, and audit trails.</li>
+      <li><strong>System integrity across integrations.</strong> Scopeworker fed other enterprise systems. Buyer-specific validations and downstream requirements still had to hold — even when a supplier authored the data.</li>
+    </ol>
+  </div>
+
+  <div class="cs-section">
+    <div class="cs-label">The decision</div>
+    <h2>Separate authorship from authority</h2>
+    <p>I evaluated three approaches. Two of them treated symptoms:</p>
+    <div class="decision">
+      <div class="dc-head"><span class="dc-num">→</span> The options on the table</div>
+      <dl class="dc-body">
+        <div class="dc-row"><dt>Option A</dt><dd>Improve buyer tooling and templates. <strong>Faster transcription is still transcription</strong> — the ground truth still starts off-platform.</dd></div>
+        <div class="dc-row"><dt>Option B</dt><dd>Add better commenting and collaboration to the existing buyer flow. Smoother, but buyers still author what suppliers already know.</dd></div>
+        <div class="dc-row is-decision"><dt>Option C ✓</dt><dd>Invert it. Suppliers <strong>initiate</strong> scope from on-ground assessment; buyers remain the final approvers; approved quotes explicitly convert into contracts and POs.</dd></div>
+      </dl>
+    </div>
+    <p>Option C is the only one that aligns the system with reality without moving power. Here's the shift, made explicit:</p>
+
+    <div class="split">
+      <div class="sp before">
+        <div class="sp-h">✕ Before · misaligned</div>
+        <dl>
+          <div class="sp-row"><dt>Ground truth</dt><dd>Supplier (on site)</dd></div>
+          <div class="sp-row key"><dt>Authors scope</dt><dd>Buyer — by transcribing</dd></div>
+          <div class="sp-row"><dt>Approves</dt><dd>Buyer</dd></div>
+          <div class="sp-row"><dt>System of record</dt><dd>Excel + email</dd></div>
+        </dl>
+      </div>
+      <div class="sp after">
+        <div class="sp-h">✓ After · aligned</div>
+        <dl>
+          <div class="sp-row"><dt>Ground truth</dt><dd>Supplier (on site)</dd></div>
+          <div class="sp-row key"><dt>Authors scope</dt><dd>Supplier — directly</dd></div>
+          <div class="sp-row"><dt>Approves</dt><dd>Buyer — final authority</dd></div>
+          <div class="sp-row"><dt>System of record</dt><dd>Scopeworker</dd></div>
+        </dl>
+      </div>
+    </div>
+    <p class="sec-note" style="margin-top:14px;">Only one row changes — who authors. Authority, approval, and compliance stay exactly where they were. That's the whole reason it was adoptable.</p>
+  </div>
+
+  <div class="cs-section">
+    <div class="cs-label">What we built</div>
+    <h2>We didn't move Excel in. We replaced it.</h2>
+
+    <h3 style="font-size:16px;font-weight:600;margin:22px 0 6px;">1 · Collaborative, spreadsheet-like authoring</h3>
+    <p>An in-platform, table-based authoring experience that felt like the tools teams already used — so structure and familiarity survived the move into a governed system. It also carried context Excel never could, like structured line-item information.</p>
+
+    <div class="recon">
+      <div class="recon-label">Illustrative reconstruction · in-platform scope authoring, not a product screenshot</div>
+      <div class="recon-body">
+        <div class="scope-wrap">
+          <table class="scope">
+            <thead>
+              <tr><th>Line item</th><th>Qty</th><th>Unit</th><th style="text-align:right">Rate</th><th style="text-align:right">Amount</th></tr>
+            </thead>
+            <tbody>
+              <tr><td class="li">Foundation pour — tower base</td><td>1</td><td>ea</td><td class="num">$8,200</td><td class="num">$8,200</td></tr>
+              <tr><td class="li">40ft crane rental</td><td>2</td><td>day</td><td class="num">$1,450</td><td class="num">$2,900</td></tr>
+              <tr><td class="li">Antenna install crew — 3 sector</td><td>1</td><td>crew</td><td class="num">$3,400</td><td class="num">$3,400</td></tr>
+              <tr><td class="li">Fiber pull — 400m</td><td>400</td><td>m</td><td class="num">$6.50</td><td class="num">$2,600</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div style="margin-top:14px;display:flex;gap:10px;flex-wrap:wrap;align-items:center;font-family:var(--mono);font-size:12px;color:var(--text-dim);">
+          <span class="state supplier">authored by supplier</span>
+          <span class="state pending">pending buyer approval</span>
+          <span style="margin-left:auto;color:var(--text);">total &nbsp;<strong>$17,100</strong></span>
+        </div>
+      </div>
+      <div class="recon-cap">The supplier builds the scope line by line, in the system — no email, no re-typing. The buyer reviews the exact same object they'll approve.</div>
+    </div>
+
+    <h3 style="font-size:16px;font-weight:600;margin:28px 0 6px;">2 · Controlled collaboration and versioning</h3>
+    <p>Multiple users across both organizations could edit one scope, with every change tracked, attributable, and auditable — and an email notification whenever a new version was published. Buyers kept final approval authority throughout.</p>
+
+    <div class="recon">
+      <div class="recon-label">Illustrative reconstruction · version history & approval state</div>
+      <div class="recon-body">
+        <div class="vhist">
+          <div class="vh-row"><span class="vh-v">v3</span><span class="vh-by">Published by <b>supplier</b> · added crane day + fiber run</span><span class="state pending">awaiting buyer</span></div>
+          <div class="vh-row"><span class="vh-v">v2</span><span class="vh-by">Edited by <b>supplier</b> · revised foundation qty</span><span class="state supplier">superseded</span></div>
+          <div class="vh-row"><span class="vh-v">v1</span><span class="vh-by">Initial scope by <b>supplier</b> · from site assessment</span><span class="state supplier">superseded</span></div>
+        </div>
+        <div style="margin-top:12px;font-family:var(--mono);font-size:12px;color:var(--text-faint);">↳ on approve, v3 converts into a contract + PO — one explicit, auditable step.</div>
+      </div>
+      <div class="recon-cap">The thing Excel never had: one owner per version, a clear trail of who changed what, and an unambiguous approval gate.</div>
+    </div>
+
+    <h3 style="font-size:16px;font-weight:600;margin:28px 0 6px;">3 · Buyer-specific validations</h3>
+    <p>The subtle part: I <strong>decoupled who creates the data from whose rules apply</strong>. Buyer validations kept running against supplier-authored scopes, so compliance and downstream-system compatibility held even though the author had changed.</p>
+
+    <div class="flow">
+      <div class="flow-node l1"><div class="fn-k">Authored by</div><div class="fn-t">Supplier</div></div>
+      <div class="flow-arrow">↓ &nbsp;buyer's rules still run</div>
+      <div class="flow-node l2"><div class="fn-k">Validated against</div><div class="fn-t">Buyer's compliance + integration requirements</div></div>
+      <div class="flow-arrow">↓</div>
+      <div class="flow-node terminal"><div class="fn-k">Result</div><div class="fn-t">A compliant contract, whoever typed it</div></div>
+    </div>
+  </div>
+
+  <div class="cs-section">
+    <div class="cs-label">Execution</div>
+    <h2>Shipped on existing rails, rolled out incrementally</h2>
+    <p>The goal was never feature completeness — it was making Scopeworker the real system of record, fast, without a risky big-bang.</p>
+    <ul>
+      <li><strong>Reused the existing contract infrastructure</strong> rather than rebuilding from scratch — minimizing integration and adoption risk.</li>
+      <li><strong>Rolled out incrementally</strong> to manage adoption risk on a workflow this central.</li>
+      <li><strong>Ran discovery with both buyers and suppliers</strong> to validate real comfort with the approval model before scaling it.</li>
+      <li><strong>Optimized for cycle time and information loss</strong>, not surface area.</li>
+    </ul>
+  </div>
+
+  <div class="cs-section">
+    <div class="cs-label">Outcome</div>
+    <h2>From transcription layer to single source of truth</h2>
+    <div class="pull-stats">
+      <div class="ps"><div class="n">~60%</div><div class="l">of contracts moved to the supplier-led flow</div></div>
+      <div class="ps"><div class="n">~480K</div><div class="l">contracts a year now authored this way</div></div>
+      <div class="ps"><div class="n">In-platform</div><div class="l">all scoping communication, off email</div></div>
+    </div>
+    <p>Contract creation cycles dropped sharply, buyers gained earlier visibility and clearer control, and suppliers became first-class participants instead of email attachments. Scopeworker went from recording contracts after the fact to being the place they're actually created.</p>
+
+    <div class="cs-section" style="margin-bottom:0;">
+      <h3 style="font-size:16px;font-weight:600;margin:8px 0 8px;">Second-order effects</h3>
+      <ul>
+        <li>Cut the dependency on email and manual follow-ups across two organizations.</li>
+        <li>Improved trust between buyers and suppliers — shared, attributable scope instead of dueling spreadsheets.</li>
+        <li>Created the foundation for downstream automation.</li>
+        <li>Opened a <strong>new revenue stream</strong> for Scopeworker — the supplier-side product that this made possible. <a href="case-3.html" style="color:var(--teal);">See case 03 →</a></li>
+      </ul>
+    </div>
+
+    <div class="callout key">
+      <div class="co-label">Key takeaway</div>
+      <p>Good enterprise products don't enforce the ideal process — they <strong>adapt to how work actually happens, while preserving control, accountability, and trust</strong>. The win here wasn't a slicker form. It was designing the system around reality instead of the org chart.</p>
+    </div>
+
+    <h3 style="font-size:16px;font-weight:600;margin:26px 0 6px;">What I'd pin down next</h3>
+    <p>The adoption number is hard and clear (~60%). The cycle-time win I can describe but not yet quantify to the day — the version of this story with a precise before/after on scoping cycle time is the stronger one, and that's the first thing I'd instrument on a re-run.</p>
+  </div>
+
+</div>
+
+<div class="wrap-narrow case-nav">
+  <a href="case-3.html">← Supplier monetization</a>
+  <a href="index.html">Back to all work →</a>
+</div>
+
+<footer class="wrap-narrow">
+  <div>Chandigarh, India · Built by hand, not by template.</div>
+</footer>
+
+</body>
+</html>
