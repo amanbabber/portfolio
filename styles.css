@@ -195,10 +195,32 @@ section{padding:80px 0;}
   width:9px; height:9px; border-radius:50%; background:var(--bg);
   border:2px solid var(--teal);
 }
+.tl-item.current::before{background:var(--teal); box-shadow:0 0 0 4px rgba(79,209,197,0.12);}
+.tl-item.past::before{border-color:var(--text-faint);}
 .tl-date{font-family:var(--mono); font-size:12px; color:var(--text-faint); margin-bottom:6px;}
 .tl-role{font-size:16px; font-weight:600;}
 .tl-org{font-size:14px; color:var(--text-dim); margin-bottom:8px;}
 .tl-detail{font-size:14px; color:var(--text-dim); max-width:600px;}
+
+/* role ladder within a single company */
+.tl-roles{
+  list-style:none; margin:16px 0 0; padding:0;
+  border:1px solid var(--border-soft); border-radius:6px;
+  background:var(--surface); max-width:600px; overflow:hidden;
+}
+.tl-roles li{
+  display:flex; align-items:baseline; gap:14px; flex-wrap:wrap;
+  padding:11px 16px; border-top:1px solid var(--border-soft);
+}
+.tl-roles li:first-child{border-top:none;}
+.tl-roles .r-title{font-size:14px; color:var(--text); font-weight:600; flex:1; min-width:180px;}
+.tl-roles li:first-child .r-title::after{
+  content:"current"; font-family:var(--mono); font-size:10px; font-weight:500;
+  letter-spacing:0.06em; text-transform:uppercase; color:var(--teal);
+  border:1px solid rgba(79,209,197,0.4); background:rgba(79,209,197,0.08);
+  padding:2px 7px; border-radius:20px; margin-left:10px; white-space:nowrap;
+}
+.tl-roles .r-date{font-family:var(--mono); font-size:12px; color:var(--text-faint); white-space:nowrap;}
 
 /* ---------- CONTACT ---------- */
 .contact{
