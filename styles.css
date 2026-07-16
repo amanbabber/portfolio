@@ -349,36 +349,43 @@ footer{padding:32px 0 60px; text-align:left; font-family:var(--mono); font-size:
   background:var(--surface);
 }
 .cs-table{
-  width:100%; border-collapse:collapse; min-width:520px;
-  font-size:14.5px;
+  width:100%; border-collapse:collapse; table-layout:fixed; min-width:560px;
+  font-size:14.5px; line-height:1.5;
 }
 .cs-table th, .cs-table td{
-  padding:14px 16px; text-align:left;
+  padding:16px 18px; text-align:left;
   border-bottom:1px solid var(--border-soft);
   vertical-align:top;
+  word-break:normal; overflow-wrap:break-word;
 }
 .cs-table tr:last-child td{border-bottom:none;}
-.cs-table th{
+.cs-table thead th{
   font-family:var(--mono); font-size:11px; letter-spacing:0.08em;
   color:var(--text-faint); text-transform:uppercase; font-weight:600;
   background:var(--surface-2); border-bottom:1px solid var(--border);
 }
 .cs-table td{color:var(--text-dim);}
-.cs-table td:first-child{color:var(--text); font-weight:600;}
 .cs-table td strong{color:var(--text);}
-.cs-table .weight{
+
+/* first-column stacked cell (layer / signal name) */
+.cs-table .cell-lead{color:var(--text); font-weight:600; font-size:15px;}
+.cs-table .cell-tag{
   font-family:var(--mono); font-size:11px; letter-spacing:0.06em;
-  padding:3px 8px; border-radius:20px; border:1px solid; display:inline-block;
-  text-transform:uppercase;
+  color:var(--teal); text-transform:uppercase; display:block; margin-bottom:5px;
+}
+.cs-table .cell-note{
+  font-family:var(--mono); font-size:11px; color:var(--text-faint);
+  display:block; margin-top:6px; letter-spacing:0.02em;
+}
+
+.cs-table .weight{
+  font-family:var(--mono); font-size:10.5px; letter-spacing:0.06em;
+  padding:4px 9px; border-radius:20px; border:1px solid; display:inline-block;
+  text-transform:uppercase; white-space:nowrap;
 }
 .cs-table .weight.primary{color:var(--amber); border-color:rgba(226,160,63,0.4); background:rgba(226,160,63,0.08);}
 .cs-table .weight.secondary{color:var(--teal); border-color:rgba(79,209,197,0.4); background:rgba(79,209,197,0.08);}
 .cs-table .weight.weak{color:var(--text-faint); border-color:var(--border);}
-
-.cs-table .phase-num{
-  font-family:var(--mono); color:var(--teal); font-weight:600;
-  font-size:13px; letter-spacing:0.04em;
-}
 
 /* ---------- INLINE CHART ---------- */
 .cs-chart{
@@ -389,22 +396,54 @@ footer{padding:32px 0 60px; text-align:left; font-family:var(--mono); font-size:
   overflow:hidden;
 }
 .cs-chart .chart-head{
-  padding:16px 20px 8px;
+  padding:18px 22px 14px;
   border-bottom:1px solid var(--border-soft);
 }
-.cs-chart .chart-title{font-size:14px; font-weight:600; color:var(--text);}
-.cs-chart .chart-sub{font-family:var(--mono); font-size:11px; color:var(--text-faint); margin-top:4px; letter-spacing:0.02em;}
-.cs-chart svg{display:block; width:100%; height:auto; padding:20px 20px 8px;}
+.cs-chart .chart-title{font-size:15px; font-weight:600; color:var(--text); line-height:1.35;}
+.cs-chart .chart-sub{font-family:var(--mono); font-size:11px; color:var(--text-faint); margin-top:6px; letter-spacing:0.02em; text-transform:uppercase;}
+.cs-chart svg{display:block; width:100%; height:auto; padding:22px 22px 10px;}
 .cs-chart .chart-legend{
-  display:flex; gap:24px; flex-wrap:wrap;
-  padding:8px 20px 16px;
+  display:flex; gap:12px 26px; flex-wrap:wrap;
+  padding:6px 22px 18px;
   font-family:var(--mono); font-size:12px; color:var(--text-dim);
 }
 .cs-chart .chart-legend .lg-item{display:flex; align-items:center; gap:8px;}
-.cs-chart .chart-legend .sw{width:14px; height:2px; border-radius:1px;}
+.cs-chart .chart-legend .sw{width:16px; height:3px; border-radius:2px; flex:none;}
 .cs-chart .chart-caption{
-  font-family:var(--mono); font-size:12px; color:var(--text-dim);
-  padding:12px 20px; border-top:1px solid var(--border-soft);
+  font-family:var(--sans); font-size:14.5px; line-height:1.6; color:var(--text-dim);
+  padding:16px 22px; border-top:1px solid var(--border-soft);
+}
+.cs-chart .chart-caption strong{color:var(--text); font-weight:600;}
+
+/* "how to read this" helper block, sits above a chart */
+.read-guide{
+  margin:20px 0; padding:18px 20px;
+  background:var(--surface-2); border:1px solid var(--border-soft);
+  border-radius:6px; max-width:680px;
+}
+.read-guide .rg-label{
+  font-family:var(--mono); font-size:11px; letter-spacing:0.1em;
+  color:var(--text-faint); text-transform:uppercase; margin-bottom:12px;
+}
+.read-guide ul{list-style:none; padding:0; margin:0;}
+.read-guide li{
+  position:relative; padding-left:22px; margin-bottom:10px;
+  font-size:14.5px; color:var(--text-dim); line-height:1.55; max-width:none;
+}
+.read-guide li:last-child{margin-bottom:0;}
+.read-guide li::before{
+  content:""; position:absolute; left:0; top:9px;
+  width:8px; height:8px; border-radius:2px;
+}
+.read-guide li.rg-x::before{background:var(--text-faint); border-radius:50%;}
+.read-guide li.rg-fp::before{background:var(--red);}
+.read-guide li.rg-fn::before{background:var(--teal);}
+.read-guide li strong{color:var(--text); font-weight:600;}
+.read-guide li .axis{color:var(--text); font-weight:600;}
+.read-guide > p{
+  margin:14px 0 0; padding-top:14px;
+  border-top:1px solid var(--border-soft);
+  font-size:14.5px; line-height:1.6; color:var(--text); max-width:none;
 }
 
 /* ---------- FIGURES ---------- */
