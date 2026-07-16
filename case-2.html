@@ -6,8 +6,8 @@
 <title>Stopping duplicate work orders before clients paid twice — Aman</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="styles.css?v=5">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css?v=6">
 </head>
 <body>
 
@@ -195,24 +195,24 @@
         <div class="chart-sub">Illustrative — shape of the trade-off, not exact eval values</div>
       </div>
       <svg viewBox="0 0 640 328" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="As the confidence threshold rises left to right, the false-positive rate falls and the false-negative rate rises. The two curves cross near the middle; the production threshold is set at 0.78, just to the right of the crossover, favouring a cleaner queue.">
-        <text x="16" y="130" transform="rotate(-90 16 130)" text-anchor="middle" fill="#9099ac" font-family="IBM Plex Mono, monospace" font-size="10" letter-spacing="1">ERROR RATE (% OF PAIRS)</text>
-        <g stroke="#2a3040" stroke-width="1">
+        <text x="16" y="130" transform="rotate(-90 16 130)" text-anchor="middle" fill="#B7C0CE" font-family="IBM Plex Mono, monospace" font-size="10" letter-spacing="1">ERROR RATE (% OF PAIRS)</text>
+        <g stroke="#27303F" stroke-width="1">
           <line x1="60" y1="20" x2="60" y2="240"/>
           <line x1="60" y1="240" x2="620" y2="240"/>
         </g>
-        <g stroke="#232838" stroke-width="1" stroke-dasharray="2 4">
+        <g stroke="#1E2635" stroke-width="1" stroke-dasharray="2 4">
           <line x1="60" y1="80" x2="620" y2="80"/>
           <line x1="60" y1="140" x2="620" y2="140"/>
           <line x1="60" y1="200" x2="620" y2="200"/>
         </g>
-        <g fill="#5b6272" font-family="IBM Plex Mono, monospace" font-size="10">
+        <g fill="#6D7788" font-family="IBM Plex Mono, monospace" font-size="10">
           <text x="52" y="244" text-anchor="end">0%</text>
           <text x="52" y="204" text-anchor="end">25%</text>
           <text x="52" y="144" text-anchor="end">50%</text>
           <text x="52" y="84"  text-anchor="end">75%</text>
           <text x="52" y="24"  text-anchor="end">100%</text>
         </g>
-        <g fill="#5b6272" font-family="IBM Plex Mono, monospace" font-size="10">
+        <g fill="#6D7788" font-family="IBM Plex Mono, monospace" font-size="10">
           <text x="60"  y="258" text-anchor="middle">0.50</text>
           <text x="172" y="258" text-anchor="middle">0.60</text>
           <text x="284" y="258" text-anchor="middle">0.70</text>
@@ -220,31 +220,31 @@
           <text x="508" y="258" text-anchor="middle">0.90</text>
           <text x="620" y="258" text-anchor="middle">1.00</text>
         </g>
-        <g font-family="IBM Plex Mono, monospace" font-size="9.5" fill="#5b6272">
+        <g font-family="IBM Plex Mono, monospace" font-size="9.5" fill="#6D7788">
           <text x="60" y="280" text-anchor="start">← flags more pairs</text>
           <text x="620" y="280" text-anchor="end">flags fewer pairs →</text>
         </g>
-        <text x="340" y="306" text-anchor="middle" fill="#9099ac" font-family="IBM Plex Mono, monospace" font-size="11" letter-spacing="1">CONFIDENCE THRESHOLD</text>
-        <text x="340" y="320" text-anchor="middle" fill="#5b6272" font-family="IBM Plex Mono, monospace" font-size="9">how certain the model must be to flag a pair</text>
+        <text x="340" y="306" text-anchor="middle" fill="#B7C0CE" font-family="IBM Plex Mono, monospace" font-size="11" letter-spacing="1">CONFIDENCE THRESHOLD</text>
+        <text x="340" y="320" text-anchor="middle" fill="#6D7788" font-family="IBM Plex Mono, monospace" font-size="9">how certain the model must be to flag a pair</text>
         <path d="M 60,40 C 140,50 220,85 300,140 C 360,180 440,215 620,232" fill="none" stroke="#e2665f" stroke-width="2.25" stroke-linecap="round"/>
-        <path d="M 60,232 C 180,222 260,205 340,170 C 420,135 500,90 620,40" fill="none" stroke="#4fd1c5" stroke-width="2.25" stroke-linecap="round"/>
+        <path d="M 60,232 C 180,222 260,205 340,170 C 420,135 500,90 620,40" fill="none" stroke="#55E0C9" stroke-width="2.25" stroke-linecap="round"/>
         <g>
-          <circle cx="332" cy="158" r="3" fill="none" stroke="#5b6272" stroke-width="1"/>
-          <text x="332" y="150" text-anchor="middle" fill="#5b6272" font-family="IBM Plex Mono, monospace" font-size="9">crossover</text>
+          <circle cx="332" cy="158" r="3" fill="none" stroke="#6D7788" stroke-width="1"/>
+          <text x="332" y="150" text-anchor="middle" fill="#6D7788" font-family="IBM Plex Mono, monospace" font-size="9">crossover</text>
         </g>
         <g>
           <line x1="374" y1="20" x2="374" y2="240" stroke="#e2a03f" stroke-width="1.25" stroke-dasharray="4 4"/>
           <circle cx="374" cy="20" r="3.5" fill="#e2a03f"/>
-          <rect x="190" y="27" width="180" height="36" rx="4" fill="#171b25" stroke="#e2a03f" stroke-width="1"/>
+          <rect x="190" y="27" width="180" height="36" rx="4" fill="#141A24" stroke="#e2a03f" stroke-width="1"/>
           <text x="280" y="44" text-anchor="middle" fill="#e2a03f" font-family="IBM Plex Mono, monospace" font-size="12" font-weight="600">we shipped 0.78</text>
-          <text x="280" y="56" text-anchor="middle" fill="#9099ac" font-family="IBM Plex Mono, monospace" font-size="9">favours a cleaner queue</text>
+          <text x="280" y="56" text-anchor="middle" fill="#B7C0CE" font-family="IBM Plex Mono, monospace" font-size="9">favours a cleaner queue</text>
         </g>
         <text x="76" y="34" fill="#e2665f" font-family="IBM Plex Mono, monospace" font-size="11">false positives</text>
-        <text x="604" y="34" fill="#4fd1c5" font-family="IBM Plex Mono, monospace" font-size="11" text-anchor="end">false negatives</text>
+        <text x="604" y="34" fill="#55E0C9" font-family="IBM Plex Mono, monospace" font-size="11" text-anchor="end">false negatives</text>
       </svg>
       <div class="chart-legend">
         <div class="lg-item"><span class="sw" style="background:#e2665f;"></span>False positives — noise in the queue, drives fatigue</div>
-        <div class="lg-item"><span class="sw" style="background:#4fd1c5;"></span>False negatives — real duplicates that slip through</div>
+        <div class="lg-item"><span class="sw" style="background:#55E0C9;"></span>False negatives — real duplicates that slip through</div>
         <div class="lg-item"><span class="sw" style="background:#e2a03f;"></span>Shipped threshold — 0.78</div>
       </div>
       <div class="chart-caption">I scored the model against the client-labeled golden set across candidate cutoffs and landed on <strong>0.78 — deliberately just right of the crossover</strong>. A lower bar catches more theoretical duplicates but floods the queue and destroys adoption. A slightly leakier filter people trust and actually triage catches far more cumulative leakage over time than a stricter one they ignore.</div>
