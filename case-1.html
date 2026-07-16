@@ -30,87 +30,121 @@
 <header class="case-hero wrap-narrow">
   <div class="eyebrow">Case study 01 · Platform rebuild</div>
   <h1>Rebuilding the contract dashboard under a live 2M-contract/year load</h1>
-  <p class="dek">The entry point to the platform for every mobile buyer was taking up to 20 seconds to load, and blocking every other action until it did. This is the diagnosis, the rebuild, and the tradeoff I'd revisit next.</p>
+  <p class="dek">A paid feature commitment to ScopeWorker's largest client couldn't be bolted onto a 7-year-old page. So I rebuilt the foundation — and mapped every write path in the platform to keep 150 columns of data in sync.</p>
 
   <div class="case-meta">
-    <div class="m-item"><div class="l">My role</div><div class="v">PM — scope, spec, sprint mgmt, QA</div></div>
+    <div class="m-item"><div class="l">My role</div><div class="v">PM — diagnosis, scope, spec, sprint mgmt, QA</div></div>
     <div class="m-item"><div class="l">Team</div><div class="v">3 senior engineers + me</div></div>
     <div class="m-item"><div class="l">Timeline</div><div class="v">~2.5 months</div></div>
     <div class="m-item"><div class="l">Load time</div><div class="v hero-stat">15–20s → 3–4.5s</div></div>
+  </div>
+
+  <div class="impact-strip">
+    <div class="imp"><div class="n">~75–80%</div><div class="l">page load time reduction</div></div>
+    <div class="imp"><div class="n">150+</div><div class="l">columns kept in real-time sync</div></div>
+    <div class="imp"><div class="n">Paid commitment</div><div class="l">delivered to largest client</div></div>
+    <div class="imp"><div class="n">93%</div><div class="l">avg user satisfaction, post-launch</div></div>
   </div>
 </header>
 
 <div class="case-body-page wrap-narrow">
 
   <div class="cs-section">
-    <div class="cs-label">Context</div>
-    <h2>The busiest page on the platform was also the oldest</h2>
-    <p>ScopeWorker runs the contract lifecycle for enterprise telecom infrastructure clients. For a single client alone, one program creates over 2.3 million contracts a year. The contract listing page is where every mobile buyer on that program lands first — it's the entry point to the platform, not a secondary screen.</p>
-    <p>That page was built roughly seven years ago, on AngularJS (now unsupported and a standing security concern) with Bootstrap 3.4.1 components. It was never built to handle the dataset it was now serving: <strong>150+ columns</strong>, with no clean existing way to represent that much structure on a single grid.</p>
+    <div class="cs-label">The business problem</div>
+    <h2>A feature was already sold. The page under it couldn't support it.</h2>
+    <p>T-Mobile, ScopeWorker's largest client, had purchased advanced condition-based search and saved views as a paid add-on. Delivering it wasn't optional — it was a commitment already sold.</p>
+    <p>The problem: neither feature could be built on top of the existing contract dashboard. The page was a ~7-year-old legacy build that couldn't support the new functionality. And for T-Mobile specifically — with <strong>2.3 million contracts created in a single program in one year</strong> — it was also failing at a more basic level: the page, which gates every other action on the platform until it loads, was taking 15–20 seconds to open.</p>
+
+    <div class="callout">
+      <div class="co-label">The real question</div>
+      <p>Delivering what T-Mobile had paid for meant deciding <strong>how to rebuild the foundation underneath it</strong> — not just designing two new features.</p>
+    </div>
   </div>
 
   <div class="cs-section">
-    <div class="cs-label">Problem</div>
-    <h2>A 20-second load that blocked everything else</h2>
-    <p>Load times on the listing page ran as high as 20 seconds. Until the page finished loading, every other action on it was blocked — there was no partial interactivity to fall back on. That's a structural constraint I couldn't route around; it had to be fixed at the source.</p>
-    <div class="diff-block">
-      <span class="before">15–20 second load</span>
-      <span class="arrow">→</span>
-      <span class="after">page usable</span>
-    </div>
+    <div class="cs-label">Deciding to rebuild, not patch</div>
+    <h2>Three pressures pointed at the same answer</h2>
+    <p>Any one of these might have justified a smaller patch. Together, they made the case:</p>
+    <ol class="reasons">
+      <li><strong>A paid feature commitment.</strong> Advanced search and saved views couldn't be bolted onto the legacy page's architecture.</li>
+      <li><strong>Security debt.</strong> The page ran on AngularJS (now unsupported, a security liability) with legacy Bootstrap 3.4.1 components that needed removal.</li>
+      <li><strong>Performance at scale.</strong> The join-heavy legacy architecture couldn't handle large programs' data volume.</li>
+    </ol>
+    <p>So the real decision wasn't <em>"should we rebuild"</em> — it was <em>"given that we have to rebuild, what's the most optimized foundation to build the paid features on."</em></p>
   </div>
 
   <div class="cs-section">
     <div class="cs-label">Diagnosis</div>
-    <h2>I went to engineering before I went to a redesign brief</h2>
-    <p>Before scoping anything, I worked with engineering to confirm the actual root cause rather than assume it was a frontend problem. Live data for every contract required joins across separate tables, for every one of 150+ columns, on every page load. The data model itself — not the UI — was the bottleneck.</p>
-    <p>Two other things pushed this from "optimize the existing page" to "rebuild it":</p>
-    <ul>
-      <li><strong>A feature request that couldn't be bolted on.</strong> The client had paid for two new capabilities — advanced condition-based search and saved/preset views — and adding either to the legacy page wasn't viable without the rebuild anyway.</li>
-      <li><strong>A dead stack.</strong> AngularJS and Bootstrap 3.4.1 weren't just old; building new capability on top of them didn't make technical sense. That reinforced the case for a ground-up rebuild over an incremental patch.</li>
-    </ul>
+    <h2>Tracing the slowness to the data architecture</h2>
+    <p>Working with engineering, I traced the slowness to the data model. Each contract's live status was assembled by joining across many separate tables in real time — even for just the first 100 contracts on initial load. As columns and live data points were added over the years, join complexity grew, but the schema never changed to accommodate it.</p>
+    <p>The initial fix was moving contract data into OpenSearch, decoupling reads from the expensive joins. That surfaced a harder problem.</p>
   </div>
 
   <div class="cs-section">
-    <div class="cs-label">Approach</div>
-    <h2>Flatten the data, sync it in real time, load it lazily</h2>
-    <p>I scoped and specced the rebuild around three technical decisions, arrived at after evaluating multiple approaches with engineering:</p>
-    <ul>
-      <li><strong>Flattened the data model</strong> — removing the per-load joins that were the actual bottleneck</li>
-      <li><strong>OpenSearch + Kafka</strong> for real-time sync, replacing the old approach of computing everything live on request</li>
-      <li><strong>Server-side lazy loading</strong> in place of client-side pagination, so the browser was never asked to hold the full dataset at once</li>
-    </ul>
-    <p>The hardest problem showed up after the first OpenSearch pass: data was still frequently stale, because nothing was feeding OpenSearch the latest state on every relevant change. I personally mapped every user action across the platform that could update any of the 150 data points, and built the pipelines to make sure OpenSearch reflected current state — not the state it had when it was last indexed.</p>
+    <div class="cs-label">The hardest problem</div>
+    <h2>Keeping 150 data points in sync</h2>
+    <p>Moving to OpenSearch solved the join problem but introduced a new one — the index quickly went stale, with no pipeline keeping it current. Users would often see outdated contract data on load.</p>
+    <p>Fixing this meant mapping <strong>every single action, anywhere on the platform</strong>, that could change any of the 150 data points shown on this page. I went through the platform action by action — status changes, supplier assignments, date edits, cancellations, line item updates, and more — and catalogued which fields each one touched. That map became the spec for a real-time sync pipeline (built with Kafka) feeding OpenSearch.</p>
+
+    <div class="callout key">
+      <div class="co-label">The actual hard part</div>
+      <p>Not the performance tuning. The <strong>exhaustive, systems-level audit of every write path in the platform</strong> — that's what made the OpenSearch move actually work.</p>
+    </div>
   </div>
 
   <div class="cs-section">
     <div class="cs-label">Execution</div>
-    <h2>A hard cutover, with a rollback plan on standby</h2>
-    <p>This ran end to end in about 2.5 months with three senior engineers (full-stack, backend, frontend) and me as PM — while I was also managing other products concurrently, since I'm the only PM across two of ScopeWorker's three squads.</p>
-    <p>I owned the rollout risk directly:</p>
+    <h2>Shipped in ~2.5 months, while running two other squads</h2>
+    <p>I ran this as PM for a three-person senior engineering team (one full-stack, one backend, one frontend) over roughly two and a half months, while continuing to manage other products in parallel. Resourcing wasn't a hard sell — since this delivered a feature T-Mobile had already paid for, the business case was largely made for us.</p>
+    <p>My scope covered diagnosis, prioritization, and spec-writing for the rebuild; sprint management across the project; and end-to-end QA — verifying not just functionality, but that performance held under load and that no contract data was lost or misrepresented in the new system.</p>
+    <p><strong>Fixes shipped:</strong></p>
     <ul>
-      <li>Migrated existing users' saved dashboard state into the new version, so nobody lost their default view</li>
-      <li>Anticipated that users would need to relearn where bulk actions moved to in the new UI</li>
-      <li>Planned a hard cutover overnight — no dual-support period for old vs. new — with a rollback plan prepared in case of major pushback</li>
+      <li>Flattened the data model to eliminate expensive multi-table joins</li>
+      <li>Moved to OpenSearch for fast reads, decoupled from the primary database</li>
+      <li>Built a Kafka-based real-time sync pipeline, informed by the full write-path audit</li>
+      <li>Replaced client-side pagination with server-side lazy loading</li>
+      <li>Shipped advanced condition-based search and saved views (custom filters, columns, layouts)</li>
+      <li>Added enterprise-scale bulk actions: date updates, supplier assignment, cancellation, agent assignment, document/PO downloads, map plotting, and cross-contract line item views</li>
     </ul>
-    <p>The rebuild also shipped real bulk actions that didn't exist before: updating contract start/end dates across multiple contracts at once, assigning contracts to multiple suppliers, canceling multiple contracts, bulk-assigning agents, bulk-downloading PO/contract documents, plotting multiple contracts on a map, and viewing line items across all contracts at once.</p>
+  </div>
+
+  <div class="cs-section">
+    <div class="cs-label">Managing rollout risk</div>
+    <h2>Replacing the platform's entry point, live</h2>
+    <p>Replacing the entry point for millions of contracts carried real risk. That shaped how we shipped it:</p>
+    <ul>
+      <li><strong>Preserving user state</strong> — migrated existing users' saved dashboard preferences (e.g., their last-used view) into the new system rather than resetting them</li>
+      <li><strong>Relearning risk</strong> — bulk actions moved location in the new UI; we planned for users needing to re-find functionality they used daily</li>
+      <li><strong>Hard cutover</strong> — running old and new dashboards in parallel wasn't feasible within the timeline, so we shipped a one-day cutover with a rollback plan prepared in case of significant user pushback</li>
+    </ul>
+
+    <div class="callout warn">
+      <div class="co-label">The bet</div>
+      <p>No dual-run period. One overnight cutover, rollback plan on standby. <strong>Cutover held.</strong></p>
+    </div>
   </div>
 
   <div class="cs-section">
     <div class="cs-label">Results</div>
-    <h2>3–4.5 second loads, and a full adoption signal on top</h2>
+    <h2>The numbers that moved</h2>
     <div class="pull-stats">
-      <div class="ps"><div class="n">3–4.5s</div><div class="l">first load, down from 15–20s</div></div>
-      <div class="ps"><div class="n">93%</div><div class="l">average user score across the full redesigned experience</div></div>
+      <div class="ps"><div class="n">3–4.5s</div><div class="l">page load, down from 15–20s (~75–80% reduction)</div></div>
+      <div class="ps"><div class="n">93%</div><div class="l">avg user satisfaction across the full redesign</div></div>
       <div class="ps"><div class="n">2.6</div><div class="l">saved views created per user, on average</div></div>
     </div>
-    <p>The 93% figure comes from ScopeWorker's per-feature success rating, where users score a launched feature 1–5 after using it — averaged out to a percentage across the new dashboard, table structure, advanced search, and saved views together, not any single sub-feature in isolation.</p>
+    <ul>
+      <li><strong>Load time cut from 15–20s to 3–4.5s</strong> on the page every user has to get through before doing anything else</li>
+      <li><strong>Data staleness eliminated</strong> across all 150 tracked fields via the sync pipeline</li>
+      <li><strong>Paid feature commitment delivered</strong> to ScopeWorker's largest client</li>
+      <li>93% satisfaction score is averaged across the new dashboard, table structure, advanced search, and saved views together — not any single sub-feature in isolation</li>
+    </ul>
   </div>
 
   <div class="cs-section">
-    <div class="cs-label">What I'd do next</div>
+    <div class="cs-label">What I'd do differently</div>
     <h2>Default to active contracts, not full history</h2>
-    <p>The page currently still loads and scrolls through the full contract history by default — including dormant contracts three-plus years old. I'd propose defaulting to active-only contracts instead, which would cut computation cost further on top of the load-time win already shipped. I haven't pitched this to the client yet, but it's the next lever I'd pull.</p>
+    <p>The page still defaults to loading the full contract history — including dormant contracts three-plus years old — rather than active contracts only. For a client like T-Mobile, that means computing over 2.3 million rows on every load when the vast majority aren't relevant to daily work.</p>
+    <p>I haven't yet made the case to T-Mobile for defaulting to active-only views, but it's the next obvious optimization — both for user experience and for reducing the computation cost we solved so much of the rest of this project to fix.</p>
   </div>
 
 </div>
