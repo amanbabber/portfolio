@@ -29,8 +29,8 @@
 
 <header class="case-hero wrap-narrow">
   <div class="eyebrow">Case study 01 · Platform rebuild</div>
-  <h1>Rebuilding the contract dashboard under a live 2M-contract/year load</h1>
-  <p class="dek">A paid feature commitment to ScopeWorker's largest client couldn't be bolted onto a 7-year-old page. So I rebuilt the foundation — and mapped every write path in the platform to keep 150 columns of data in sync.</p>
+  <h1>Rebuilding the contract dashboard under a 2.3M-contract enterprise load</h1>
+  <p class="dek">A paid feature commitment to ScopeWorker's largest client couldn't be bolted onto a 7-year-old page. So I rebuilt the foundation — and mapped every write path in the platform to keep 70 columns of data in sync.</p>
 
   <div class="case-meta">
     <div class="m-item"><div class="l">My role</div><div class="v">PM — diagnosis, scope, spec, sprint mgmt, QA</div></div>
@@ -41,7 +41,7 @@
 
   <div class="impact-strip">
     <div class="imp"><div class="n">~75–80%</div><div class="l">page load time reduction</div></div>
-    <div class="imp"><div class="n">150+</div><div class="l">columns kept in real-time sync</div></div>
+    <div class="imp"><div class="n">70+</div><div class="l">columns kept in real-time sync</div></div>
     <div class="imp"><div class="n">Paid commitment</div><div class="l">delivered to largest client</div></div>
     <div class="imp"><div class="n">93%</div><div class="l">avg user satisfaction, post-launch</div></div>
   </div>
@@ -58,7 +58,7 @@
     <div class="cs-label">The business problem</div>
     <h2>A feature was already sold. The page under it couldn't support it.</h2>
     <p>T-Mobile, ScopeWorker's largest client, had purchased advanced condition-based search and saved views as a paid add-on. Delivering it wasn't optional — it was a commitment already sold.</p>
-    <p>The problem: neither feature could be built on top of the existing contract dashboard. The page was a ~7-year-old legacy build that couldn't support the new functionality. And for T-Mobile specifically — with <strong>2.3 million contracts created in a single program in one year</strong> — it was also failing at a more basic level: the page, which gates every other action on the platform until it loads, was taking 15–20 seconds to open.</p>
+    <p>The problem: neither feature could be built on top of the existing contract dashboard. The page was a ~7-year-old legacy build that couldn't support the new functionality. And for T-Mobile specifically — with <strong>2.3 million contracts created in a single program over three years</strong> — it was also failing at a more basic level: the page, which gates every other action on the platform until it loads, was taking 15–20 seconds to open.</p>
 
     <div class="callout">
       <div class="co-label">The real question</div>
@@ -87,9 +87,9 @@
 
   <div class="cs-section">
     <div class="cs-label">The hardest problem</div>
-    <h2>Keeping 150 data points in sync</h2>
+    <h2>Keeping 70 data points in sync</h2>
     <p>Moving to OpenSearch solved the join problem but introduced a new one — the index quickly went stale, with no pipeline keeping it current. Users would often see outdated contract data on load.</p>
-    <p>Fixing this meant mapping <strong>every single action, anywhere on the platform</strong>, that could change any of the 150 data points shown on this page. I went through the platform action by action — status changes, supplier assignments, date edits, cancellations, line item updates, and more — and catalogued which fields each one touched. That map became the spec for a real-time sync pipeline (built with Kafka) feeding OpenSearch.</p>
+    <p>Fixing this meant mapping <strong>every single action, anywhere on the platform</strong>, that could change any of the 70 data points shown on this page. I went through the platform action by action — status changes, supplier assignments, date edits, cancellations, line item updates, and more — and catalogued which fields each one touched. That map became the spec for a real-time sync pipeline (built with Kafka) feeding OpenSearch.</p>
 
     <div class="callout key">
       <div class="co-label">The actual hard part</div>
@@ -154,7 +154,7 @@
     </div>
     <ul>
       <li><strong>Load time cut from 15–20s to 3–4.5s</strong> on the page every user has to get through before doing anything else</li>
-      <li><strong>Data staleness eliminated</strong> across all 150 tracked fields via the sync pipeline</li>
+      <li><strong>Data staleness eliminated</strong> across all 70 tracked fields via the sync pipeline</li>
       <li><strong>Paid feature commitment delivered</strong> to ScopeWorker's largest client</li>
       <li>93% satisfaction score is averaged across the new dashboard, table structure, advanced search, and saved views together — not any single sub-feature in isolation</li>
     </ul>
