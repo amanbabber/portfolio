@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aman — Senior Product Manager</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <div class="logo">aman<span>.</span>pm</div>
+    <div class="nav-links">
+      <a href="#work"><span class="n">01</span>Work</a>
+      <a href="#approach"><span class="n">02</span>Approach</a>
+      <a href="#timeline"><span class="n">03</span>Timeline</a>
+      <a href="#contact"><span class="n">04</span>Contact</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero wrap">
+  <div class="query-bar">
+    <span class="prompt">&gt;</span> senior_pm --location=chandigarh --status=open_to_relocate<span class="cursor"></span>
+  </div>
+  <div class="eyebrow">Senior Product Manager · Enterprise B2B SaaS</div>
+  <h1>I rebuild the systems everyone else is afraid to touch.</h1>
+  <p class="hero-sub">Sole PM across two squads at a bootstrapped, profitable B2B SaaS company serving US telecom infrastructure clients. I ship code myself, own root-cause diagnosis end to end, and I'm usually the one who takes a <strong>20-second page load down to three.</strong></p>
+
+  <div class="row-card">
+    <div class="row-head">
+      <div>name</div><div>role</div><div>company</div><div>status</div>
+    </div>
+    <div class="row-body">
+      <div class="field-name">Aman</div>
+      <div class="field-sub">Sole PM — Contracts &amp; App squads</div>
+      <div class="field-sub">ScopeWorker · #3</div>
+      <div><span class="chip live">shipping</span></div>
+    </div>
+  </div>
+
+  <div class="kpis">
+    <div class="kpi"><div class="val">20s→3.4s</div><div class="lbl">contract dashboard load time, rebuilt</div></div>
+    <div class="kpi"><div class="val">850+</div><div class="lbl">active suppliers, built from zero</div></div>
+    <div class="kpi"><div class="val">93%</div><div class="lbl">user success rating on dashboard rebuild</div></div>
+    <div class="kpi"><div class="val">5</div><div class="lbl">AI features shipped to production</div></div>
+    <div class="kpi"><div class="val">#3</div><div class="lbl">employee, joined 2021</div></div>
+  </div>
+</header>
+
+<section id="work" class="wrap">
+  <div class="section-head">
+    <div class="sec-eyebrow">01 · Case studies</div>
+    <div class="sec-title">What I actually built</div>
+    <p class="sec-note">No case study here is a redesign for its own sake. Each one starts from a metric that was broken and ends with a number that moved. Click through — these are full write-ups, not tooltips.</p>
+  </div>
+
+  <a class="case-link" href="case-1.html">
+    <div class="case-head">
+      <div class="case-num">01</div>
+      <div class="case-title-wrap">
+        <div class="case-title">Rebuilding the contract dashboard under a live 2M-contract/year load</div>
+        <div class="case-dek">A 7-year-old AngularJS page was blocking every mobile buyer for up to 20 seconds. Here's the root-cause diagnosis, the rebuild, and what I'd fix next.</div>
+        <div class="case-tags">
+          <span class="tag">150+ column data grid</span>
+          <span class="tag">OpenSearch + Kafka</span>
+          <span class="tag">2.5-month rebuild</span>
+        </div>
+      </div>
+      <div class="case-diff"><span class="before">15–20s</span><span class="after">3–4.5s</span></div>
+      <div class="case-arrow">→</div>
+    </div>
+  </a>
+
+  <a class="case-link" href="case-2.html">
+    <div class="case-head">
+      <div class="case-num">02</div>
+      <div class="case-title-wrap">
+        <div class="case-title">Designing the eval rubric behind an AI duplicate-detection feature</div>
+        <div class="case-dek">Building a golden dataset, working the confusion matrix, and setting a production confidence threshold instead of chasing a single accuracy number.</div>
+        <div class="case-tags">
+          <span class="tag">1,000-pair golden dataset</span>
+          <span class="tag">FP/FN tradeoffs</span>
+        </div>
+      </div>
+      <div class="case-diff"><span class="after">0.78 threshold</span></div>
+      <div class="case-arrow">→</div>
+    </div>
+  </a>
+
+  <a class="case-link" href="case-3.html">
+    <div class="case-head">
+      <div class="case-num">03</div>
+      <div class="case-title-wrap">
+        <div class="case-title">Launching supplier monetization from zero</div>
+        <div class="case-dek">Taking a two-sided marketplace with no supplier-side revenue and turning it into a live product with 850+ active suppliers.</div>
+        <div class="case-tags">
+          <span class="tag">0→1 product</span>
+        </div>
+      </div>
+      <div class="case-diff"><span class="after">850+ suppliers</span></div>
+      <div class="case-arrow">→</div>
+    </div>
+  </a>
+</section>
+
+<section id="approach" class="wrap">
+  <div class="section-head">
+    <div class="sec-eyebrow">02 · Approach</div>
+    <div class="sec-title">How I work</div>
+  </div>
+  <div class="approach-grid">
+    <div class="ap-card">
+      <div class="idx">A</div>
+      <h3>I diagnose before I scope</h3>
+      <p>The contract dashboard rebuild started with confirming, alongside engineering, exactly why the old page was slow — not with a redesign brief. Root cause first, spec second.</p>
+    </div>
+    <div class="ap-card">
+      <div class="idx">B</div>
+      <h3>I ship code, not just specs</h3>
+      <p>I work directly in the codebase via Cursor and have shipped code to production myself. I can read a pull request, not just a Jira ticket.</p>
+    </div>
+    <div class="ap-card">
+      <div class="idx">C</div>
+      <h3>Eval methodology over demo confidence</h3>
+      <p>For AI features, I build the golden dataset and set the threshold — the boring, precise work that decides whether a feature is trustworthy in production.</p>
+    </div>
+    <div class="ap-card">
+      <div class="idx">D</div>
+      <h3>Solo, end to end, on purpose</h3>
+      <p>As the only PM across two of three squads, I own diagnosis, scope, spec, sprint management, and QA on every feature I ship — there's no one else to hand it off to.</p>
+    </div>
+  </div>
+</section>
+
+<section id="timeline" class="wrap">
+  <div class="section-head">
+    <div class="sec-eyebrow">03 · Timeline</div>
+    <div class="sec-title">Where this was built</div>
+  </div>
+  <div class="tl">
+    <div class="tl-item">
+      <div class="tl-date">Jan 2021 — Present</div>
+      <div class="tl-role">Senior Product Manager</div>
+      <div class="tl-org">ScopeWorker — enterprise B2B SaaS, US telecom infrastructure</div>
+      <div class="tl-detail">Employee #3. Sole PM leading the Contracts and App squads inside an 18-person org (9 eng, 6 QA, 2 design, 1 DevOps). Hands-on in the codebase; ships code directly to production.</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-date">Jan 2017 — Dec 2019</div>
+      <div class="tl-role">Founding Product Designer</div>
+      <div class="tl-org">Avail Finance — fintech</div>
+      <div class="tl-detail">Employee #10. Early product and design work at an early-stage fintech startup.</div>
+    </div>
+  </div>
+</section>
+
+<section id="contact" class="wrap">
+  <div class="contact">
+    <h2>Let's talk about a role.</h2>
+    <p>I'm a Senior PM looking at enterprise B2B SaaS and applied AI roles, open to relocating. If you're hiring for a PM who reads pull requests and sets confidence thresholds, reach out.</p>
+    <div class="contact-links">
+      <a class="btn primary" href="mailto:amanbabbar2009@gmail.com">Email me →</a>
+      <a class="btn" href="#">LinkedIn</a>
+      <a class="btn" href="#">Resume (PDF)</a>
+    </div>
+  </div>
+</section>
+
+<footer class="wrap">
+  <div>Chandigarh, India · Built by hand, not by template.</div>
+</footer>
+
+</body>
+</html>

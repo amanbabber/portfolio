@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contract dashboard rebuild — Aman</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a class="logo" href="index.html">aman<span>.</span>pm</a>
+    <div class="nav-links">
+      <a href="index.html#work"><span class="n">01</span>Work</a>
+      <a href="index.html#approach"><span class="n">02</span>Approach</a>
+      <a href="index.html#timeline"><span class="n">03</span>Timeline</a>
+      <a href="index.html#contact"><span class="n">04</span>Contact</a>
+    </div>
+  </div>
+</nav>
+
+<div class="wrap-narrow breadcrumb">
+  <a href="index.html">← All case studies</a> / 01
+</div>
+
+<header class="case-hero wrap-narrow">
+  <div class="eyebrow">Case study 01 · Platform rebuild</div>
+  <h1>Rebuilding the contract dashboard under a live 2M-contract/year load</h1>
+  <p class="dek">The entry point to the platform for every mobile buyer was taking up to 20 seconds to load, and blocking every other action until it did. This is the diagnosis, the rebuild, and the tradeoff I'd revisit next.</p>
+
+  <div class="case-meta">
+    <div class="m-item"><div class="l">My role</div><div class="v">PM — scope, spec, sprint mgmt, QA</div></div>
+    <div class="m-item"><div class="l">Team</div><div class="v">3 senior engineers + me</div></div>
+    <div class="m-item"><div class="l">Timeline</div><div class="v">~2.5 months</div></div>
+    <div class="m-item"><div class="l">Load time</div><div class="v hero-stat">15–20s → 3–4.5s</div></div>
+  </div>
+</header>
+
+<div class="case-body-page wrap-narrow">
+
+  <div class="cs-section">
+    <div class="cs-label">Context</div>
+    <h2>The busiest page on the platform was also the oldest</h2>
+    <p>ScopeWorker runs the contract lifecycle for enterprise telecom infrastructure clients. For a single client alone, one program creates over 2.3 million contracts a year. The contract listing page is where every mobile buyer on that program lands first — it's the entry point to the platform, not a secondary screen.</p>
+    <p>That page was built roughly seven years ago, on AngularJS (now unsupported and a standing security concern) with Bootstrap 3.4.1 components. It was never built to handle the dataset it was now serving: <strong>150+ columns</strong>, with no clean existing way to represent that much structure on a single grid.</p>
+  </div>
+
+  <div class="cs-section">
+    <div class="cs-label">Problem</div>
+    <h2>A 20-second load that blocked everything else</h2>
+    <p>Load times on the listing page ran as high as 20 seconds. Until the page finished loading, every other action on it was blocked — there was no partial interactivity to fall back on. That's a structural constraint I couldn't route around; it had to be fixed at the source.</p>
+    <div class="diff-block">
+      <span class="before">15–20 second load</span>
+      <span class="arrow">→</span>
+      <span class="after">page usable</span>
+    </div>
+  </div>
+
+  <div class="cs-section">
+    <div class="cs-label">Diagnosis</div>
+    <h2>I went to engineering before I went to a redesign brief</h2>
+    <p>Before scoping anything, I worked with engineering to confirm the actual root cause rather than assume it was a frontend problem. Live data for every contract required joins across separate tables, for every one of 150+ columns, on every page load. The data model itself — not the UI — was the bottleneck.</p>
+    <p>Two other things pushed this from "optimize the existing page" to "rebuild it":</p>
+    <ul>
+      <li><strong>A feature request that couldn't be bolted on.</strong> The client had paid for two new capabilities — advanced condition-based search and saved/preset views — and adding either to the legacy page wasn't viable without the rebuild anyway.</li>
+      <li><strong>A dead stack.</strong> AngularJS and Bootstrap 3.4.1 weren't just old; building new capability on top of them didn't make technical sense. That reinforced the case for a ground-up rebuild over an incremental patch.</li>
+    </ul>
+  </div>
+
+  <div class="cs-section">
+    <div class="cs-label">Approach</div>
+    <h2>Flatten the data, sync it in real time, load it lazily</h2>
+    <p>I scoped and specced the rebuild around three technical decisions, arrived at after evaluating multiple approaches with engineering:</p>
+    <ul>
+      <li><strong>Flattened the data model</strong> — removing the per-load joins that were the actual bottleneck</li>
+      <li><strong>OpenSearch + Kafka</strong> for real-time sync, replacing the old approach of computing everything live on request</li>
+      <li><strong>Server-side lazy loading</strong> in place of client-side pagination, so the browser was never asked to hold the full dataset at once</li>
+    </ul>
+    <p>The hardest problem showed up after the first OpenSearch pass: data was still frequently stale, because nothing was feeding OpenSearch the latest state on every relevant change. I personally mapped every user action across the platform that could update any of the 150 data points, and built the pipelines to make sure OpenSearch reflected current state — not the state it had when it was last indexed.</p>
+  </div>
+
+  <div class="cs-section">
+    <div class="cs-label">Execution</div>
+    <h2>A hard cutover, with a rollback plan on standby</h2>
+    <p>This ran end to end in about 2.5 months with three senior engineers (full-stack, backend, frontend) and me as PM — while I was also managing other products concurrently, since I'm the only PM across two of ScopeWorker's three squads.</p>
+    <p>I owned the rollout risk directly:</p>
+    <ul>
+      <li>Migrated existing users' saved dashboard state into the new version, so nobody lost their default view</li>
+      <li>Anticipated that users would need to relearn where bulk actions moved to in the new UI</li>
+      <li>Planned a hard cutover overnight — no dual-support period for old vs. new — with a rollback plan prepared in case of major pushback</li>
+    </ul>
+    <p>The rebuild also shipped real bulk actions that didn't exist before: updating contract start/end dates across multiple contracts at once, assigning contracts to multiple suppliers, canceling multiple contracts, bulk-assigning agents, bulk-downloading PO/contract documents, plotting multiple contracts on a map, and viewing line items across all contracts at once.</p>
+  </div>
+
+  <div class="cs-section">
+    <div class="cs-label">Results</div>
+    <h2>3–4.5 second loads, and a full adoption signal on top</h2>
+    <div class="pull-stats">
+      <div class="ps"><div class="n">3–4.5s</div><div class="l">first load, down from 15–20s</div></div>
+      <div class="ps"><div class="n">93%</div><div class="l">average user score across the full redesigned experience</div></div>
+      <div class="ps"><div class="n">2.6</div><div class="l">saved views created per user, on average</div></div>
+    </div>
+    <p>The 93% figure comes from ScopeWorker's per-feature success rating, where users score a launched feature 1–5 after using it — averaged out to a percentage across the new dashboard, table structure, advanced search, and saved views together, not any single sub-feature in isolation.</p>
+  </div>
+
+  <div class="cs-section">
+    <div class="cs-label">What I'd do next</div>
+    <h2>Default to active contracts, not full history</h2>
+    <p>The page currently still loads and scrolls through the full contract history by default — including dormant contracts three-plus years old. I'd propose defaulting to active-only contracts instead, which would cut computation cost further on top of the load-time win already shipped. I haven't pitched this to the client yet, but it's the next lever I'd pull.</p>
+  </div>
+
+</div>
+
+<div class="wrap-narrow case-nav">
+  <a href="index.html">← Back to all work</a>
+  <a href="case-2.html">Next: AI duplicate detection →</a>
+</div>
+
+<footer class="wrap-narrow">
+  <div>Chandigarh, India · Built by hand, not by template.</div>
+</footer>
+
+</body>
+</html>

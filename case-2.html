@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI duplicate detection eval design — Aman</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a class="logo" href="index.html">aman<span>.</span>pm</a>
+    <div class="nav-links">
+      <a href="index.html#work"><span class="n">01</span>Work</a>
+      <a href="index.html#approach"><span class="n">02</span>Approach</a>
+      <a href="index.html#timeline"><span class="n">03</span>Timeline</a>
+      <a href="index.html#contact"><span class="n">04</span>Contact</a>
+    </div>
+  </div>
+</nav>
+
+<div class="wrap-narrow breadcrumb">
+  <a href="index.html">← All case studies</a> / 02
+</div>
+
+<header class="case-hero wrap-narrow">
+  <div class="eyebrow">Case study 02 · AI eval design</div>
+  <h1>Designing the eval rubric behind an AI duplicate-detection feature</h1>
+  <p class="dek">An AI feature that flags duplicate VC entries needed a decision rule, not a demo. This is the rubric, the dataset, and the threshold decision behind it.</p>
+
+  <div class="case-meta">
+    <div class="m-item"><div class="l">My role</div><div class="v">PM — rubric design &amp; eval methodology</div></div>
+    <div class="m-item"><div class="l">Dataset</div><div class="v">1,000 labeled pairs</div></div>
+    <div class="m-item"><div class="l">Iterations</div><div class="v">3 rubric revisions</div></div>
+    <div class="m-item"><div class="l">Production threshold</div><div class="v hero-stat">0.78 confidence</div></div>
+  </div>
+</header>
+
+<div class="case-body-page wrap-narrow">
+
+  <div class="cs-section">
+    <div class="cs-label">Context</div>
+    <h2>One of five AI features I've shipped to production</h2>
+    <p>This sits alongside four other AI features I've taken to production at ScopeWorker. This one flags likely duplicate entries in the VC data — where two records that look different on the surface actually refer to the same underlying entity. "The model looks accurate" isn't a spec for a feature like this; a wrong flag and a missed one cost the business in different ways, so the decision rule had to be explicit.</p>
+  </div>
+
+  <div class="cs-section">
+    <div class="cs-label">Approach</div>
+    <h2>Rubric first, threshold second</h2>
+    <p>I designed the detection rubric from scratch and took it through three iterations before it was stable enough to test against. Rather than trust a single accuracy number, I built out a <strong>1,000-pair golden dataset</strong> — labeled duplicate/not-duplicate pairs — to evaluate the rubric and, later, the model against.</p>
+    <p>From there the real work was in the confusion matrix: weighing precision against false-positive rate rather than optimizing for one aggregate score. A false positive (flagging two distinct entries as duplicates) and a false negative (missing a real duplicate) don't cost the same thing, so the right operating point isn't the one that maximizes accuracy — it's the one where that tradeoff actually pays off for the business.</p>
+  </div>
+
+  <div class="cs-section">
+    <div class="cs-label">Decision</div>
+    <h2>Setting the threshold at 0.78</h2>
+    <div class="diff-block">
+      <span class="after">0.78 confidence threshold</span>
+    </div>
+    <p>The production confidence threshold was set at <strong>0.78</strong> — the point on the precision/false-positive-rate curve that matched what the business could actually tolerate, not the point that looked best in isolation on the eval set. This is the kind of decision that doesn't show up in a demo but determines whether the feature is trustworthy once it's live.</p>
+  </div>
+
+</div>
+
+<div class="wrap-narrow case-nav">
+  <a href="case-1.html">← Contract dashboard rebuild</a>
+  <a href="case-3.html">Next: Supplier monetization →</a>
+</div>
+
+<footer class="wrap-narrow">
+  <div>Chandigarh, India · Built by hand, not by template.</div>
+</footer>
+
+</body>
+</html>
