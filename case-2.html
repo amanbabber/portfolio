@@ -3,11 +3,11 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Stopping duplicate work orders before clients paid twice — Aman</title>
+<title>How we stopped T-Mobile from ordering the same work twice — Aman</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="styles.css?v=6">
+<link rel="stylesheet" href="styles.css?v=7">
 </head>
 <body>
 
@@ -27,190 +27,224 @@
   <a href="index.html">← All case studies</a> / 02
 </div>
 
+<!-- ============ §1 HERO ============ -->
 <header class="case-hero wrap-narrow">
   <div class="eyebrow">Case study 02 · AI product</div>
-  <h1>Stopping duplicate work orders before clients paid twice</h1>
-  <p class="dek">Across 1M line items and 300,000 sites, a buyer could unknowingly order the same job twice — same site, different wording, under a different contract — and the client would pay for it twice. There was no reliable way to catch it before billing.</p>
+  <h1>How we stopped T-Mobile from ordering the same work twice</h1>
+  <p class="dek">For one of T-Mobile's procurement programs, buyers purchased work across <strong style="color:var(--text);">540,000 cell sites</strong> — about 5,000 standard line items in the catalogue, plus custom ones created whenever the needed work didn't exist yet. Every time a buyer awarded a contract, they had to answer one question: <em>has this work already been purchased for this site?</em> The platform had no reliable way to answer it. A single site could carry years of history spread across contracts, so duplicate work got approved without anyone noticing — until billing.</p>
 
   <div class="case-meta">
     <div class="m-item"><div class="l">My role</div><div class="v">Sole PM — end to end</div></div>
     <div class="m-item"><div class="l">Team</div><div class="v">1 sr full-stack · 1 jr FE · 1 QA</div></div>
-    <div class="m-item"><div class="l">Scale</div><div class="v">1M line items · 300K sites</div></div>
-    <div class="m-item"><div class="l">Threshold</div><div class="v hero-stat">0.78 confidence</div></div>
+    <div class="m-item"><div class="l">Scale</div><div class="v">540K sites · ~5,000 line items</div></div>
+    <div class="m-item"><div class="l">Result</div><div class="v hero-stat">$2.74M stopped</div></div>
   </div>
 
-  <p class="dek" style="margin-top:28px;">As the sole PM, I led the build of a <strong style="color:var(--text);">two-layer detection system</strong>: deterministic rules for the obvious matches, and AI-assisted triage for the ambiguous, free-text orders. A problem we first treated as data-matching turned out to be a product, domain, and change-management problem — and managing that is what the project became about. The result wasn't more alerts. It was turning a check buyers avoided into a focused workflow they trust and act on.</p>
+  <p class="dek" style="margin-top:28px;">We set out to add a simple duplicate check to the procurement workflow. It grew into a two-phase system — <strong style="color:var(--text);">rules for the obvious matches, AI for the ambiguous ones</strong> — that cut contract awards by 9.5%. The order mattered: two-thirds of that came from the simple rules, before any AI ran. And because every catch could be traced to a cancelled contract, we could put a real number on it: <strong style="color:var(--text);">$2.74M of duplicate work stopped before it was paid.</strong></p>
 
   <div class="impact-strip">
-    <div class="imp"><div class="n">Billed twice</div><div class="l">the same job could be ordered — and paid for — twice</div></div>
-    <div class="imp"><div class="n">Now pre-billing</div><div class="l">duplicates caught at procurement, before invoicing</div></div>
-    <div class="imp"><div class="n">Skipped → used</div><div class="l">a noisy check buyers ignored became one they work</div></div>
-    <div class="imp"><div class="n">0.78</div><div class="l">threshold tuned for fewer false alarms, on purpose</div></div>
+    <div class="imp"><div class="n">$2.74M</div><div class="l">duplicate work stopped — traced to cancelled contracts, not estimated</div></div>
+    <div class="imp"><div class="n">9.5%</div><div class="l">fewer contract awards — duplicates caught before billing</div></div>
+    <div class="imp"><div class="n">74%</div><div class="l">of Phase 1 catches were cancelled — proof the duplicates were real</div></div>
+    <div class="imp"><div class="n">540K / ~5K</div><div class="l">sites, and standard line items the check runs across</div></div>
   </div>
 </header>
 
 <div class="case-body-page wrap-narrow">
 
+  <!-- ============ §2 THE PROBLEM ============ -->
   <div class="cs-section">
-    <div class="cs-label">The turn</div>
-    <h2>We planned for a matching problem. We found a comprehension problem.</h2>
-    <p>Before this program, ScopeWorker had <strong>no duplicate detection at all</strong> — this was net-new. So we started where it seemed obvious to start.</p>
-
-    <div class="arc">
-      <div class="arc-step believed">
-        <div class="arc-k">What we believed</div>
-        <p>Catching duplicates is a <strong>comparison problem</strong>. Surface line items that share an ID at a site, show the buyer the prior matches, let them decide. We built exactly that first — and for structured, fixed-cost orders, it worked.</p>
-      </div>
-      <div class="arc-step broke">
-        <div class="arc-k">What broke</div>
-        <p>For variable-cost, free-text orders, "surface every match" produced a long, noisy list. The same job could be written two completely different ways; two different jobs could read almost identically. Buyers hit alert fatigue and <strong>skipped the check entirely</strong> — so the one safeguard against paying twice was quietly catching nothing.</p>
-      </div>
-      <div class="arc-step learned">
-        <div class="arc-k">What we learned</div>
-        <p>For free-text orders, deciding whether two are the same isn't comparison — it's <strong>reading comprehension grounded in procurement knowledge</strong>. That's what turned "a matching feature" into a model, a domain rubric authored with the client, and a labeling program. The real scope of the project was managing that uncertainty, not tuning an algorithm.</p>
-      </div>
-    </div>
+    <div class="cs-label">The problem</div>
+    <h2>"Has this work already been purchased for this site?"</h2>
+    <p>Answering that at the moment of award was harder than it sounds. A buyer working across hundreds of sites would have to open years of past contracts for the one site in front of them, read every line item, and decide whether any of it matched what they were about to buy — for every award, under deadline.</p>
+    <p>The history itself worked against them. The same job could have been entered by a different buyer, on a different contract, worded a different way. There was nothing to line up against, no single view of "what this site already has."</p>
+    <p>So in practice the check didn't happen. Buyers awarded the work and moved on — which is exactly how the same job got bought twice.</p>
 
     <div class="callout warn">
-      <div class="co-label">What was at risk</div>
-      <p>A check that looks like a control on paper but catches nothing is <strong>worse than no check</strong> — it gives everyone false confidence while the client keeps paying for duplicated work. Adoption, not model accuracy, was the thing that could kill this.</p>
+      <div class="co-label">What made it expensive</div>
+      <p>A duplicate that slips past the award stage doesn't stay a mistake on a screen. The contractor does the work once and bills against both contracts, and the client pays twice. By the time anyone notices, the money is already gone — catching it <strong>before the award</strong> was the only point where it was still free to fix.</p>
     </div>
   </div>
 
+  <!-- ============ §3 PHASE 1 ============ -->
   <div class="cs-section">
-    <div class="cs-label">The system</div>
-    <h2>Two layers — cheap rules first, AI only where it's needed</h2>
-    <p>The core bet was to spend AI only where nothing else would work. Everything a rule could catch, a rule caught. The expensive, ambiguous cases — and only those — went to the model.</p>
+    <div class="cs-label">Phase 1</div>
+    <h2>Start with the simplest matches</h2>
+    <p>Many line items had a standard ID and a fixed price. For those, detection was simple. When a buyer tried to award one, ScopeWorker checked whether that same line-item ID had already been purchased for the site. If it found a match, it surfaced the earlier order and asked the buyer to review it before continuing.</p>
+    <p>We shipped this in about a month. It cut contract awards by <strong>6%</strong>.</p>
+    <p>The more telling number was what happened next: <strong>74% of the contracts it flagged were cancelled.</strong> In most of those cases the buyer looked at the earlier order and decided the new one wasn't needed. A basic ID check was already stopping a real amount of duplicate work — and it settled the question of whether this was a genuine problem. These weren't hypothetical duplicates. They were making it all the way to a contract award before anyone caught them.</p>
 
-    <div class="flow">
-      <div class="flow-node"><div class="fn-k">Input</div><div class="fn-t">A new line-item order at a site</div><div class="fn-d">e.g. "40ft crane for a foundation pour" under a fresh contract</div></div>
-      <div class="flow-arrow">↓</div>
-      <div class="flow-node l1"><div class="fn-k">Layer 1 · Deterministic</div><div class="fn-t">Shares an ID? Standardized fixed-cost spec?</div><div class="fn-d">Rule-based comparison. Obvious matches are handled here — no AI.</div></div>
-      <div class="flow-arrow">↓ &nbsp;free-text / ambiguous</div>
-      <div class="flow-node l2"><div class="fn-k">Layer 2 · AI triage</div><div class="fn-t">Semantic similarity + an LLM, scored against the rubric</div><div class="fn-d">Reads two free-text orders and judges whether they're the same job.</div></div>
-      <div class="flow-arrow">↓</div>
-      <div class="flow-node terminal"><div class="fn-k">Output</div><div class="fn-t">A short, high-signal queue → the buyer reviews & acts</div><div class="fn-d">A handful of likely duplicates with confidence — caught before billing.</div></div>
+    <div class="pull-stats">
+      <div class="ps"><div class="n">~1 month</div><div class="l">to build and launch Phase 1</div></div>
+      <div class="ps"><div class="n">6%</div><div class="l">fewer contract awards, from ID matching alone</div></div>
+      <div class="ps"><div class="n">74%</div><div class="l">of flagged contracts were cancelled by the buyer</div></div>
     </div>
 
-    <p>Here's the concrete case Layer 2 exists for — two orders a rule can't reconcile, but a person (or a well-aimed model) can:</p>
+    <div class="callout key">
+      <div class="co-label">Where the $2.74M comes from</div>
+      <p>A cancelled contract isn't an estimate. It has a value recorded in the system. So every time a flag led to a cancellation, we could read the exact amount that would otherwise have been paid and add it to the total. That's the entire basis for the <strong>$2.74M</strong> — real cancelled contracts, not a model.</p>
+    </div>
+  </div>
+
+  <!-- ============ §4 THE LIMIT ============ -->
+  <div class="cs-section">
+    <div class="cs-label">The limit</div>
+    <h2>Where Phase 1 stopped working</h2>
+    <p>Not every line item had a standard ID or a fixed price. A large share of the work was variable-cost, entered as free text — and its name, description, and price shifted with the buyer, the supplier, the quote, the contract.</p>
+    <p>That broke the ID check completely. Two orders could describe the same job at the same site in entirely different words, with different prices and different IDs — and the rule would treat them as unrelated. The reverse happened too: two orders could read almost identically and be separate, valid jobs.</p>
+    <p>Phase 1 was good at matching data. This needed something that could read <em>meaning</em>.</p>
 
     <div class="recon">
-      <div class="recon-label">Illustrative reconstruction · simplified to show the logic, not a product screenshot</div>
+      <div class="recon-label">Illustrative — shows the logic, not a real screenshot</div>
       <div class="recon-body">
         <div class="compare">
           <div class="ord">
             <div class="ord-h"><span>ORDER · contract A</span><span>$18,400</span></div>
-            <div class="ord-desc">"40FT CRANE — FOUNDATION POUR, SITE TX-4471"</div>
+            <div class="ord-desc">"40-foot crane for foundation work"</div>
             <div class="ord-meta">
               <div>site &nbsp;<b>TX-4471</b></div>
-              <div>date &nbsp;<b>Mar 04</b></div>
+              <div>line-item ID &nbsp;<b>custom / free-text</b></div>
             </div>
           </div>
           <div class="ord">
             <div class="ord-h"><span>ORDER · contract B</span><span>$17,950</span></div>
-            <div class="ord-desc">"Crane rental (40 ft) for foundation, Dallas-North"</div>
+            <div class="ord-desc">"Crane rental for tower-base concrete pour"</div>
             <div class="ord-meta">
-              <div>site &nbsp;<b>Dallas-North</b></div>
-              <div>date &nbsp;<b>Mar 11</b></div>
+              <div>site &nbsp;<b>TX-4471</b></div>
+              <div>line-item ID &nbsp;<b>different ID</b></div>
             </div>
           </div>
         </div>
-        <div class="verdict">
-          <span class="v-score">0.83 · likely duplicate</span>
-          <span class="v-tag">same site <b>(TX-4471 = Dallas-North)</b></span>
-          <span class="v-tag">same job</span>
-          <span class="v-tag">price within tolerance</span>
+        <div class="verdict" style="background:rgba(226,102,95,0.08); border-color:rgba(226,102,95,0.3);">
+          <span class="v-score" style="color:var(--red);">ID check · no match found</span>
+          <span class="v-tag">both contracts awarded — the duplicate slips through</span>
         </div>
       </div>
-      <div class="recon-cap">Different wording, different contracts, a $450 price gap, a site <em>code</em> vs a site <em>name</em>. A string comparison sees two unrelated rows. The rubric-guided model sees one job, ordered twice.</div>
-    </div>
-
-    <p>And what a buyer actually gets is not an alert firehose — it's a short list they can clear in seconds:</p>
-
-    <div class="recon">
-      <div class="recon-label">Illustrative reconstruction · the triage queue for one site</div>
-      <div class="recon-body">
-        <div class="queue">
-          <div class="q-row"><div class="q-score hi">0.91</div><div class="q-pair"><b>"Antenna install crew, 3-sector"</b> ↔ "3 sector antenna installation team"</div><div class="q-site">TX-4471</div></div>
-          <div class="q-row"><div class="q-score hi">0.83</div><div class="q-pair"><b>"40ft crane — foundation pour"</b> ↔ "Crane rental (40 ft) for foundation"</div><div class="q-site">TX-4471</div></div>
-          <div class="q-row"><div class="q-score mid">0.79</div><div class="q-pair"><b>"Fiber pull, 400m"</b> ↔ "Fibre run ~1,300ft, tower base"</div><div class="q-site">TX-4471</div></div>
-        </div>
-      </div>
-      <div class="recon-cap">Everything below the 0.78 line is filtered out before it ever reaches the buyer. What's left is a few pairs worth a human's attention — which is the entire point.</div>
+      <div class="recon-cap">Same crane, same site, same pour — different words, a $450 price gap, and a different ID. The rule sees two unrelated rows and lets both through. This is exactly the case Phase 1 couldn't catch.</div>
     </div>
   </div>
 
+  <!-- ============ §5 PHASE 2 ============ -->
   <div class="cs-section">
-    <div class="cs-label">The decisions</div>
-    <h2>Three calls that shaped the product</h2>
+    <div class="cs-label">Phase 2</div>
+    <h2>AI only where the rules weren't enough</h2>
+    <p>We didn't replace Phase 1 with AI. The ID check was fast, cheap, and reliable — there was no reason to hand a model a job a simple rule already did better. So the two ran as layers, hardest-case-last:</p>
 
-    <div class="decision">
-      <div class="dc-head"><span class="dc-num">01</span> Rules before AI</div>
-      <dl class="dc-body">
-        <div class="dc-row"><dt>Evidence</dt><dd>Fixed-cost orders carry standardized specs — their duplicates are detectable with plain, deterministic logic.</dd></div>
-        <div class="dc-row"><dt>Options</dt><dd>Send everything to the model (simple to build, expensive and opaque), or split the problem by tractability.</dd></div>
-        <div class="dc-row is-decision"><dt>My decision</dt><dd>Solve every case a rule can solve with a rule. Reserve AI for the genuinely irreducible free-text case.</dd></div>
-        <div class="dc-row"><dt>Trade-off</dt><dd>Two systems to maintain instead of one, and a harder story to tell than "we used AI."</dd></div>
-        <div class="dc-row"><dt>Consequence</dt><dd>Cheap, reliable coverage shipped fast — and it de-risked the funding case for the hard layer by proving the model on the easy one first.</dd></div>
-      </dl>
+    <div class="flow">
+      <div class="flow-node"><div class="fn-k">Input</div><div class="fn-t">A new award placed at a site</div></div>
+      <div class="flow-arrow">↓</div>
+      <div class="flow-node l1"><div class="fn-k">Layer 1 · rules</div><div class="fn-t">Exact ID match? → Phase 1 settles it</div><div class="fn-d">Cheap and certain. No model involved.</div></div>
+      <div class="flow-arrow">↓ &nbsp;variable-cost / free-text</div>
+      <div class="flow-node l2"><div class="fn-k">Layer 2 · AI reader</div><div class="fn-t">Compares the new order against the relevant earlier orders for that site</div></div>
+      <div class="flow-arrow">↓</div>
+      <div class="flow-node l2"><div class="fn-k">Queue</div><div class="fn-t">Only strong matches go into a short review list</div></div>
+      <div class="flow-arrow">↓</div>
+      <div class="flow-node terminal"><div class="fn-k">Decision</div><div class="fn-t">The buyer compares the pair and decides</div></div>
     </div>
 
-    <div class="decision">
-      <div class="dc-head"><span class="dc-num">02</span> A throwaway harness before any integration</div>
-      <dl class="dc-body">
-        <div class="dc-row"><dt>Evidence</dt><dd>We didn't yet know if the model could even do the job. Wiring an unproven model into the platform is the most expensive way to find out.</dd></div>
-        <div class="dc-row"><dt>Options</dt><dd>Build inside the product and iterate live, or build a standalone checker decoupled from the platform.</dd></div>
-        <div class="dc-row is-decision"><dt>My decision</dt><dd>Build a standalone experimentation harness first — cheap to iterate on prompts and approach, running in parallel with Layer 1.</dd></div>
-        <div class="dc-row"><dt>Trade-off</dt><dd>Up-front time on scaffolding that ships to no user, and the discipline to not "just integrate it."</dd></div>
-        <div class="dc-row"><dt>Consequence</dt><dd>By the time we integrated, the hard questions were answered. Wiring the AI layer in took only ~3–4 weeks because the research was already done.</dd></div>
-      </dl>
+    <p>The AI never cancelled anything. Its only job was to narrow thousands of past line items down to the few a person should actually look at. The decision stayed with the buyer — the model just found the right orders to put in front of them.</p>
+  </div>
+
+  <!-- ============ §6 GETTING THE AI GOOD ENOUGH ============ -->
+  <div class="cs-section">
+    <div class="cs-label">Getting it right</div>
+    <h2>Getting the AI good enough to trust</h2>
+    <p>We didn't know yet whether AI could judge these orders well enough to be useful — and the live product is the most expensive place to find that out. So we built a small testing tool outside the platform, ran real line-item pairs through it, and reworked the approach in hours instead of release cycles. Phase 1 kept delivering value the whole time.</p>
+    <p>Our first version asked the model one broad question — <em>"Are these two line items duplicates?"</em> — for every kind of work. It wasn't good enough. Different work needs different judgment: a crane rental turns on capacity, duration, and whether an operator is included; an antenna install turns on equipment and sector count; fibre work needs to know that 400 metres and ~1,300 feet are the same distance.</p>
+    <p>So we moved from one generic prompt to guidance written for each type of line item. The results jumped — the model was finally weighing the details that actually mattered for the work in front of it.</p>
+
+    <div class="prompt-evo">
+      <div class="pe before">
+        <div class="pe-h">✕ &nbsp;before · one generic prompt</div>
+        <div class="pe-code"><span class="k">"Are these two line
+items duplicates?"</span>
+
+→ applied to cranes,
+  antennas, fibre,
+  everything.</div>
+      </div>
+      <div class="pe after">
+        <div class="pe-h">✓ &nbsp;after · guidance per line-item type</div>
+        <div class="pe-code"><span class="k">crane:</span> capacity,
+  duration, operator?
+<span class="k">antenna:</span> equipment,
+  sector count
+<span class="k">fibre:</span> match
+  metres ↔ feet</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ §7 DEFINING "CORRECT" ============ -->
+  <div class="cs-section">
+    <div class="cs-label">The hard part</div>
+    <h2>Defining "correct" with T-Mobile</h2>
+    <p>The hardest part wasn't picking a model. It was agreeing on what counted as a duplicate — and that definition couldn't come from product and engineering alone. Two descriptions could look identical to us and be different jobs; two very different descriptions could be the same work.</p>
+    <p>So we sat with T-Mobile's procurement experts and reviewed real pairs of line items. They labelled each one — duplicate work, separate work, or unclear without more context. Those reviewed pairs became our <strong>golden dataset</strong>: a trusted set of answers we could measure every version of the AI against.</p>
+    <p>The disagreements were the most useful part. When experienced buyers read the same pair differently, it meant our definition wasn't clear enough yet — for them or for the model. Each hard case sharpened the rules.</p>
+
+    <div class="cs-table-wrap">
+      <table class="cs-table">
+        <colgroup>
+          <col style="width:20%"><col style="width:22%"><col style="width:58%">
+        </colgroup>
+        <thead>
+          <tr><th>Signal</th><th>How much it counts</th><th>The rule</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><span class="cell-lead">Purpose</span></td><td><span class="weight primary">Decisive</span></td><td>Are both orders trying to complete the same job? A different purpose means different work.</td></tr>
+          <tr><td><span class="cell-lead">Scope</span></td><td><span class="weight secondary">Supporting</span></td><td>Differences in equipment, capacity, duration, quantity, or labour separate two similar-looking jobs.</td></tr>
+          <tr><td><span class="cell-lead">Price</span></td><td><span class="weight weak">Minor</span></td><td>Allowed to differ within reason — never decisive on its own, since quotes and costs move.</td></tr>
+        </tbody>
+      </table>
     </div>
 
-    <div class="decision">
-      <div class="dc-head"><span class="dc-num">03</span> 0.78 — fewer false alarms, and accept more misses</div>
-      <dl class="dc-body">
-        <div class="dc-row"><dt>Evidence</dt><dd>The old noisy check already proved that a queue people don't trust gets abandoned — and then catches zero.</dd></div>
-        <div class="dc-row"><dt>Options</dt><dd>A low threshold (catch more, flood the queue) or a high one (cleaner queue, more misses).</dd></div>
-        <div class="dc-row is-decision"><dt>My decision</dt><dd>Score the model against the client-labeled golden set across cutoffs and ship 0.78 — just right of the crossover.</dd></div>
-        <div class="dc-row"><dt>Trade-off</dt><dd>We knowingly let some real duplicates slip rather than risk drowning the signal.</dd></div>
-        <div class="dc-row"><dt>Consequence</dt><dd>A queue buyers actually work. A slightly leakier filter people trust catches far more over time than a strict one they ignore.</dd></div>
-      </dl>
+    <div class="callout">
+      <div class="co-label">Change management, not just product</div>
+      <p>Most of these experts had never been asked to sit as the judge in an exercise like this. A real part of the job was bringing them along — why the golden dataset mattered, how we'd break it into manageable batches, what we were building. Their disagreements weren't friction; they were the signal that showed me exactly where my definition was still fuzzy.</p>
     </div>
+  </div>
 
-    <p>That last call is the whole feature in one picture. Here's how to read it:</p>
+  <!-- ============ §8 THE TRADE-OFF ============ -->
+  <div class="cs-section">
+    <div class="cs-label">The trade-off</div>
+    <h2>False alarms vs. missed duplicates</h2>
+    <p>The AI introduced two kinds of mistake, and they pulled in opposite directions. A <strong>false alarm</strong> is two valid, separate jobs flagged as duplicates — it wastes the buyer's time, and if it happens too often, buyers stop trusting the queue and ignore it, which quietly kills the whole check. A <strong>missed duplicate</strong> is a real repeat the AI doesn't catch; it lets unnecessary work continue toward billing.</p>
+    <p>To choose a setting, I measured two things against the golden set at every threshold: <strong>precision</strong> — of the orders it flags, how many are genuinely duplicates (few false alarms) — and <strong>recall</strong> — of all the real duplicates, how many it catches (few misses). Raising the threshold pushes precision up and recall down. No setting maxes both.</p>
+    <p>I set it at <strong>0.78</strong> — not because two lines cross there, but because it's where precision is high enough that buyers keep trusting the list, while the daily volume of alerts stays inside the review team's capacity. It's an operating threshold, chosen for trust and workload and recalibrated as production data comes in — not a mathematical optimum the chart discovers on its own.</p>
 
     <div class="read-guide">
       <div class="rg-label">How to read this chart</div>
       <ul>
-        <li class="rg-x"><span class="axis">The horizontal axis</span> is the confidence threshold — how sure the model must be before it flags a pair. Move left and it flags <em>more</em>; move right and it flags <em>fewer</em>.</li>
-        <li class="rg-fp"><span class="axis">The red line — false positives</span> — is wrong flags. Loosen the threshold (left) and these pile up, burying real matches in noise and bringing back the fatigue that killed the old check.</li>
-        <li class="rg-fn"><span class="axis">The teal line — false negatives</span> — is real duplicates the model <em>misses</em>. Tighten the threshold (right) and more of these slip through to billing.</li>
+        <li class="rg-x"><span class="axis">Left to right</span> — how sure the AI must be before it flags an order. Left is lenient (flags more); right is strict (flags fewer).</li>
+        <li class="rg-fn"><span class="axis">Precision (teal)</span> — of the orders it flags, the share that are actually duplicates. Higher means fewer false alarms, so buyers trust the list. It climbs as the AI gets stricter.</li>
+        <li class="rg-rec"><span class="axis">Recall (slate)</span> — of all the real duplicates, the share it catches. Higher means fewer slip through to billing. It falls as the AI gets stricter.</li>
       </ul>
-      <p>The two lines always move in opposite directions: every cutoff buys fewer of one error by accepting more of the other. No setting makes both zero — so the job isn't to eliminate error, it's to pick the point where the trade is worth it.</p>
+      <p>The two pull apart: a stricter setting buys trust (precision) by catching fewer (recall). <strong>0.78 isn't where the lines cross</strong> — it's the point where precision is high enough that buyers keep using the queue while the daily alert volume stays inside the review team's capacity. An operating choice, recalibrated as production data lands.</p>
     </div>
 
     <div class="cs-chart">
       <div class="chart-head">
-        <div class="chart-title">The threshold decision: two errors moving in opposite directions</div>
-        <div class="chart-sub">Illustrative — shape of the trade-off, not exact eval values</div>
+        <div class="chart-title">Choosing the threshold: trust vs. coverage</div>
+        <div class="chart-sub">Precision &amp; recall from the golden-set evaluation · review load estimated · values illustrative</div>
       </div>
-      <svg viewBox="0 0 640 328" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="As the confidence threshold rises left to right, the false-positive rate falls and the false-negative rate rises. The two curves cross near the middle; the production threshold is set at 0.78, just to the right of the crossover, favouring a cleaner queue.">
-        <text x="16" y="130" transform="rotate(-90 16 130)" text-anchor="middle" fill="#B7C0CE" font-family="IBM Plex Mono, monospace" font-size="10" letter-spacing="1">ERROR RATE (% OF PAIRS)</text>
+      <svg viewBox="0 0 640 312" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Precision rises and recall falls as the confidence threshold increases from 0.50 to 1.00. The selected threshold 0.78 is marked, where precision is about 84 percent and recall about 76 percent, generating roughly 18 alerts per day within the review team capacity of 20. The point is chosen for trust and workload, not because the two lines cross.">
+        <text x="15" y="130" transform="rotate(-90 15 130)" text-anchor="middle" fill="#B7C0CE" font-family="IBM Plex Mono, monospace" font-size="10" letter-spacing="1">% OF ORDERS</text>
         <g stroke="#27303F" stroke-width="1">
           <line x1="60" y1="20" x2="60" y2="240"/>
           <line x1="60" y1="240" x2="620" y2="240"/>
         </g>
         <g stroke="#1E2635" stroke-width="1" stroke-dasharray="2 4">
-          <line x1="60" y1="80" x2="620" y2="80"/>
-          <line x1="60" y1="140" x2="620" y2="140"/>
-          <line x1="60" y1="200" x2="620" y2="200"/>
+          <line x1="60" y1="75"  x2="620" y2="75"/>
+          <line x1="60" y1="130" x2="620" y2="130"/>
+          <line x1="60" y1="185" x2="620" y2="185"/>
         </g>
         <g fill="#6D7788" font-family="IBM Plex Mono, monospace" font-size="10">
-          <text x="52" y="244" text-anchor="end">0%</text>
-          <text x="52" y="204" text-anchor="end">25%</text>
-          <text x="52" y="144" text-anchor="end">50%</text>
-          <text x="52" y="84"  text-anchor="end">75%</text>
           <text x="52" y="24"  text-anchor="end">100%</text>
+          <text x="52" y="79"  text-anchor="end">75%</text>
+          <text x="52" y="134" text-anchor="end">50%</text>
+          <text x="52" y="189" text-anchor="end">25%</text>
+          <text x="52" y="244" text-anchor="end">0%</text>
         </g>
         <g fill="#6D7788" font-family="IBM Plex Mono, monospace" font-size="10">
           <text x="60"  y="258" text-anchor="middle">0.50</text>
@@ -221,108 +255,103 @@
           <text x="620" y="258" text-anchor="middle">1.00</text>
         </g>
         <g font-family="IBM Plex Mono, monospace" font-size="9.5" fill="#6D7788">
-          <text x="60" y="280" text-anchor="start">← flags more pairs</text>
-          <text x="620" y="280" text-anchor="end">flags fewer pairs →</text>
+          <text x="60" y="274" text-anchor="start">← lenient</text>
+          <text x="620" y="274" text-anchor="end">strict →</text>
         </g>
-        <text x="340" y="306" text-anchor="middle" fill="#B7C0CE" font-family="IBM Plex Mono, monospace" font-size="11" letter-spacing="1">CONFIDENCE THRESHOLD</text>
-        <text x="340" y="320" text-anchor="middle" fill="#6D7788" font-family="IBM Plex Mono, monospace" font-size="9">how certain the model must be to flag a pair</text>
-        <path d="M 60,40 C 140,50 220,85 300,140 C 360,180 440,215 620,232" fill="none" stroke="#e2665f" stroke-width="2.25" stroke-linecap="round"/>
-        <path d="M 60,232 C 180,222 260,205 340,170 C 420,135 500,90 620,40" fill="none" stroke="#55E0C9" stroke-width="2.25" stroke-linecap="round"/>
-        <g>
-          <circle cx="332" cy="158" r="3" fill="none" stroke="#6D7788" stroke-width="1"/>
-          <text x="332" y="150" text-anchor="middle" fill="#6D7788" font-family="IBM Plex Mono, monospace" font-size="9">crossover</text>
-        </g>
-        <g>
-          <line x1="374" y1="20" x2="374" y2="240" stroke="#e2a03f" stroke-width="1.25" stroke-dasharray="4 4"/>
-          <circle cx="374" cy="20" r="3.5" fill="#e2a03f"/>
-          <rect x="190" y="27" width="180" height="36" rx="4" fill="#141A24" stroke="#e2a03f" stroke-width="1"/>
-          <text x="280" y="44" text-anchor="middle" fill="#e2a03f" font-family="IBM Plex Mono, monospace" font-size="12" font-weight="600">we shipped 0.78</text>
-          <text x="280" y="56" text-anchor="middle" fill="#B7C0CE" font-family="IBM Plex Mono, monospace" font-size="9">favours a cleaner queue</text>
-        </g>
-        <text x="76" y="34" fill="#e2665f" font-family="IBM Plex Mono, monospace" font-size="11">false positives</text>
-        <text x="604" y="34" fill="#55E0C9" font-family="IBM Plex Mono, monospace" font-size="11" text-anchor="end">false negatives</text>
+        <text x="340" y="296" text-anchor="middle" fill="#B7C0CE" font-family="IBM Plex Mono, monospace" font-size="10.5" letter-spacing="0.5">CONFIDENCE THRESHOLD — how sure the AI must be before it flags</text>
+
+        <!-- selected threshold marker -->
+        <line x1="374" y1="20" x2="374" y2="240" stroke="#e2a03f" stroke-width="1.25" stroke-dasharray="4 4"/>
+        <circle cx="374" cy="20" r="3.5" fill="#e2a03f"/>
+
+        <!-- recall line (falls) -->
+        <polyline points="60,31 172,42 284,57 374,73 508,119 620,170" fill="none" stroke="#9AA7BD" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round"/>
+        <g fill="#9AA7BD"><circle cx="60" cy="31" r="2.6"/><circle cx="172" cy="42" r="2.6"/><circle cx="284" cy="57" r="2.6"/><circle cx="508" cy="119" r="2.6"/><circle cx="620" cy="170" r="2.6"/></g>
+        <!-- precision line (rises) -->
+        <polyline points="60,134 172,108 284,79 374,55 508,38 620,27" fill="none" stroke="#55E0C9" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round"/>
+        <g fill="#55E0C9"><circle cx="60" cy="134" r="2.6"/><circle cx="172" cy="108" r="2.6"/><circle cx="284" cy="79" r="2.6"/><circle cx="508" cy="38" r="2.6"/><circle cx="620" cy="27" r="2.6"/></g>
+
+        <!-- highlighted points at 0.78 -->
+        <circle cx="374" cy="55" r="4" fill="#55E0C9" stroke="#e2a03f" stroke-width="1.5"/>
+        <circle cx="374" cy="73" r="4" fill="#9AA7BD" stroke="#e2a03f" stroke-width="1.5"/>
+
+        <!-- line end labels -->
+        <text x="612" y="22" text-anchor="end" fill="#55E0C9" font-family="IBM Plex Mono, monospace" font-size="11">precision</text>
+        <text x="612" y="184" text-anchor="end" fill="#9AA7BD" font-family="IBM Plex Mono, monospace" font-size="11">recall</text>
+
+        <!-- operating-point annotation -->
+        <line x1="346" y1="180" x2="374" y2="180" stroke="#e2a03f" stroke-width="1"/>
+        <rect x="96" y="150" width="250" height="60" rx="4" fill="#141A24" stroke="#e2a03f" stroke-width="1"/>
+        <text x="108" y="170" text-anchor="start" fill="#e2a03f" font-family="IBM Plex Mono, monospace" font-size="11" font-weight="600">SELECTED · 0.78</text>
+        <text x="108" y="187" text-anchor="start" fill="#B7C0CE" font-family="IBM Plex Mono, monospace" font-size="10.5">84% precision · 76% recall</text>
+        <text x="108" y="203" text-anchor="start" fill="#6D7788" font-family="IBM Plex Mono, monospace" font-size="10">≈18 alerts/day · within capacity (20)</text>
       </svg>
       <div class="chart-legend">
-        <div class="lg-item"><span class="sw" style="background:#e2665f;"></span>False positives — noise in the queue, drives fatigue</div>
-        <div class="lg-item"><span class="sw" style="background:#55E0C9;"></span>False negatives — real duplicates that slip through</div>
-        <div class="lg-item"><span class="sw" style="background:#e2a03f;"></span>Shipped threshold — 0.78</div>
+        <div class="lg-item"><span class="sw" style="background:#55E0C9;"></span>Precision — of flagged orders, the share that are real duplicates (list stays trustworthy)</div>
+        <div class="lg-item"><span class="sw" style="background:#9AA7BD;"></span>Recall — of all real duplicates, the share caught (fewer slip through)</div>
+        <div class="lg-item"><span class="sw" style="background:#e2a03f;"></span>Selected threshold — 0.78, set by trust + review capacity, not a curve crossing</div>
       </div>
-      <div class="chart-caption">I scored the model against the client-labeled golden set across candidate cutoffs and landed on <strong>0.78 — deliberately just right of the crossover</strong>. A lower bar catches more theoretical duplicates but floods the queue and destroys adoption. A slightly leakier filter people trust and actually triage catches far more cumulative leakage over time than a stricter one they ignore.</div>
+      <div class="chart-caption"><strong>0.78 isn't where two curves cross</strong> — it's the point where the flagged list is trustworthy enough (≈84% precision) that buyers keep using it, while daily alert volume stays within the review team's capacity. Precision and recall are measured on the golden set; the threshold is an operating policy we recalibrate as production data comes in.</div>
     </div>
   </div>
 
+  <!-- ============ §9 THE BUYER STAYED IN CONTROL ============ -->
   <div class="cs-section">
-    <div class="cs-label">The iteration</div>
-    <h2>How the AI layer actually got good</h2>
-    <p>The harness earned its keep here — it's where three problems surfaced and got solved before any of this touched a real buyer.</p>
+    <div class="cs-label">The experience</div>
+    <h2>The buyer stayed in control</h2>
+    <p>The final experience was deliberately simple. When the AI found a likely duplicate, the buyer saw the new order beside the earlier one and compared them directly before deciding. Nothing was cancelled automatically.</p>
+    <p>The AI narrowed thousands of past line items down to a few strong matches. It didn't make the procurement call — it removed the manual work of finding the right orders to compare, and left the judgment where it belonged.</p>
 
-    <h3 style="font-size:16px;font-weight:600;margin:24px 0 6px;">1 · One giant prompt wasn't enough</h3>
-    <p>We started with a single macro prompt — one global "are these two line items duplicates?" applied to everything. It wasn't good enough. The fix was architectural, not a threshold tweak: <strong>per-item-type prompts</strong>, so the model is told how to judge duplicates for the specific kind of work in front of it.</p>
-
-    <div class="prompt-evo">
-      <div class="pe before">
-        <div class="pe-h">✕ &nbsp;before · one macro prompt</div>
-        <div class="pe-code"><span class="k">"Are these two line
-items duplicates?"</span>
-
-→ applied to cranes,
-  antennas, fiber,
-  everything.</div>
+    <div class="recon">
+      <div class="recon-label">Illustrative — the review list for one site</div>
+      <div class="recon-body">
+        <div class="queue">
+          <div class="q-row"><div class="q-score hi">0.91</div><div class="q-pair"><b>"Antenna install crew, 3-sector"</b> ↔ "3 sector antenna installation team"</div><div class="q-site">TX-4471</div></div>
+          <div class="q-row"><div class="q-score hi">0.83</div><div class="q-pair"><b>"40ft crane — foundation pour"</b> ↔ "Crane rental (40 ft) for foundation"</div><div class="q-site">TX-4471</div></div>
+          <div class="q-row"><div class="q-score mid">0.79</div><div class="q-pair"><b>"Fiber pull, 400m"</b> ↔ "Fibre run ~1,300ft, tower base"</div><div class="q-site">TX-4471</div></div>
+        </div>
       </div>
-      <div class="pe after">
-        <div class="pe-h">✓ &nbsp;after · per item-type</div>
-        <div class="pe-code"><span class="k">crane_rental:</span> weigh
-  capacity, duration...
-<span class="k">antenna_install:</span> weigh
-  sector count, band...
-<span class="k">fiber_run:</span> normalize
-  metres ↔ feet...</div>
-      </div>
+      <div class="recon-cap">Anything below the 0.78 bar is filtered out before the buyer ever sees it. What's left is a few pairs genuinely worth a person's attention — a list they can clear in seconds, not a flood of alerts.</div>
     </div>
-
-    <h3 style="font-size:16px;font-weight:600;margin:28px 0 6px;">2 · The rubric — defining "correct" with the people who own the domain</h3>
-    <p>An LLM will invent its own fluid definition of a "duplicate" if you let it. I authored a scoring rubric that pins the model to real procurement logic — but the <strong>ground truth couldn't come from me</strong>. T-Mobile's procurement team owned the labeling of the golden set; I built the rubric with them and ran the sessions.</p>
-
-    <div class="cs-table-wrap">
-      <table class="cs-table">
-        <colgroup>
-          <col style="width:22%"><col style="width:20%"><col style="width:58%">
-        </colgroup>
-        <thead>
-          <tr><th>Signal</th><th>Weight</th><th>Rule</th></tr>
-        </thead>
-        <tbody>
-          <tr><td><span class="cell-lead">Purpose</span></td><td><span class="weight primary">Primary</span></td><td>Any difference means distinct jobs. A foundation pour ≠ an antenna install.</td></tr>
-          <tr><td><span class="cell-lead">Site</span></td><td><span class="weight primary">Primary</span></td><td>Different site → not a duplicate. Site code and site name are normalized as the same signal.</td></tr>
-          <tr><td><span class="cell-lead">Time window</span></td><td><span class="weight primary">Primary</span></td><td>Same work at the same site months apart is legitimate re-work, not a duplicate order.</td></tr>
-          <tr><td><span class="cell-lead">Scope details</span></td><td><span class="weight secondary">Secondary</span></td><td>An operator present on one crane rental and absent on the other is a different scope of work.</td></tr>
-          <tr><td><span class="cell-lead">Price</span></td><td><span class="weight weak">Weak</span></td><td>Held to a tolerance, never decisive alone — prices legitimately move with quotes and timing.</td></tr>
-        </tbody>
-      </table>
-    </div>
-
-    <div class="callout">
-      <div class="co-label">Change management, not just product</div>
-      <p>Most of these domain experts had never been asked to be the judge in a labeling exercise. A lot of the work was getting them there — why label quality was non-negotiable, how we'd chunk it to be doable, what we were building. Their disagreements on hard pairs weren't friction; they were <strong>signal</strong>, exposing exactly where the rubric was underspecified, which fed straight back into tightening it.</p>
-    </div>
-
-    <h3 style="font-size:16px;font-weight:600;margin:28px 0 6px;">3 · The client stayed in the loop the whole way</h3>
-    <p>We didn't rely on a single after-the-fact metric. The harness was the measurement loop: real line-item pairs ran through it continuously, and T-Mobile's procurement team watched the outputs throughout. <strong>The people who defined "correct" were the same people confirming the system met their bar</strong> — in the loop the whole way, not just at a launch sign-off.</p>
   </div>
 
+  <!-- ============ §10 THE OUTCOME ============ -->
   <div class="cs-section">
-    <div class="cs-label">Outcome</div>
-    <h2>A check buyers avoided became one they act on</h2>
-    <p>The program took ScopeWorker from no duplicate detection to a layered system: deterministic coverage for the structured cases, and an AI triage layer that collapses a site's messy variable-cost history into a short queue a buyer can clear in seconds.</p>
-    <p>The real win wasn't time saved — it was <strong>behavior changed</strong>. The safeguard against paying twice went from a noisy list everyone ignored to a workflow buyers trust and actually use, so duplicates get caught at the point of procurement, before they ever reach billing. And because the client's own experts defined and validated "correct," it shipped with their trust built in, not bolted on.</p>
+    <div class="cs-label">The outcome</div>
+    <h2>9.5% fewer awards — and $2.74M we can point to</h2>
+    <p>The two phases produced one clear result. The ID-based rules cut contract awards by <strong>6%</strong>. The AI layer found another <strong>3.5%</strong> among the variable-cost, free-text orders no rule could catch. Together: <strong>9.5% fewer contract awards</strong>, stopped as duplicates before billing.</p>
+
+    <div class="econ">
+      <div class="eq win"><div class="eq-n">6.0%</div><div class="eq-l">caught by the simple ID rules — no AI</div></div>
+      <div class="op">+</div>
+      <div class="eq win"><div class="eq-n">3.5%</div><div class="eq-l">added by the AI reader, on the messy orders no rule could catch</div></div>
+      <div class="op">=</div>
+      <div class="eq win"><div class="eq-n">9.5%</div><div class="eq-l">of awards stopped as duplicates before billing</div></div>
+    </div>
+
+    <p>That split is the whole story. Almost <strong>two-thirds of the result came from simple rules</strong> — AI was never the starting point, and we didn't reach for it everywhere. We shipped the smallest thing that could create value, measured what it did, found where it broke, and used AI only for the part that actually needed to understand meaning.</p>
+    <p>And because every catch traced back to a cancelled contract with a real value, the impact wasn't a guess. <strong>$2.74M of duplicate work stopped before it was paid</strong> — a number pulled from the system, not modelled.</p>
+  </div>
+
+  <!-- ============ §11 WHAT I LEARNED ============ -->
+  <div class="cs-section">
+    <div class="cs-label">What I learned</div>
+    <h2>The model was the easy part</h2>
+    <p>This looked like a data-matching problem at the start. It turned into a product, evaluation, and change-management problem — and the model was only one piece of it. The real work was:</p>
+    <ul>
+      <li>Defining what "duplicate" meant <strong>with</strong> the client, not for them</li>
+      <li>Turning expert judgment into a rubric the AI could apply consistently</li>
+      <li>Building a golden dataset everyone trusted, and measuring every change against it</li>
+      <li>Owning the trade-off between false alarms and missed duplicates</li>
+      <li>Designing a queue buyers would actually open and use</li>
+      <li>Keeping people in control of the final decision</li>
+      <li>Tying every catch to a cancelled contract, so the impact was a real number and not a claim</li>
+    </ul>
 
     <div class="callout key">
       <div class="co-label">The reusable lesson</div>
-      <p>The model was never the moat. <strong>Adoption was the constraint</strong> — so the work was sequencing AI to only the irreducible case, defining "correct" with the domain experts who own it, and owning the trade-off between crying wolf and letting a miss slip through.</p>
+      <p>The strongest AI product isn't the one that automates the most. Here it was rules for the obvious matches, AI for the ambiguous ones, and human judgment for the decision — and the thing that made it defensible wasn't the model, it was being able to prove, in dollars, that it worked.</p>
     </div>
-
-    <h3 style="font-size:16px;font-weight:600;margin:26px 0 6px;">What I'd do differently</h3>
-    <p>I'd instrument the queue as a first-class product surface from day one — flagged-vs-confirmed rate, triage time, and duplicates prevented, captured continuously. We validated adoption by watching real behavior with the client, which is strong qualitative evidence; but the version of this story with a hard before/after number on leakage caught is the one I'd rather be able to tell, and that starts with measurement built in from the first sprint.</p>
   </div>
 
 </div>

@@ -326,9 +326,11 @@ footer{padding:32px 0 60px; text-align:left; font-family:var(--mono); font-size:
 .callout strong{color:var(--teal); font-weight:600;}
 .callout.key{border-left-color:var(--teal); background:linear-gradient(180deg, rgba(85,224,201,0.07), transparent 60%), var(--surface);}
 .callout.key .co-label{color:var(--teal);}
-.callout.warn{border-left-color:var(--red);}
+.callout.warn{border-left-color:var(--red); padding:24px 26px 24px 28px;}
 .callout.warn .co-label{color:var(--red);}
 .callout.warn strong{color:var(--red);}
+.callout.warn p{font-size:22px; line-height:1.5; letter-spacing:-0.005em;}
+@media (max-width:560px){ .callout.warn p{font-size:19px;} }
 
 /* Impact strip — banner at top of a case */
 .impact-strip{
@@ -464,6 +466,7 @@ footer{padding:32px 0 60px; text-align:left; font-family:var(--mono); font-size:
 .read-guide li.rg-x::before{background:var(--text-faint); border-radius:50%;}
 .read-guide li.rg-fp::before{background:var(--red);}
 .read-guide li.rg-fn::before{background:var(--teal);}
+.read-guide li.rg-rec::before{background:#9AA7BD;}
 .read-guide li strong{color:var(--text); font-weight:600;}
 .read-guide li .axis{color:var(--text); font-weight:600;}
 .read-guide > p{
