@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Line-item preview & financials popup — Aman</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css?v=8">
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a class="logo" href="index.html">aman<span>.</span>pm</a>
+    <div class="nav-links">
+      <a href="index.html#work"><span class="n">01</span>Work</a>
+      <a href="index.html#approach"><span class="n">02</span>Approach</a>
+      <a href="index.html#timeline"><span class="n">03</span>Timeline</a>
+      <a href="index.html#contact"><span class="n">04</span>Contact</a>
+    </div>
+  </div>
+</nav>
+
+<div class="wrap-narrow breadcrumb">
+  <a href="index.html">← All case studies</a> / 05
+</div>
+
+<header class="case-hero wrap-narrow">
+  <div class="eyebrow">Case study 05 · PM who codes</div>
+  <h1>My first ScopeWorker PR was a weekend project — it now serves 300+ requests a day</h1>
+  <p class="dek">There was no way to see what was inside a contract from the contract list — not the line items, not the PR / PO / Invoice records tied to it. You opened contracts one by one, or downloaded the PO offline. So I brought both up to the list, coding it myself on infrastructure the team already had: a line-item preview built on the bulk-acceptance pipeline — my first PR at ScopeWorker — and a context-aware financials popup that repurposes the contract's own finance page.</p>
+
+  <div class="case-meta">
+    <div class="m-item"><div class="l">My role</div><div class="v">PM — spotted the reuse, coded it end to end</div></div>
+    <div class="m-item"><div class="l">Team</div><div class="v">Solo, on the team's existing infra</div></div>
+    <div class="m-item"><div class="l">Timeline</div><div class="v">One weekend</div></div>
+    <div class="m-item"><div class="l">Usage</div><div class="v hero-stat">300+ requests / day</div></div>
+  </div>
+
+  <div class="impact-strip">
+    <div class="imp"><div class="n">Weekend</div><div class="l">my first production PR at ScopeWorker</div></div>
+    <div class="imp"><div class="n">300+/day</div><div class="l">line-item previews served, seen in Mezmo</div></div>
+    <div class="imp"><div class="n">89%</div><div class="l">feature score</div></div>
+    <div class="imp"><div class="n">No new backend</div><div class="l">reused pipeline + repurposed the finance page</div></div>
+  </div>
+
+  <figure class="cs-figure">
+    <img src="assets/case-5/preview.png" alt="The line-item preview on the contract list page" loading="lazy">
+    <figcaption><span class="ba after">After</span><span class="fc-idx">fig.01</span>The line-item preview — every line item across contracts, read from the list, without opening or accepting anything.</figcaption>
+  </figure>
+</header>
+
+<div class="case-body-page wrap-narrow">
+
+  <div class="cs-section">
+    <div class="cs-label">The gap</div>
+    <h2>You couldn't see what was inside a contract without leaving the list</h2>
+    <p>The contract list page showed contracts, not their contents. Two kinds of detail lived one click deep, or offline:</p>
+    <ul>
+      <li><strong>Line items</strong> — the scope, quantities, and pricing inside a contract. To read them you opened each contract one at a time, or downloaded the PO and read it offline.</li>
+      <li><strong>Financial records</strong> — the POs, PRs, and Invoices tied to a contract lived in its finance section. On the list we <em>showed</em> the PR #, PO #, and Invoice ID — but they were inert text, not links to anything.</li>
+    </ul>
+
+    <figure class="cs-figure">
+      <img src="assets/case-5/before.png" alt="The contract list page before, with line items hidden and PR/PO/Invoice IDs shown as plain text" loading="lazy">
+      <figcaption><span class="ba before">Before</span><span class="fc-idx">fig.00</span>Before — line items lived one click deep, and the PR / PO / Invoice IDs on the list were dead text.</figcaption>
+    </figure>
+  </div>
+
+  <div class="cs-section">
+    <div class="cs-label">The insight</div>
+    <h2>Everything I needed was already built — for other features</h2>
+    <p>I didn't need new backends. Both times, the data and the view already existed somewhere else in the platform:</p>
+    <ul>
+      <li>The <strong>bulk contract acceptance</strong> flow already had a pipeline that pulls every line item across every contract in a batch, through one endpoint — exactly what a list-level line-item preview needed.</li>
+      <li>Each contract already had a <strong>finance page</strong> rendering its PO / PR / Invoice listings — exactly the view those dead IDs on the list should open.</li>
+    </ul>
+    <p>So the work wasn't building financial infrastructure or a line-item service. It was putting the right, stateful, permission-aware views on top of things the team had already shipped.</p>
+
+    <div class="callout">
+      <div class="co-label">Why this was the right size to code myself</div>
+      <p>The hard parts — assembling line items across contracts, and computing a contract's financial records — were already solved. What remained was the front-facing, stateful layer. Small enough to build in a weekend, real enough to matter.</p>
+    </div>
+  </div>
+
+  <div class="cs-section">
+    <div class="cs-label">What I built · 1</div>
+    <h2>A stateful, per-user line-item preview</h2>
+    <p>I built the preview in <strong>Angular</strong>, using <strong>ag-Grid</strong> for the line-item table, on top of the existing acceptance endpoint. Two things made it more than a table:</p>
+    <ul>
+      <li><strong>State retention.</strong> The preview holds its state — filters, column configuration, expanded rows — as users move around the list, so they don't lose their place each time they come back to it.</li>
+      <li><strong>Data-access-based views.</strong> Line items include pricing, and not every user is allowed to see cost data. The preview renders per user: financial fields are hidden from anyone without financial access, so restricted users see the scope without the numbers.</li>
+    </ul>
+
+    <div class="callout key">
+      <div class="co-label">The judgment call</div>
+      <p>The moment line items include pricing, "show the line items" becomes "show the right line items to the right person." Gating financial fields by access wasn't a UI nicety — it was the difference between a safe feature and a data leak.</p>
+    </div>
+
+    <figure class="cs-figure">
+      <img src="assets/case-5/financial-gating.png" alt="The preview rendered for a user without financial access, with pricing columns hidden" loading="lazy">
+      <figcaption><span class="fc-idx">fig.02</span>Same preview, two users — financial fields hidden for anyone without financial access.</figcaption>
+    </figure>
+  </div>
+
+  <div class="cs-section">
+    <div class="cs-label">What I built · 2</div>
+    <h2>A financials popup that follows you down the list</h2>
+    <p>For the financial records, I repurposed the contract's own finance page — its PO, PR, and Invoice listings — to open as a popup right on the contract list, so the IDs we'd been showing as dead text finally led somewhere.</p>
+    <p>The part I'm proudest of is how it behaves once open. It doesn't block the page. <strong>While the popup is open, you can keep scrolling the contracts behind it</strong> and page through the POs, PRs, and Invoices across all of them — without closing and reopening it for each contract. It turns a per-contract detail view into a way to scan financial records across the whole list.</p>
+
+    <div class="callout">
+      <div class="co-label">Dead text → a doorway</div>
+      <p>The PR / PO / Invoice IDs were already on the list — they just didn't do anything. The win wasn't inventing a view; it was making what we already displayed <strong>clickable, and then better than the page it came from.</strong></p>
+    </div>
+
+    <figure class="cs-figure">
+      <img src="assets/case-5/financials-popup.png" alt="The financials popup open over the contract list, with the list scrollable behind it" loading="lazy">
+      <figcaption><span class="fc-idx">fig.03</span>The financials popup — the contract's finance page, opened over the list and scrollable across contracts without closing.</figcaption>
+    </figure>
+  </div>
+
+  <div class="cs-section">
+    <div class="cs-label">How it shipped</div>
+    <h2>A weekend, and my first PR into the codebase</h2>
+    <p>The line-item preview was the first pull request I opened at ScopeWorker — a PM shipping into the production codebase, not writing a ticket for someone else to build. Reusing the acceptance pipeline and repurposing the finance page meant there was no new backend to design, review, or maintain; the work was the front-facing views and the access logic around them, which is why real features fit inside a weekend.</p>
+  </div>
+
+  <div class="cs-section">
+    <div class="cs-label">Results</div>
+    <h2>Quietly one of the most-used views on the page</h2>
+    <div class="pull-stats">
+      <div class="ps"><div class="n">300+/day</div><div class="l">line-item previews requested, measured in Mezmo</div></div>
+      <div class="ps"><div class="n">89%</div><div class="l">feature score</div></div>
+      <div class="ps"><div class="n">Weekend</div><div class="l">to build, on infra that already existed</div></div>
+    </div>
+    <ul>
+      <li><strong>300+ requests a day</strong> — real production usage on the contract list, confirmed in Mezmo logging, growing as more users discover it</li>
+      <li><strong>89% feature score</strong>, in line with the rest of the platform's most-used views</li>
+      <li><strong>Zero new backend</strong> — the line-item preview runs on the endpoint the bulk-acceptance flow already maintained, and the financials popup reuses the contract's existing finance page</li>
+    </ul>
+  </div>
+
+</div>
+
+<div class="wrap-narrow case-nav">
+  <a href="case-4.html">← Rebuilding contract creation</a>
+  <a href="index.html">Back to all work →</a>
+</div>
+
+<footer class="wrap-narrow">
+  <div>Chandigarh, India · Built by hand, not by template.</div>
+</footer>
+
+</body>
+</html>
