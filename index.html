@@ -46,26 +46,16 @@
   <div class="section-head">
     <div class="sec-eyebrow">01 · Case studies</div>
     <div class="sec-title">What I actually built</div>
-    <p class="sec-note">No case study here is a redesign for its own sake. Each one starts from a metric that was broken and ends with a number that moved. Click through — these are full write-ups, not tooltips.</p>
+    <p class="sec-note">No case study here is a redesign for its own sake. Most start from a metric that was broken and end with a number that moved; the last two I built because I wanted them to exist. Click through — these are full write-ups, not tooltips.</p>
+  </div>
+
+  <div class="tier-head">
+    <h3>Start here</h3>
+    <span class="tier-note">Three different muscles — applied AI, pricing, and AI depth.</span>
   </div>
 
   <div class="case-grid">
-  <a class="case-link" href="case-1.html">
-    <div class="case-top">
-      <div class="case-num">01</div>
-      <div class="case-diff"><span class="before">15–20s</span><span class="after">3–4.5s</span></div>
-    </div>
-    <div class="case-title">Rebuilding the contract dashboard under a 2.3M-contract enterprise load</div>
-    <div class="case-dek">A 7-year-old AngularJS page was blocking every mobile buyer for up to 20 seconds. Here's the root-cause diagnosis, the rebuild, and what I'd fix next.</div>
-    <div class="case-tags">
-      <span class="tag">70+ column data grid</span>
-      <span class="tag">OpenSearch + Kafka</span>
-      <span class="tag">2.5-month rebuild</span>
-    </div>
-    <div class="case-cta">Read the case study <span class="case-arrow">→</span></div>
-  </a>
-
-  <a class="case-link" href="case-2.html">
+  <a class="case-link wide" href="case-2.html">
     <div class="case-top">
       <div class="case-num">02</div>
       <div class="case-diff"><span class="after">$2.74M stopped</span></div>
@@ -95,80 +85,75 @@
     <div class="case-cta">Read the case study <span class="case-arrow">→</span></div>
   </a>
 
-  <a class="case-link" href="case-4.html">
+  <div class="case-link case-two-part">
     <div class="case-top">
-      <div class="case-num">04</div>
-      <div class="case-diff"><span class="after">~60% adopted</span></div>
-    </div>
-    <div class="case-title">Rebuilding contract creation by shifting authorship</div>
-    <div class="case-dek">Suppliers held the ground truth; scoping lived in Excel and email. I let suppliers author scope while buyers kept control — moving $11B of spend into the platform.</div>
-    <div class="case-tags">
-      <span class="tag">$11B annual spend</span>
-      <span class="tag">Authorship vs authority</span>
-      <span class="tag">Excel → system of record</span>
-    </div>
-    <div class="case-cta">Read the case study <span class="case-arrow">→</span></div>
-  </a>
-
-  <a class="case-link" href="case-5.html">
-    <div class="case-top">
-      <div class="case-num">05</div>
-      <div class="case-diff"><span class="after">300+/day</span></div>
-    </div>
-    <div class="case-title">A weekend project — my first PR — now used 300+ times a day</div>
-    <div class="case-dek">You couldn't see the line items or financial records inside a contract from the list. I reused the pipeline the bulk-acceptance flow already had, repurposed the finance page as a context-aware popup, and coded it myself — over a weekend.</div>
-    <div class="case-tags">
-      <span class="tag">Angular + ag-Grid</span>
-      <span class="tag">Reused infra, no new backend</span>
-      <span class="tag">Financial-access gating</span>
-    </div>
-    <div class="case-cta">Read the case study <span class="case-arrow">→</span></div>
-  </a>
-
-  <a class="case-link" href="case-6.html">
-    <div class="case-top">
-      <div class="case-num">06</div>
+      <div class="case-num">06 · 07</div>
       <div class="case-diff"><span class="before">18%</span><span class="after">&lt;2%</span></div>
     </div>
-    <div class="case-title">Eliminating the $700 re-climb with a real-time AI quality gate</div>
-    <div class="case-dek">A blurry photo, caught 72 hours late, sent a crew back up a 200ft tower. I moved LLM photo validation into the moment of capture — cutting rejections from 18% to under 2%, killing the $700 truck roll, and closing a fraud loop along the way.</div>
+    <div class="case-title">From a blurry photo to contract-aware AI enforcement</div>
+    <div class="case-dek">A blurry photo, caught 72 hours late, sent a crew back up a 200ft tower. I moved LLM validation into the moment of capture — 18% rejections to under 2% — then evolved it into a contract enforcement engine with RAG grounding and a deterministic trust layer that runs before the model.</div>
     <div class="case-tags">
       <span class="tag">Multimodal LLM validation</span>
-      <span class="tag">700× ROI, client-funded</span>
-      <span class="tag">Data-sovereignty model call</span>
-    </div>
-    <div class="case-cta">Read the case study <span class="case-arrow">→</span></div>
-  </a>
-
-  <a class="case-link" href="case-7.html">
-    <div class="case-top">
-      <div class="case-num">07</div>
-      <div class="case-diff"><span class="after">CV → contract engine</span></div>
-    </div>
-    <div class="case-title">From computer vision to contract-aware execution</div>
-    <div class="case-dek">The photos were sharp, but submissions still failed — wrong equipment, wrong credentials, recycled evidence. I evolved the AI into a contract enforcement engine: RAG grounding, cross-field reasoning, and a deterministic trust layer that runs before the model.</div>
-    <div class="case-tags">
       <span class="tag">RAG contract grounding</span>
-      <span class="tag">Cross-field inference</span>
       <span class="tag">Deterministic-first pipeline</span>
     </div>
-    <div class="case-cta">Read the case study <span class="case-arrow">→</span></div>
-  </a>
+    <div class="case-cta">
+      <a href="case-6.html">Part 1 — the quality gate →</a>
+      <a href="case-7.html">Part 2 — the enforcement engine →</a>
+    </div>
+  </div>
+  </div>
 
-  <a class="case-link" href="case-8.html">
-    <div class="case-top">
+  <div class="tier-head">
+    <h3>More client work</h3>
+    <span class="tier-note">Platform and strategy, under live enterprise load.</span>
+  </div>
+
+  <div class="case-rows">
+    <a class="case-row" href="case-1.html">
+      <div class="case-num">01</div>
+      <div>
+        <div class="cr-title">Rebuilding the contract dashboard under a 2.3M-contract load</div>
+        <div class="cr-sub">A 7-year-old AngularJS page blocked every mobile buyer for up to 20 seconds. Root-cause diagnosis, then a 2.5-month rebuild.</div>
+      </div>
+      <div class="case-diff"><span class="before">15–20s</span><span class="after">3–4.5s</span></div>
+      <div class="case-arrow">→</div>
+    </a>
+    <a class="case-row" href="case-4.html">
+      <div class="case-num">04</div>
+      <div>
+        <div class="cr-title">Rebuilding contract creation by shifting authorship</div>
+        <div class="cr-sub">Suppliers held the ground truth; scoping lived in Excel. I let suppliers author scope while buyers kept control — moving $11B of spend on-platform.</div>
+      </div>
+      <div class="case-diff"><span class="after">~60% adopted</span></div>
+      <div class="case-arrow">→</div>
+    </a>
+  </div>
+
+  <div class="tier-head">
+    <h3>Built it myself</h3>
+    <span class="tier-note">Nobody asked for these. I shipped them anyway.</span>
+  </div>
+
+  <div class="case-rows">
+    <a class="case-row" href="case-5.html">
+      <div class="case-num">05</div>
+      <div>
+        <div class="cr-title">A weekend project — my first PR — now used 300+ times a day</div>
+        <div class="cr-sub">Reused the bulk-acceptance pipeline, repurposed the finance page as a context-aware popup, and coded it myself over a weekend.</div>
+      </div>
+      <div class="case-diff"><span class="after">300+/day</span></div>
+      <div class="case-arrow">→</div>
+    </a>
+    <a class="case-row" href="case-8.html">
       <div class="case-num">08</div>
+      <div>
+        <div class="cr-title">I built the QA tool I wished I had — paste a Jira story, get a test session</div>
+        <div class="cr-sub">A full-stack app with Claude wired through five jobs. Here to show how I build applied-AI products — includes a working in-page prototype.</div>
+      </div>
       <div class="case-diff"><span class="after">Playable demo</span></div>
-    </div>
-    <div class="case-title">I built the QA tool I wished I had — paste a Jira story, get a test session</div>
-    <div class="case-dek">A full-stack app with Claude wired through five jobs — split, plan, assist, draft bugs, summarize to Jira. No metric to claim; it's here to show how I build applied-AI products. Includes a working in-page prototype.</div>
-    <div class="case-tags">
-      <span class="tag">The prompt is the product</span>
-      <span class="tag">2-phase generation</span>
-      <span class="tag">Model-tiered + eval discipline</span>
-    </div>
-    <div class="case-cta">Read the case study <span class="case-arrow">→</span></div>
-  </a>
+      <div class="case-arrow">→</div>
+    </a>
   </div>
 </section>
 
