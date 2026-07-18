@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The photos were sharp. The submissions still failed. — Aman</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css?v=8">
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a class="logo" href="index.html">aman<span>.</span>pm</a>
+    <div class="nav-links">
+      <a href="index.html#work"><span class="n">01</span>Work</a>
+      <a href="index.html#approach"><span class="n">02</span>Approach</a>
+      <a href="index.html#timeline"><span class="n">03</span>Timeline</a>
+      <a href="index.html#contact"><span class="n">04</span>Contact</a>
+    </div>
+  </div>
+</nav>
+
+<div class="wrap-narrow breadcrumb">
+  <a href="index.html">← All case studies</a> / 07
+</div>
+
+<!-- ============ §1 HERO ============ -->
+<header class="case-hero wrap-narrow">
+  <div class="eyebrow">Case study 07 · Applied AI · Part 2 of 2</div>
+  <h1>The photos were sharp. The submissions still failed.</h1>
+  <p class="dek">Stage 1 solved image quality — real-time AI cut tower-site rejections from 18% to under 2% and killed the $700 re-climb. But within weeks of deployment the downstream data told me something uncomfortable: approvals were up, yet back-office exceptions weren't falling at the same rate. We'd fixed the camera, not the compliance gap. The rejections had just shifted category — from <em>"blurry photo"</em> to <strong style="color:var(--text);">"wrong equipment," "wrong credentials," "recycled evidence."</strong></p>
+
+  <div class="case-meta">
+    <div class="m-item"><div class="l">My role</div><div class="v">Sole PM — diagnosis to system design</div></div>
+    <div class="m-item"><div class="l">Builds on</div><div class="v"><a href="case-6.html" style="color:var(--teal);">Case 06 — Stage 1</a></div></div>
+    <div class="m-item"><div class="l">Approach</div><div class="v">RAG grounding · cross-field reasoning · deterministic trust layer</div></div>
+    <div class="m-item"><div class="l">The shift</div><div class="v hero-stat">Photo checker → contract engine</div></div>
+  </div>
+
+  <p class="dek" style="margin-top:28px;">I evolved the system from a visual quality checker into a <strong style="color:var(--text);">contract-aware compliance engine</strong> by closing three distinct gaps: a RAG pipeline that grounds the AI in each client's actual SOPs, cross-field reasoning that catches fraud no single check could see, and a deterministic trust layer that stops spoofed evidence before the model ever runs. The design principle shifted from <em>"is this photo good?"</em> to <strong style="color:var(--text);">"does this submission satisfy the contract?"</strong></p>
+
+  <div class="impact-strip">
+    <div class="imp"><div class="n">3 gaps</div><div class="l">mapped from the exception queue — each a different class of risk</div></div>
+    <div class="imp"><div class="n">RAG</div><div class="l">client SOPs injected at inference — model generic, context proprietary</div></div>
+    <div class="imp"><div class="n">10+ fields</div><div class="l">validated as one linked cluster, not in isolation</div></div>
+    <div class="imp"><div class="n">Deterministic-first</div><div class="l">provenance checks run before the AI, so spoofed evidence never reaches it</div></div>
+  </div>
+</header>
+
+<div class="case-body-page wrap-narrow">
+
+  <!-- ============ §2 THE SIGNAL ============ -->
+  <div class="cs-section">
+    <div class="cs-label">The signal</div>
+    <h2>Approvals were up, but exceptions weren't down</h2>
+    <p>Stage 1 was working exactly as designed: the AI was passing photos at a far higher rate, and re-climbs had all but vanished. But when I watched the downstream metrics, back-office reviewers were still flagging a meaningful share of submissions at final approval. The volume of rejections had dropped — the <em>category</em> had changed.</p>
+    <p>That told me something important. We'd solved for <strong>image quality</strong>, not <strong>submission correctness</strong>. The AI could confirm a photo was sharp and well-framed. It could not tell you whether what was <em>in</em> the photo actually matched what the contract required.</p>
+
+    <div class="split">
+      <div class="sp before">
+        <div class="sp-h">✕ Stage 1 caught</div>
+        <dl>
+          <div class="sp-row"><dt>Blurry photo</dt><dd>out of focus, glare</dd></div>
+          <div class="sp-row"><dt>Wrong angle</dt><dd>connection point not visible</dd></div>
+          <div class="sp-row"><dt>Missing shot</dt><dd>a required photo absent</dd></div>
+        </dl>
+      </div>
+      <div class="sp after">
+        <div class="sp-h">✕ Still slipping through</div>
+        <dl>
+          <div class="sp-row key"><dt>Wrong equipment</dt><dd>clear photo, non-compliant part</dd></div>
+          <div class="sp-row key"><dt>Wrong credentials</dt><dd>valid license, wrong technician</dd></div>
+          <div class="sp-row key"><dt>Recycled evidence</dt><dd>a real photo, from another site</dd></div>
+        </dl>
+      </div>
+    </div>
+    <p class="sec-note" style="margin-top:14px;">A sharp photo of the wrong thing still passes a sharpness check. Stage 2 had to reason about meaning, identity, and provenance — none of which Stage 1 was built to see.</p>
+  </div>
+
+  <!-- ============ §3 THE THREE GAPS ============ -->
+  <div class="cs-section">
+    <div class="cs-label">The diagnosis</div>
+    <h2>Three gaps in the exception queue</h2>
+    <p>I dug into the exception-queue data and reviewer override logs and mapped the remaining failures into three categories. Each was a fundamentally different type of risk than Stage 1 was built to catch.</p>
+
+    <h3 style="font-size:16px;font-weight:600;margin:22px 0 6px;">Gap 1 · Quality ≠ contractual correctness</h3>
+    <p>The most common rejection was no longer "blurry photo" — it was "wrong equipment" or "non-compliant installation." A technician could submit a crystal-clear photo of a battery rack and the AI would pass it, because it <em>looked</em> right. But the contract specified a particular mounting bolt, or a torque-spec label that had to be visible, and what was in the photo didn't match. Worse, the requirements varied by job: a rooftop small cell and a rural macro-tower upgrade have completely different checklists and specs — and the AI was applying roughly the same logic to both.</p>
+    <div class="callout">
+      <div class="co-label">The core insight</div>
+      <p>The AI was reasoning against its own general knowledge of "what a good installation looks like." But acceptability is defined by <strong>the contract</strong> — every client, SOW, and region had different rules, and none of that context was in the system. We were asking the model to be an expert in every client's rulebook without ever showing it one.</p>
+    </div>
+
+    <h3 style="font-size:16px;font-weight:600;margin:28px 0 6px;">Gap 2 · Valid in isolation, fraudulent in combination</h3>
+    <p>This came from a pattern in the override logs: reviewers rejecting submissions that had passed every individual check. A technician entered a climber name and uploaded a valid climber certification. The AI passed both — the name was real, the license was real and current. But the name <em>on the license card</em> belonged to a different technician entirely, likely borrowed to cover a gap in crew credentials. Our system validated each field as a standalone data point. It never asked whether Field A matched the document in Field B.</p>
+
+    <div class="recon">
+      <div class="recon-label">Illustrative — fields valid alone, fraudulent together</div>
+      <div class="recon-body">
+        <div class="compare">
+          <div class="ord">
+            <div class="ord-h"><span>FIELD · climber name</span><span class="v-score" style="color:var(--teal);">✓ valid</span></div>
+            <div class="ord-desc">"John Doe" — a real, active technician</div>
+          </div>
+          <div class="ord">
+            <div class="ord-h"><span>FIELD · certification upload</span><span class="v-score" style="color:var(--teal);">✓ valid</span></div>
+            <div class="ord-desc">A real, current climber license — issued to <b>"James Smith"</b></div>
+          </div>
+        </div>
+        <div class="verdict" style="background:rgba(226,102,95,0.08); border-color:rgba(226,102,95,0.3);">
+          <span class="v-score" style="color:var(--red);">✕ cross-field mismatch</span>
+          <span class="v-tag">every field passes on its own — the relationship between them is the fraud</span>
+        </div>
+      </div>
+      <div class="recon-cap">Field-level validation is necessary but insufficient. In regulated workflows, the relationships between data points matter as much as the data points themselves.</div>
+    </div>
+
+    <h3 style="font-size:16px;font-weight:600;margin:28px 0 6px;">Gap 3 · Recycled evidence</h3>
+    <p>This was the Stage 2 equivalent of Stage 1's good-photo/bad-photo loophole, and much harder to detect. Auditing AI-approved photos, we found EXIF data that didn't match the time or location of the site the technician was on — some images taken days or weeks before the job was even scheduled. When I pulled image hashes, I found <strong>duplicates appearing across multiple, unrelated sites</strong>. The logic was simple: if a grounding lug looks the same on Tower A and Tower B, why not upload the same photo twice? The Stage 1 AI passed it both times — it was a clear, well-framed photo. But it wasn't evidence that <em>this</em> lug, on <em>this</em> tower, was installed <em>today</em>.</p>
+    <div class="callout warn">
+      <div class="co-label">The core insight</div>
+      <p>We could validate what was <em>in</em> a photo but had no concept of whether it was legitimate evidence for the job in question. Without provenance — timestamps, geolocation, digital fingerprinting — our "proof of work" was trivially spoofable.</p>
+    </div>
+  </div>
+
+  <!-- ============ §4 SOLUTION 1 ============ -->
+  <div class="cs-section">
+    <div class="cs-label">Solution 1 → Gap 1</div>
+    <h2>RAG-powered contract grounding</h2>
+    <p>The fundamental problem was that the model lacked specific knowledge of what each contract actually required — it reasoned from general training data, not the client's rulebook. So we built a <strong>Retrieval-Augmented Generation</strong> pipeline that injects the relevant SOPs and engineering specs into the prompt at inference time. Rather than fine-tuning or retraining a model per client, we kept the model generic and made the <em>context</em> proprietary.</p>
+
+    <div class="flow">
+      <div class="flow-node"><div class="fn-k">Input</div><div class="fn-t">A photo + its job context — client, region, job type</div></div>
+      <div class="flow-arrow">↓</div>
+      <div class="flow-node l1"><div class="fn-k">Retrieve</div><div class="fn-t">Pull the right SOPs & engineering specs for this exact job</div><div class="fn-d">Rooftop small cell vs. macro tower resolve to different rulebooks — dynamically, not hard-coded.</div></div>
+      <div class="flow-arrow">↓ &nbsp;specs injected into the prompt</div>
+      <div class="flow-node l2"><div class="fn-k">Reason</div><div class="fn-t">The generic model now judges against the client's actual contract</div></div>
+      <div class="flow-arrow">↓</div>
+      <div class="flow-node terminal"><div class="fn-k">Result</div><div class="fn-t">"Contractually correct," not just "looks right"</div></div>
+    </div>
+
+    <div class="callout key">
+      <div class="co-label">Why RAG, not fine-tuning</div>
+      <p>Every new client's SOPs become <strong>just another document in the retrieval layer</strong> — contract enforcement scales without scaling engineering effort. And because the SOPs are retrieved, not trained on, customer contract data stays proprietary and is <strong>never used to train a model.</strong></p>
+    </div>
+  </div>
+
+  <!-- ============ §5 SOLUTION 2 ============ -->
+  <div class="cs-section">
+    <div class="cs-label">Solution 2 → Gap 2</div>
+    <h2>Cross-field semantic reasoning</h2>
+    <p>We already had conditional form fields. The missing piece was <strong>relational validation</strong> — evaluating fields as a connected cluster rather than independent inputs. So we introduced <strong>Linked-Field Inference</strong>: when a technician enters a climber name, uploads a certification, and is assigned to a job, the system evaluates all three as a single logical unit. It cross-references the name input against the OCR-extracted text from the license image against the job-assignment metadata. If any link breaks, it flags the mismatch before submission.</p>
+
+    <div class="recon">
+      <div class="recon-label">Illustrative — linked-field inference on the credential cluster</div>
+      <div class="recon-body">
+        <div class="flow" style="margin:0;">
+          <div class="flow-node l2"><div class="fn-k">Name field</div><div class="fn-t">"John Doe"</div></div>
+          <div class="flow-arrow">↔ &nbsp;must match</div>
+          <div class="flow-node l2"><div class="fn-k">License OCR</div><div class="fn-t">"James Smith"</div></div>
+          <div class="flow-arrow">↔ &nbsp;must match</div>
+          <div class="flow-node l2"><div class="fn-k">Job assignment</div><div class="fn-t">crew roster metadata</div></div>
+        </div>
+        <div class="verdict" style="background:rgba(226,102,95,0.08); border-color:rgba(226,102,95,0.3);">
+          <span class="v-score" style="color:var(--red);">✕ link broken · name ≠ license</span>
+          <span class="v-tag">flagged before submission — the cluster fails even though each field passes</span>
+        </div>
+      </div>
+      <div class="recon-cap">This ran on every revalidation cycle: change one field mid-submission and the <em>entire</em> cluster is re-evaluated, not just the edited field. We tested it across 10+ levels of related fields — near perfect.</div>
+    </div>
+  </div>
+
+  <!-- ============ §6 SOLUTION 3 ============ -->
+  <div class="cs-section">
+    <div class="cs-label">Solution 3 → Gap 3</div>
+    <h2>A deterministic trust layer — and it runs first</h2>
+    <p>The recycled-evidence problem couldn't be solved with AI reasoning alone. Provenance is a <strong>binary question</strong> — either a photo was taken at the right place and time, or it wasn't — so it deserved hard, deterministic checks, not probabilistic model output. We built an enforcement layer that verifies provenance at the point of capture:</p>
+    <ul>
+      <li><strong>Temporal guards</strong> — reject any photo whose EXIF timestamp falls outside the job's execution window.</li>
+      <li><strong>Hash-based duplicate detection</strong> — flag any photo already submitted to a previous job site.</li>
+      <li><strong>GPS validation</strong> — confirm the capture location matches the assigned site coordinates.</li>
+    </ul>
+
+    <div class="flow">
+      <div class="flow-node l1"><div class="fn-k">Layer 1 · deterministic</div><div class="fn-t">Provenance checks — timestamp, hash, GPS</div><div class="fn-d">No AI. A binary pass/fail on questions that don't need a model.</div></div>
+      <div class="flow-arrow">↓ &nbsp;only evidence that passes continues</div>
+      <div class="flow-node l2"><div class="fn-k">Layer 2 · AI</div><div class="fn-t">Content & contract validation (RAG + cross-field)</div></div>
+      <div class="flow-arrow">↓</div>
+      <div class="flow-node terminal"><div class="fn-k">Result</div><div class="fn-t">Legitimate evidence, validated against the contract</div></div>
+    </div>
+
+    <div class="callout key">
+      <div class="co-label">The sequencing was the decision</div>
+      <p>The trust layer runs <strong>first</strong>. Only evidence that passes provenance is forwarded to the AI for content validation — so the model never wastes tokens reasoning about photos that are already disqualified, and spoofed evidence never reaches it. Cheaper and safer, in one ordering choice.</p>
+    </div>
+  </div>
+
+  <!-- ============ §7 CLOSE ============ -->
+  <div class="cs-section">
+    <div class="cs-label">What it proves</div>
+    <h2>From "AI checks photos" to "AI enforces contracts"</h2>
+    <p>Stage 1 proved that real-time AI validation worked. Stage 2 made it smart enough to matter at the enterprise level — closing the gap between field approval and back-office acceptance. The progression is the point:</p>
+
+    <div class="split">
+      <div class="sp before">
+        <div class="sp-h">Stage 1 · computer vision</div>
+        <dl>
+          <div class="sp-row"><dt>Question</dt><dd>Is this photo good?</dd></div>
+          <div class="sp-row"><dt>Reasons from</dt><dd>general visual knowledge</dd></div>
+          <div class="sp-row"><dt>Catches</dt><dd>blur, angle, missing shots</dd></div>
+        </dl>
+      </div>
+      <div class="sp after">
+        <div class="sp-h">Stage 2 · contract-aware</div>
+        <dl>
+          <div class="sp-row key"><dt>Question</dt><dd>Does this satisfy the contract?</dd></div>
+          <div class="sp-row key"><dt>Reasons from</dt><dd>the client's actual SOPs (RAG)</dd></div>
+          <div class="sp-row key"><dt>Catches</dt><dd>wrong equipment, wrong identity, recycled evidence</dd></div>
+        </dl>
+      </div>
+    </div>
+
+    <div class="callout key">
+      <div class="co-label">The reusable lesson</div>
+      <p>An AI feature is rarely "done" when the demo works — the failures just move somewhere quieter. The discipline is watching the downstream data, seeing which category of exception the fix <em>revealed</em>, and knowing when a problem needs a model (contract nuance), a relationship (cross-field), or a hard deterministic gate (provenance) — and in what order to run them.</p>
+    </div>
+  </div>
+
+</div>
+
+<div class="wrap-narrow case-nav">
+  <a href="case-6.html">← Eliminating the 150ft re-climb</a>
+  <a href="index.html">Back to all work →</a>
+</div>
+
+<footer class="wrap-narrow">
+  <div>Chandigarh, India · Built by hand, not by template.</div>
+</footer>
+
+</body>
+</html>
