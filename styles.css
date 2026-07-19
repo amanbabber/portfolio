@@ -57,7 +57,6 @@ nav{
   font-family:var(--mono); font-weight:600; font-size:14px;
   letter-spacing:0.02em;
 }
-.logo span{color:var(--teal);}
 .nav-links{display:flex; gap:28px; font-family:var(--mono); font-size:13px; color:var(--text-dim);}
 .nav-links a:hover{color:var(--text);}
 .nav-links .n{color:var(--text-faint); margin-right:6px;}
