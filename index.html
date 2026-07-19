@@ -7,7 +7,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="styles.css?v=8">
+<link rel="stylesheet" href="styles.css?v=9">
 </head>
 <body>
 
@@ -16,21 +16,17 @@
     <div class="logo">aman<span>.</span>pm</div>
     <div class="nav-links">
       <a href="#work"><span class="n">01</span>Work</a>
-      <a href="#approach"><span class="n">02</span>Approach</a>
-      <a href="#timeline"><span class="n">03</span>Timeline</a>
-      <a href="#contact"><span class="n">04</span>Contact</a>
+      <a href="#timeline"><span class="n">02</span>Timeline</a>
+      <a href="#contact"><span class="n">03</span>Contact</a>
     </div>
   </div>
 </nav>
 
 <header class="hero wrap">
-  <div class="query-bar">
-    <span class="prompt">&gt;</span> product_lead --focus=enterprise_b2b --status=open_to_new_roles<span class="cursor"></span>
-  </div>
   <div class="eyebrow">Product Leader · Enterprise B2B SaaS · Applied AI</div>
-  <h1>In my last role, I saved a national telecom millions in procurement.</h1>
-  <p class="hero-lead"><a href="case-2.html">See the case study →</a> — $2.74M of duplicate work, caught before it was paid.</p>
-  <p class="hero-sub">For nearly seven years I've worked inside mission-critical enterprise systems — learning where they leak and how to fix it — through applied-AI features, marketplace monetization, and platform rebuilds under live, <strong>billion-dollar load</strong>. I set the strategy, own the hard architecture calls, run the design reviews, and stay technical enough to ship the code. I'm now <strong>looking for my next enterprise product role</strong>.</p>
+  <h1>Product lead on the contract systems behind $11B in annual telecom procurement.</h1>
+  <p class="hero-lead"><a href="case-2.html">See case study →</a> — $2.74M of duplicate work, caught before it was paid.</p>
+  <p class="hero-sub">For nearly seven years at ScopeWorker I've owned the contracts platform — duplicate detection that stopped $2.74M in double-billing, a supplier revenue model that took the marketplace from $0 to ~$14M, and a dashboard rebuild under 2.3M contracts. I build the eval sets for our AI features and set the thresholds myself. I'm now <strong>looking for my next enterprise product role</strong>.</p>
 
   <div class="kpis">
     <div class="kpi"><div class="val">$2.74M</div><div class="lbl">duplicate spend stopped before billing</div></div>
@@ -38,34 +34,23 @@
     <div class="kpi"><div class="val">$11B</div><div class="lbl">annual spend moved on-platform</div></div>
     <div class="kpi"><div class="val">800+</div><div class="lbl">suppliers onboarded, 100% converted to paying</div></div>
     <div class="kpi"><div class="val">20s→3.4s</div><div class="lbl">contract dashboard load, rebuilt</div></div>
-    <div class="kpi"><div class="val">IIM-V</div><div class="lbl">Strategic Product Management</div></div>
   </div>
 </header>
 
 <section id="work" class="wrap">
   <div class="section-head">
     <div class="sec-eyebrow">01 · Case studies</div>
-    <div class="sec-title">What I actually built</div>
-    <p class="sec-note">No case study here is a redesign for its own sake. Each one starts from a metric that was broken and ends with a number that moved. Click through — these are full write-ups, not tooltips.</p>
+    <div class="sec-title">Selected work</div>
+    <p class="sec-note">Most of these start from a number that was wrong and end with one that moved. The last two I built on my own time. Each is a full write-up — the diagnosis, the tradeoffs, and the calls I got to make.</p>
+  </div>
+
+  <div class="tier-head">
+    <h3>Start here</h3>
+    <span class="tier-note">The three I'd point a hiring manager to first.</span>
   </div>
 
   <div class="case-grid">
-  <a class="case-link" href="case-1.html">
-    <div class="case-top">
-      <div class="case-num">01</div>
-      <div class="case-diff"><span class="before">15–20s</span><span class="after">3–4.5s</span></div>
-    </div>
-    <div class="case-title">When patching isn't an option: rebuilding the foundation</div>
-    <div class="case-dek">A 7-year-old AngularJS page was blocking every mobile buyer for up to 20 seconds. Here's the root-cause diagnosis, the rebuild, and what I'd fix next.</div>
-    <div class="case-tags">
-      <span class="tag">70+ column data grid</span>
-      <span class="tag">OpenSearch + Kafka</span>
-      <span class="tag">2.5-month rebuild</span>
-    </div>
-    <div class="case-cta">Read the case study <span class="case-arrow">→</span></div>
-  </a>
-
-  <a class="case-link" href="case-2.html">
+  <a class="case-link wide" href="case-2.html">
     <div class="case-top">
       <div class="case-num">02</div>
       <div class="case-diff"><span class="after">$2.74M stopped</span></div>
@@ -95,124 +80,88 @@
     <div class="case-cta">Read the case study <span class="case-arrow">→</span></div>
   </a>
 
-  <a class="case-link" href="case-4.html">
-    <div class="case-top">
-      <div class="case-num">04</div>
-      <div class="case-diff"><span class="after">~60% adopted</span></div>
-    </div>
-    <div class="case-title">Rebuilding contract creation by shifting authorship</div>
-    <div class="case-dek">Suppliers held the ground truth; scoping lived in Excel and email. I let suppliers author scope while buyers kept control — moving $11B of spend into the platform.</div>
-    <div class="case-tags">
-      <span class="tag">$11B annual spend</span>
-      <span class="tag">Authorship vs authority</span>
-      <span class="tag">Excel → system of record</span>
-    </div>
-    <div class="case-cta">Read the case study <span class="case-arrow">→</span></div>
-  </a>
-
-  <a class="case-link" href="case-5.html">
-    <div class="case-top">
-      <div class="case-num">05</div>
-      <div class="case-diff"><span class="after">300+/day</span></div>
-    </div>
-    <div class="case-title">Years on the wishlist, shipped in a weekend — now 300+ uses a day</div>
-    <div class="case-dek">You couldn't see the line items or financial records inside a contract from the list. I reused the pipeline the bulk-acceptance flow already had, repurposed the finance page as a context-aware popup, and coded it myself — over a weekend.</div>
-    <div class="case-tags">
-      <span class="tag">Angular + ag-Grid</span>
-      <span class="tag">Reused infra, no new backend</span>
-      <span class="tag">Financial-access gating</span>
-    </div>
-    <div class="case-cta">Read the case study <span class="case-arrow">→</span></div>
-  </a>
-
   <a class="case-link" href="case-6.html">
     <div class="case-top">
       <div class="case-num">06</div>
       <div class="case-diff"><span class="before">18%</span><span class="after">&lt;2%</span></div>
     </div>
-    <div class="case-title">Eliminating the $700 re-climb with a real-time AI quality gate</div>
-    <div class="case-dek">A blurry photo, caught 72 hours late, sent a crew back up a 200ft tower. I moved LLM photo validation into the moment of capture — cutting rejections from 18% to under 2%, killing the $700 truck roll, and closing a fraud loop along the way.</div>
+    <div class="case-title">21,000 repeat trips at $337 each: a leak AI could close</div>
+    <div class="case-dek">A spend audit turned up 21,000 change orders for site visits the contracts had already paid for — $7.1M over three years, all caused by photos nobody checked until the crew had left. I moved the check to the moment of capture, then layered it into contract-aware validation.</div>
     <div class="case-tags">
-      <span class="tag">Multimodal LLM validation</span>
-      <span class="tag">700× ROI, client-funded</span>
-      <span class="tag">Data-sovereignty model call</span>
-    </div>
-    <div class="case-cta">Read the case study <span class="case-arrow">→</span></div>
-  </a>
-
-  <a class="case-link" href="case-7.html">
-    <div class="case-top">
-      <div class="case-num">07</div>
-      <div class="case-diff"><span class="after">CV → contract engine</span></div>
-    </div>
-    <div class="case-title">From computer vision to contract-aware execution</div>
-    <div class="case-dek">The photos were sharp, but submissions still failed — wrong equipment, wrong credentials, recycled evidence. I evolved the AI into a contract enforcement engine: RAG grounding, cross-field reasoning, and a deterministic trust layer that runs before the model.</div>
-    <div class="case-tags">
+      <span class="tag">Found in a spend audit</span>
+      <span class="tag">Multimodal validation at capture</span>
       <span class="tag">RAG contract grounding</span>
-      <span class="tag">Cross-field inference</span>
-      <span class="tag">Deterministic-first pipeline</span>
     </div>
     <div class="case-cta">Read the case study <span class="case-arrow">→</span></div>
   </a>
+  </div>
 
-  <a class="case-link" href="case-8.html">
-    <div class="case-top">
+  <div class="tier-head">
+    <h3>More client work</h3>
+    <span class="tier-note">A platform rebuild, and a change to who authors a contract.</span>
+  </div>
+
+  <div class="case-rows">
+    <a class="case-row" href="case-1.html">
+      <div class="case-num">01</div>
+      <div>
+        <div class="cr-title">When patching isn't an option: rebuilding the foundation</div>
+        <div class="cr-sub">A 7-year-old AngularJS page blocked every mobile buyer for up to 20 seconds. Root-cause diagnosis, then a 2.5-month rebuild.</div>
+      </div>
+      <div class="case-diff"><span class="before">15–20s</span><span class="after">3–4.5s</span></div>
+      <div class="case-arrow">→</div>
+    </a>
+    <a class="case-row" href="case-4.html">
+      <div class="case-num">04</div>
+      <div>
+        <div class="cr-title">Suppliers knew the real scope. Buyers still owned the contract.</div>
+        <div class="cr-sub">Suppliers held the ground truth; scoping lived in Excel. I let suppliers author scope while buyers kept control — moving $11B of spend on-platform.</div>
+      </div>
+      <div class="case-diff"><span class="after">~60% adopted</span></div>
+      <div class="case-arrow">→</div>
+    </a>
+  </div>
+
+  <div class="tier-head">
+    <h3>Built it myself</h3>
+    <span class="tier-note">One shipped into the product. One runs on its own.</span>
+  </div>
+
+  <div class="case-rows">
+    <a class="case-row" href="case-5.html">
+      <div class="case-num">05</div>
+      <div>
+        <div class="cr-title">Years on the wishlist, shipped in a weekend — now 300+ uses a day</div>
+        <div class="cr-sub">Reused the bulk-acceptance pipeline, repurposed the finance page as a context-aware popup, and coded it myself over a weekend.</div>
+      </div>
+      <div class="case-diff"><span class="after">300+/day</span></div>
+      <div class="case-arrow">→</div>
+    </a>
+    <a class="case-row" href="case-8.html">
       <div class="case-num">08</div>
-      <div class="case-diff"><span class="after">Playable demo</span></div>
-    </div>
-    <div class="case-title">I built the QA tool I wished I had — paste a Jira story, get a test session</div>
-    <div class="case-dek">A full-stack app with Claude wired through five jobs — split, plan, assist, draft bugs, summarize to Jira. No metric to claim; it's here to show how I build applied-AI products. Includes a working in-page prototype.</div>
-    <div class="case-tags">
-      <span class="tag">The prompt is the product</span>
-      <span class="tag">2-phase generation</span>
-      <span class="tag">Model-tiered + eval discipline</span>
-    </div>
-    <div class="case-cta">Read the case study <span class="case-arrow">→</span></div>
-  </a>
+      <div>
+        <div class="cr-title">I built the QA tool I wished I had — paste a Jira story, get a test session</div>
+        <div class="cr-sub">A full-stack app with Claude wired through five jobs. Here to show how I build applied-AI products — deployed and running, so you can use it.</div>
+      </div>
+      <div class="case-diff"><span class="after">Live app</span></div>
+      <div class="case-arrow">→</div>
+    </a>
   </div>
 </section>
 
-<section id="approach" class="wrap">
-  <div class="section-head">
-    <div class="sec-eyebrow">02 · Approach</div>
-    <div class="sec-title">How I work</div>
-  </div>
-  <div class="approach-grid">
-    <div class="ap-card">
-      <div class="idx">A</div>
-      <h3>I diagnose before I scope</h3>
-      <p>The contract dashboard rebuild started with confirming, alongside engineering, exactly why the old page was slow — not with a redesign brief. Root cause first, spec second.</p>
-    </div>
-    <div class="ap-card">
-      <div class="idx">B</div>
-      <h3>I ship code, not just specs</h3>
-      <p>I work directly in the codebase via Cursor and have shipped code to production myself. I can read a pull request, not just a Jira ticket.</p>
-    </div>
-    <div class="ap-card">
-      <div class="idx">C</div>
-      <h3>Eval methodology over demo confidence</h3>
-      <p>For AI features, I build the golden dataset and set the threshold — the boring, precise work that decides whether a feature is trustworthy in production.</p>
-    </div>
-    <div class="ap-card">
-      <div class="idx">D</div>
-      <h3>Solo, end to end, on purpose</h3>
-      <p>As the only PM across two of three squads, I own diagnosis, scope, spec, sprint management, and QA on every feature I ship — there's no one else to hand it off to.</p>
-    </div>
-  </div>
-</section>
 
 <section id="timeline" class="wrap">
   <div class="section-head">
-    <div class="sec-eyebrow">03 · Timeline</div>
-    <div class="sec-title">Career journey</div>
-    <p class="sec-note">A decade from UX designer to sole PM — the design foundation is why I still read pull requests and set confidence thresholds myself.</p>
+    <div class="sec-eyebrow">02 · Experience</div>
+    <div class="sec-title">Experience</div>
+    <p class="sec-note">A decade from UX designer to sole PM, mostly inside enterprise systems.</p>
   </div>
   <div class="tl">
     <div class="tl-item current">
       <div class="tl-date">Oct 2019 — Present</div>
       <div class="tl-role">ScopeWorker</div>
       <div class="tl-org">Enterprise B2B SaaS · US telecom infrastructure</div>
-      <div class="tl-detail">Joined as a design consultant, moved into product design, then transitioned into product management. Now sole PM leading the Contracts and App squads inside an 18-person org (9 eng, 6 QA, 2 design, 1 DevOps). Hands-on in the codebase; ships code directly to production.</div>
+      <div class="tl-detail">Joined as a design consultant, moved into product design, then transitioned into product management. Now sole PM leading the Contracts and App squads inside an 18-person org (9 eng, 6 QA, 2 design, 1 DevOps).</div>
       <ul class="tl-roles">
         <li><span class="r-title">Product Manager</span><span class="r-date">Jan 2022 — Present</span></li>
         <li><span class="r-title">Product Designer</span><span class="r-date">Jan 2020 — Jan 2022</span></li>
@@ -225,23 +174,16 @@
       <div class="tl-org">Principal, Product Designer · Fintech, Bengaluru</div>
       <div class="tl-detail">Product design for an early-stage fintech lender, from early feature work through to principal-level ownership.</div>
     </div>
-    <div class="tl-item">
-      <div class="tl-date">Sep 2016 — Feb 2018</div>
-      <div class="tl-role">Jugnoo</div>
-      <div class="tl-org">Product Designer · Chandigarh</div>
-      <div class="tl-detail">Design for a hyperlocal ride-hailing and logistics startup.</div>
-    </div>
-    <div class="tl-item">
-      <div class="tl-date">Jun 2015 — Aug 2016</div>
-      <div class="tl-role">ILANTUS Technologies</div>
-      <div class="tl-org">Management Trainee, Products · Bengaluru</div>
-      <div class="tl-detail">Product exposure at an identity and access management (IAM) software company.</div>
+    <div class="tl-item past">
+      <div class="tl-date">Nov 2013 — Feb 2018</div>
+      <div class="tl-role">Earlier design roles</div>
+      <div class="tl-org">Jugnoo · ILANTUS Technologies · Snyxius Technologies</div>
+      <div class="tl-detail">Product and UX design across ride-hailing and logistics, identity software, and mobile apps — Chandigarh and Bengaluru.</div>
     </div>
     <div class="tl-item past">
-      <div class="tl-date">Nov 2013 — May 2015</div>
-      <div class="tl-role">Snyxius Technologies</div>
-      <div class="tl-org">UX Designer · Bengaluru</div>
-      <div class="tl-detail">Managed the design department; designed pixel-perfect iOS and Android applications end to end.</div>
+      <div class="tl-date">2025 · Education</div>
+      <div class="tl-role">IIM Visakhapatnam</div>
+      <div class="tl-org">Strategic Product Management</div>
     </div>
   </div>
 </section>
@@ -249,11 +191,10 @@
 <section id="contact" class="wrap">
   <div class="contact">
     <h2>Let's talk about a role.</h2>
-    <p>I'm a Senior PM looking at enterprise B2B SaaS and applied AI roles, open to relocating. If you're hiring for a PM who reads pull requests and sets confidence thresholds, reach out.</p>
+    <p>Enterprise B2B SaaS or applied AI, and I'm open to relocating. The case studies above are the best sense of how I work — if that's what you're hiring for, email me.</p>
     <div class="contact-links">
       <a class="btn primary" href="mailto:amanbabbar2009@gmail.com">Email me →</a>
-      <a class="btn" href="#">LinkedIn</a>
-      <a class="btn" href="#">Resume (PDF)</a>
+      <a class="btn" href="https://www.linkedin.com/in/babberaman/" target="_blank" rel="noopener">LinkedIn ↗</a>
     </div>
   </div>
 </section>

@@ -3,11 +3,11 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>How we stopped a blurry photo from sending a crew back up a 200ft tower — Aman</title>
+<title>21,000 repeat trips at $337 each — Aman</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="styles.css?v=8">
+<link rel="stylesheet" href="styles.css?v=9">
 </head>
 <body>
 
@@ -16,9 +16,8 @@
     <a class="logo" href="index.html">aman<span>.</span>pm</a>
     <div class="nav-links">
       <a href="index.html#work"><span class="n">01</span>Work</a>
-      <a href="index.html#approach"><span class="n">02</span>Approach</a>
-      <a href="index.html#timeline"><span class="n">03</span>Timeline</a>
-      <a href="index.html#contact"><span class="n">04</span>Contact</a>
+      <a href="index.html#timeline"><span class="n">02</span>Timeline</a>
+      <a href="index.html#contact"><span class="n">03</span>Contact</a>
     </div>
   </div>
 </nav>
@@ -29,167 +28,195 @@
 
 <!-- ============ §1 HERO ============ -->
 <header class="case-hero wrap-narrow">
-  <div class="eyebrow">Case study 06 · Applied AI · Part 1 of 2</div>
-  <h1>How we stopped a blurry photo from sending a crew back up a 200ft tower</h1>
-  <p class="dek">In US telecom, the product isn't the tower — it's the <strong style="color:var(--text);">digital evidence</strong> that the tower was built right: a Close-Out Package of 100+ photos captured on a 200ft site. Reviewers checked that package in the back office <strong style="color:var(--text);">48–72 hours later</strong>. By then the crew was 50 miles away on another job. One blurry serial number meant sending them back up the tower — a $700 re-climb for a 10-second photo, with the project's cash frozen until it was fixed.</p>
+  <div class="eyebrow">Case study 06 · Applied AI</div>
+  <h1>21,000 repeat trips at $337 each: a leak AI could close</h1>
+  <p class="dek">When a carrier like T-Mobile needs work done on a cell tower, it doesn't send its own people — it hires a contractor, whose technician climbs 150–200 feet, does the job, and records it on a phone: equipment at the right angle, grounding wires secured, serial numbers readable. Around 100 photos and 20 videos per site. Nobody from the carrier is there to watch, so those images are the <em>only</em> proof the work happened. Nothing gets paid until they're approved.</p>
+
+  <p class="dek">So the entire payment chain rested on evidence no one could verify at the point it mattered. Photos were checked two or three days later, at a desk — by which time the crew was 50 miles away, and the only remedy for a bad one was to send someone back up the tower. That gap cost money the obvious way, and it invited abuse in ways that were harder to see: photos that were sharp but showed the <strong style="color:var(--text);">wrong part</strong>, credentials that were valid but belonged to <strong style="color:var(--text);">someone else</strong>, real photos <strong style="color:var(--text);">recycled</strong> from another site. The camera was never the problem. We were checking the evidence too late, and never against what the contract actually required.</p>
 
   <div class="case-meta">
     <div class="m-item"><div class="l">My role</div><div class="v">Sole PM — discovery to rollout</div></div>
-    <div class="m-item"><div class="l">Product</div><div class="v">Scopeworker · Close-Out Package validation</div></div>
-    <div class="m-item"><div class="l">Scale</div><div class="v">200ft towers · 100+ photos / package</div></div>
-    <div class="m-item"><div class="l">Result</div><div class="v hero-stat">90% fewer rejections</div></div>
+    <div class="m-item"><div class="l">Product</div><div class="v">Scopeworker · field evidence validation</div></div>
+    <div class="m-item"><div class="l">Scale</div><div class="v">150–200ft towers · ~100 photos + 20 videos per site</div></div>
+    <div class="m-item"><div class="l">What I found</div><div class="v hero-stat">$7.1M billed twice</div></div>
   </div>
 
-  <p class="dek" style="margin-top:28px;">I pivoted the product from <strong style="color:var(--text);">reactive cleanup to real-time enforcement</strong> — moving an LLM-powered multimodal quality gate from a back-office desk into the technician's pocket, so the photo is checked while they're still on the tower. The economics made it a binary call: a sub-$1.00 AI validation prevents a $700 loss. And because the same real-time gate forced live, on-site capture, it quietly closed a fraud loop the old workflow had been paying out on for years.</p>
+  <p class="dek" style="margin-top:28px;">The fix was to move trust to the moment of capture — validate each photo on the tower, while the technician can still act on it, and validate it against what <em>this</em> job actually demands.</p>
 
   <div class="impact-strip">
-    <div class="imp"><div class="n">18% → &lt;2%</div><div class="l">COP rejection rate, before vs. after</div></div>
-    <div class="imp"><div class="n">72h → instant</div><div class="l">close-out cycle time, moved to the moment of capture</div></div>
-    <div class="imp"><div class="n">700×</div><div class="l">ROI — a &lt;$1 AI call preventing a $700 re-climb</div></div>
-    <div class="imp"><div class="n">~120K</div><div class="l">historical contracts carrying the hidden rework tax</div></div>
+    <div class="imp"><div class="n">$7.1M</div><div class="l">billed twice for repeat site visits over three years</div></div>
+    <div class="imp"><div class="n">21,000</div><div class="l">repeat climbs for a visit the contract already covered</div></div>
+    <div class="imp"><div class="n">18% → &lt;2%</div><div class="l">submissions sent back for rework</div></div>
+    <div class="imp"><div class="n">Desk → tower</div><div class="l">where the check happens</div></div>
   </div>
+
+  <!-- IMAGE SLOT · assets/case-AI-mobile/ — hero shot: the on-tower check on a phone. Uncomment when the file is added.
+  <figure class="cs-figure">
+    <img src="assets/case-AI-mobile/on-tower-check.png" alt="The on-tower check running on a technician's phone" loading="lazy">
+    <figcaption><span class="ba after">After</span><span class="fc-idx">fig.01</span>The check now runs on the phone, in the technician's hand, before they descend.</figcaption>
+  </figure>
+  -->
 </header>
 
 <div class="case-body-page wrap-narrow">
 
-  <!-- ============ §2 CONTEXT ============ -->
-  <div class="cs-section">
-    <div class="cs-label">Context</div>
-    <h2>In telecom, evidence is cash</h2>
-    <p>Scopeworker is the enterprise ERP that operators like T-Mobile and Samsung use to run field execution — tower installs, 5G upgrades, fibre maintenance. Every job produces a <strong>Close-Out Package (COP)</strong>: 100+ images and videos that prove the work was done correctly. The COP verifies engineering compliance (was the equipment mounted at the right height and angle?), safety (are the grounding lugs properly secured?), and contractual completion against the Scope of Work.</p>
-    <p>The COP sits where operations meets finance, and the rule is blunt:</p>
-
-    <div class="callout warn">
-      <div class="co-label">No approved COP = no payment</div>
-      <p>Until the package is manually reviewed and approved, the project stays <strong>"open."</strong> Suppliers can't be paid, and for a large deployment, millions in capital sit frozen on the balance sheet. A single missing photo doesn't just fail a checklist — it stalls the entire cash-flow cycle.</p>
-    </div>
-  </div>
-
-  <!-- ============ §3 THE PROBLEM ============ -->
+  <!-- ============ §2 THE PROBLEM ============ -->
   <div class="cs-section">
     <div class="cs-label">The problem</div>
-    <h2>The feedback loop arrived days too late</h2>
-    <p>The core issue was never technician effort — it was <strong>timing</strong>. In the legacy workflow, the reviewer was a post-mortem auditor, not a real-time partner. By the time anyone knew a photo had failed, fixing it was maximally expensive.</p>
+    <h2>Payment rested on evidence we checked too late</h2>
+    <p>Nobody in this chain was careless. The technician took the photos they were asked for, in the conditions they had — wind, glare, a phone held one-handed at 180 feet. The reviewer checked them properly. What went wrong was the distance between those two moments.</p>
 
     <div class="flow">
-      <div class="flow-node friction"><div class="fn-k">The climb</div><div class="fn-t">Technician climbs a 200ft tower</div><div class="fn-d">Hours of high-precision work in extreme conditions.</div></div>
+      <div class="flow-node friction"><div class="fn-k">The climb</div><div class="fn-t">Technician climbs 150–200 feet and does the job</div><div class="fn-d">Hours of precise work, often in wind or glare.</div></div>
       <div class="flow-arrow">↓</div>
-      <div class="flow-node friction"><div class="fn-k">The capture</div><div class="fn-t">100+ photos taken as evidence, then descends</div></div>
+      <div class="flow-node friction"><div class="fn-k">The capture</div><div class="fn-t">Records ~100 photos and 20 videos on a phone, then descends</div></div>
       <div class="flow-arrow">↓</div>
       <div class="flow-node friction"><div class="fn-k">The departure</div><div class="fn-t">Crew packs up and drives to the next site</div><div class="fn-d">Often hours away. As far as they know, the job is done.</div></div>
-      <div class="flow-arrow">↓ &nbsp;48–72 hours later</div>
-      <div class="flow-node friction"><div class="fn-k">The review</div><div class="fn-t">Back office finally opens the package</div></div>
+      <div class="flow-arrow">↓ &nbsp;two to three days later</div>
+      <div class="flow-node friction"><div class="fn-k">The review</div><div class="fn-t">A reviewer finally opens the package</div></div>
       <div class="flow-arrow">↓</div>
-      <div class="flow-node"><div class="fn-k">The rejection</div><div class="fn-t">One blurry serial number, one missing angle</div><div class="fn-d">The crew is 50 miles away, already assigned elsewhere.</div></div>
+      <div class="flow-node"><div class="fn-k">The rejection</div><div class="fn-t">One serial number isn't readable</div><div class="fn-d">The crew is 50 miles away, already on another job.</div></div>
     </div>
 
-    <p>Because the feedback arrived days late, the only fix was to send the whole crew back — the <strong>$700 "truck roll."</strong></p>
-    <ul>
-      <li><strong>Financial waste</strong> — every re-climb cost roughly $700 in fuel, labour, and opportunity cost, and raised compliance risk.</li>
-      <li><strong>Safety liability</strong> — a second climb up a 200ft tower for a 10-second photo is the highest-risk, lowest-value activity in the industry.</li>
-      <li><strong>Frozen capital</strong> — projects sat in "Pending" for days, holding millions in un-billable revenue hostage to a minor documentation error.</li>
-    </ul>
-  </div>
+    <p>On a phone screen in bright sun, the photo looked fine. Two days later on a desktop monitor, the serial number wasn't legible — and the only person who could retake it was on another tower in another county. That gap cost money in the plainest way: <strong>$337 a trip, 21,000 times over three years — about $7.1M.</strong> And every one of those was a person put back up a 150-to-200-foot structure to retake a photograph. Whatever the good reasons are for climbing a tower, that isn't one of them.</p>
 
-  <!-- ============ §4 THE DISCOVERY ============ -->
-  <div class="cs-section">
-    <div class="cs-label">The discovery</div>
-    <h2>An invisible tax, found in the line items</h2>
-    <p>The most dangerous problems in an enterprise are the ones everyone accepts as "just part of the job." This one was never raised as a feature request — I found it in the spend data.</p>
-    <p>While auditing line-item spend over a year, I noticed a steady uptick in <strong>Change Orders</strong>. In telecom these are usually waved off as "unforeseen site conditions," but the volume looked systemic. So I audited the line items <em>inside</em> those change orders, and the same three kept recurring: <em>Secondary Site Visit, Evidence Re-capture, Administrative Re-climb.</em></p>
+    <p>But the delay didn't just cost re-climbs. The same gap — evidence checked late, and never against the contract — let subtler things through, and these are the ones a reviewer often <em>couldn't</em> catch at all:</p>
+
+    <ul>
+      <li><strong>Unreadable.</strong> Blur, glare, wrong angle. The honest failure — and the one that cost a re-climb.</li>
+      <li><strong>Gamed.</strong> A technician submits a deliberately bad photo, waits for the rejection to trigger a $337 return-visit payment, then uploads the good photo they'd had on their phone the whole time. The delay is what made it pay.</li>
+      <li><strong>Wrong part.</strong> A sharp, well-framed photo of a part that isn't what this client's spec actually required.</li>
+      <li><strong>Wrong person, or recycled.</strong> A valid certificate belonging to someone who wasn't on site; a real photo taken weeks earlier, somewhere else.</li>
+    </ul>
 
     <div class="callout key">
-      <div class="co-label">The forensic number</div>
-      <p><strong>1 in every 6 contracts</strong> carried a change order tied to documentation rework, averaging <strong>$700</strong>. Scaled across the history, <strong>over 120,000 contracts</strong> had been hit by these hidden costs. This wasn't a minor leak — it was a multi-million-dollar operational tax nobody had put a name to.</p>
+      <div class="co-label">One root cause, four shapes</div>
+      <p>Four different failures, one cause: we verified evidence after the fact, disconnected from what the job actually required. Fixing it meant changing <em>where</em> and <em>when</em> the check happened — and <em>what</em> it checked against.</p>
     </div>
-
-    <p>To understand why it had never been flagged, I interviewed field technicians and reviewers. The problem was so embedded that no one saw it as a problem with a solution — a textbook <strong>normalization of deviance</strong>:</p>
-    <ul>
-      <li><strong>The technician:</strong> "Sometimes the wind blows or the light's bad and the photo's blurry. You just drive back and fix it later. That's tower work."</li>
-      <li><strong>The reviewer:</strong> "We reject about 20% of submissions. It's always been that way. We just wait for the new evidence."</li>
-    </ul>
   </div>
 
-  <!-- ============ §5 THE MORAL HAZARD ============ -->
-  <div class="cs-section">
-    <div class="cs-label">The deeper problem</div>
-    <h2>The system was quietly rewarding failure</h2>
-    <p>The interviews surfaced something worse than sloppiness. Because a "Secondary Site Visit" change order paid out ~$700, some field agents had engineered an easy win — and it had gone undetected for years.</p>
-
-    <div class="recon">
-      <div class="recon-label">Illustrative — the "good photo / bad photo" loophole, not a real screenshot</div>
-      <div class="recon-body">
-        <div class="flow" style="margin:0;">
-          <div class="flow-node friction"><div class="fn-k">On the tower</div><div class="fn-t">Agent takes two photos of the same equipment — one perfect, one deliberately blurry</div></div>
-          <div class="flow-arrow">↓</div>
-          <div class="flow-node friction"><div class="fn-k">Submit</div><div class="fn-t">Uploads the bad photo, descends</div></div>
-          <div class="flow-arrow">↓ &nbsp;48 hours later</div>
-          <div class="flow-node friction"><div class="fn-k">Payout</div><div class="fn-t">Reviewer rejects it → a $700 change order triggers</div></div>
-          <div class="flow-arrow">↓</div>
-          <div class="flow-node friction"><div class="fn-k">The fraud</div><div class="fn-t">Agent uploads the good photo they'd held all along — paid for a "return visit" without leaving the couch</div></div>
-        </div>
-      </div>
-      <div class="recon-cap">A moral hazard, not just a quality issue: the delayed feedback loop had become a hidden revenue stream for subcontractors, inflating every project's burn rate.</div>
-    </div>
-
-    <p>This reframed the whole strategy. We weren't building a clarity checker — we were building an <strong>anti-fraud engine</strong>. Moving validation to real time, with live on-site capture, breaks the loop at its root: if the AI demands a clear photo <em>now</em>, there's no rejected photo to convert into a future payout, and metadata (GPS + timestamp) proves the "good" photo was taken live, not pulled from a gallery later.</p>
-  </div>
-
-  <!-- ============ §6 THE AHA ============ -->
-  <div class="cs-section">
-    <div class="cs-label">The insight</div>
-    <h2>It was a latency gap, not a skill gap</h2>
-    <p>The industry had built manual workarounds for a broken feedback loop and accepted them as the cost of doing business. But the failure wasn't the blurry photo — it was that by the time the technician <em>knew</em> they'd failed, they were already 50 miles away at the next site. Collapse that latency from days to seconds, and the entire re-climb economy disappears. That was the opportunity: turn an invisible tax into a competitive advantage.</p>
-  </div>
-
-  <!-- ============ §7 THE SOLUTION ============ -->
+  <!-- ============ §3 THE SOLUTION ============ -->
   <div class="cs-section">
     <div class="cs-label">The solution</div>
-    <h2>A real-time quality gate, in the technician's pocket</h2>
-    <p>I redesigned the submission workflow around one principle: <strong>prevent rework, don't manage it.</strong> The reviewer moved from a back-office desk in another time zone directly into the technician's hands.</p>
+    <h2>One question, asked at the moment of capture</h2>
+    <p>The four failures shared a root cause, so they shared a fix: ask <em>"is this real, correct evidence for this job?"</em> while the answer is still cheap — on the tower, before the technician unclips — and check it against what the <strong>contract</strong> requires, not a general idea of a good install.</p>
+    <p>That took four layers. The order matters: cheap, certain checks first; the model last, only on what survives.</p>
 
-    <h3 style="font-size:16px;font-weight:600;margin:22px 0 6px;">1 · Multimodal LLM validation</h3>
-    <p>Rule-based checks fail in the messy real world of shadows, glare, and rust, so we used LLM-powered multimodal reasoning. When a technician captures a photo — say, a grounding-lug attachment — the system doesn't count pixels; it reasons against 10+ workflow-specific parameters and gives feedback <strong>before the technician unharnesses.</strong></p>
+    <div class="flow">
+      <div class="flow-node l1"><div class="fn-k">First — no AI</div><div class="fn-t">Provenance: timestamp, location, duplicate check</div><div class="fn-d">Answers already in the file.</div></div>
+      <div class="flow-arrow">↓ &nbsp;only what passes continues</div>
+      <div class="flow-node l2"><div class="fn-k">Then — the model</div><div class="fn-t">Reads the photo against this client's spec, and checks fields against each other</div></div>
+      <div class="flow-arrow">↓</div>
+      <div class="flow-node terminal"><div class="fn-k">Result</div><div class="fn-t">Evidence that belongs to this job, showing what the contract asked for</div></div>
+    </div>
+
+    <h3 style="font-size:16px;font-weight:600;margin:28px 0 6px;">1 · The check moves to the tower</h3>
+    <p>Simple rules can confirm a file exists or clears some resolution. They can't tell whether a serial number is readable through glare, or whether the frame shows the grounding wire actually meeting the lug.</p>
+    <p>So a multimodal model reads each photo against a description of what it should show — for a grounding lug, about ten things — and answers <strong>before the technician comes down.</strong></p>
+
+    <!-- IMAGE SLOT · assets/case-AI-mobile/ — the on-tower feedback screen. Delete the recon mockup below if a real screenshot is added.
+    <figure class="cs-figure">
+      <img src="assets/case-AI-mobile/on-tower-feedback.png" alt="The on-tower feedback telling the technician what to fix" loading="lazy">
+      <figcaption><span class="fc-idx">fig.02</span>The check runs at capture and returns what to change, not just a pass/fail.</figcaption>
+    </figure>
+    -->
 
     <div class="recon">
       <div class="recon-label">Illustrative — the on-tower feedback, not a real screenshot</div>
       <div class="recon-body">
         <div class="ord">
           <div class="ord-h"><span>CAPTURE · grounding lug</span><span>on-site</span></div>
-          <div class="ord-desc">Reasons against 10+ params: lug present? · framing wide enough to see the connection point? · serial number legible despite sun glare?</div>
+          <div class="ord-desc">Is the lug in frame? · Is the connection point visible? · Is the bolt seated? · Is the serial legible through the glare? · Is the angle close to spec?</div>
         </div>
         <div class="verdict" style="background:rgba(226,102,95,0.08); border-color:rgba(226,102,95,0.3);">
-          <span class="v-score" style="color:var(--red);">✕ serial number obscured</span>
-          <span class="v-tag">"Tilt the camera ~10° left and retake" — while still on the tower</span>
+          <span class="v-score" style="color:var(--red);">✕ serial number in shadow</span>
+          <span class="v-tag">"Tilt about 10° left and retake" — while still on the tower</span>
         </div>
       </div>
-      <div class="recon-cap">The check happens at the moment of capture, not 72 hours later at a desk. A failure now costs 10 seconds, not a $700 truck roll.</div>
+      <div class="recon-cap">Getting it wrong now costs ten seconds. Getting it wrong before cost $337 and a second climb.</div>
     </div>
 
-    <h3 style="font-size:16px;font-weight:600;margin:28px 0 6px;">2 · A security-first model call</h3>
-    <p>Operating in US telecom infrastructure makes <strong>data sovereignty</strong> a hard prerequisite, not a preference. I benchmarked multiple model families and made the explicit call to <strong>disqualify offshore models</strong> (e.g. DeepSeek) despite strong reasoning — they couldn't meet US security and compliance requirements. We standardized on OpenAI's multimodal models, which let our Tier-1 clients pass their own internal security audits. A technical choice that was really a business-enablement choice.</p>
+    <div class="callout key">
+      <div class="co-label">Why crews actually used it</div>
+      <p>A model that only said "Rejected" would be worse than nothing — the technician is 180 feet up and now knows something's wrong but not what. It returns the fix instead: <em>"the serial number is in shadow — tilt about 10° left and retake."</em> That specific instruction is most of why the group likeliest to reject the tool didn't.</p>
+    </div>
 
-    <h3 style="font-size:16px;font-weight:600;margin:28px 0 6px;">3 · Co-pilot, not digital cop</h3>
-    <p>If the AI just said "Rejected," technicians would hate it — and a tool field crews resent doesn't get used. So we pivoted to <strong>guided remediation</strong>: instead of a generic error, the AI gives a specific fix ("the serial number is in shadow; tilt 10° left and retake"). By helping technicians get it right while still in position, the tool became a partner that saved them a $700 mistake, not a hurdle between them and their payout.</p>
+    <h3 style="font-size:16px;font-weight:600;margin:32px 0 6px;">2 · The model reads the contract, not its own instincts</h3>
+    <p>A sharp photo of the wrong part still passed — we'd told the model what the photo was <em>of</em>, never what the contract <em>required</em> of it.</p>
+    <p>Every client already had this written down — specs, method statements, the SOPs their own engineers work from — in documents nothing in the checker had ever seen. So a retrieval step pulls the sections of <em>this</em> client's spec that apply to <em>this</em> job and puts them in front of the model with the photo. A rooftop small cell and a macro tower pull different documents; nothing hard-coded.</p>
 
-    <h3 style="font-size:16px;font-weight:600;margin:28px 0 6px;">4 · Turning a cost into a value-add</h3>
-    <p>High-reasoning LLMs are expensive, and most teams treat token cost as a margin-killer. I reframed it as a <strong>risk premium</strong>: a sub-$1.00 validation call is an insurance policy against a $700 operational loss. That 700× framing turned the decision binary for stakeholders.</p>
+    <div class="flow">
+      <div class="flow-node"><div class="fn-k">Input</div><div class="fn-t">A photo, and the job it belongs to — client, region, job type</div></div>
+      <div class="flow-arrow">↓</div>
+      <div class="flow-node l1"><div class="fn-k">Retrieve</div><div class="fn-t">Pull the sections of that client's specs that apply to this job</div></div>
+      <div class="flow-arrow">↓ &nbsp;specs go to the model with the photo</div>
+      <div class="flow-node l2"><div class="fn-k">Check</div><div class="fn-t">The model reads the photo against those specs</div></div>
+    </div>
+
+    <div class="callout key">
+      <div class="co-label">Why retrieve instead of fine-tune per client</div>
+      <p>Onboarding a client becomes <em>adding documents</em>, not retraining a model — which matters when you're onboarding continuously. And their specs are read at check time and never trained on: the only version their security teams would sign.</p>
+    </div>
+
+    <h3 style="font-size:16px;font-weight:600;margin:32px 0 6px;">3 · Fields get checked against each other</h3>
+    <p>A real climber name and a real, current certificate both passed on their own — but the name <em>on</em> the certificate belonged to someone else, borrowed to cover a crew short a qualified climber.</p>
+    <p>Nothing checked the relationship <em>between</em> fields, because no single field owns that rule. So now the name entered, the name read off the certificate, and the crew roster are checked as one thing. Change one field mid-submission and the whole cluster re-checks, not just the edited one.</p>
+
+    <div class="recon">
+      <div class="recon-label">Illustrative — fields valid alone, fraudulent together</div>
+      <div class="recon-body">
+        <div class="compare">
+          <div class="ord">
+            <div class="ord-h"><span>FIELD · climber name</span><span class="v-score" style="color:var(--teal);">✓ valid</span></div>
+            <div class="ord-desc">"John Doe" — a real, active technician</div>
+          </div>
+          <div class="ord">
+            <div class="ord-h"><span>FIELD · certification upload</span><span class="v-score" style="color:var(--teal);">✓ valid</span></div>
+            <div class="ord-desc">A real, current climber license — issued to <b>"James Smith"</b></div>
+          </div>
+        </div>
+        <div class="verdict" style="background:rgba(226,102,95,0.08); border-color:rgba(226,102,95,0.3);">
+          <span class="v-score" style="color:var(--red);">✕ cross-field mismatch</span>
+          <span class="v-tag">the name entered doesn't match the name on the certificate</span>
+        </div>
+      </div>
+      <div class="recon-cap">Each field is valid. The problem is the relationship between them — the one thing nothing was looking at.</div>
+    </div>
+
+    <h3 style="font-size:16px;font-weight:600;margin:32px 0 6px;">4 · Provenance, without a model</h3>
+    <p>Whether a photo was taken at the right place and time isn't a judgment call — the answer's already in the file. Three plain checks run <em>in front of</em> the AI:</p>
+    <ul>
+      <li>Timestamp outside the job window → reject</li>
+      <li>Duplicate of an image already submitted, to this job or any other → flag</li>
+      <li>Location doesn't match the assigned site → reject</li>
+    </ul>
+
+    <div class="callout key">
+      <div class="co-label">Why the order matters</div>
+      <p>Running these first means spoofed evidence never reaches the model, so there's nothing for it to be talked past — and we don't spend model time on submissions already disqualified. That's what kept cost flat as the checks piled up.</p>
+    </div>
+
+    <h3 style="font-size:16px;font-weight:600;margin:32px 0 6px;">The constraints that shaped it</h3>
+    <p>Two decisions had nothing to do with model quality:</p>
+    <ul>
+      <li><strong>Data sovereignty.</strong> This runs on infrastructure for US carriers. Some offshore models — DeepSeek among them — reasoned well and I ruled them out anyway: a model our clients' security teams won't approve is worth nothing, whatever it scores. We went with OpenAI's. Small performance gap; decisive approval gap.</li>
+      <li><strong>Who pays.</strong> A check under $1 against a $337 trip is 337×. Strong enough to take the cost off our books entirely and make it a line the client pays — reasonably, since the client had been funding the repeat visits all along.</li>
+    </ul>
 
     <div class="econ">
-      <div class="eq"><div class="eq-n">&lt;$1.00</div><div class="eq-l">one real-time AI validation call</div></div>
+      <div class="eq"><div class="eq-n">&lt;$1.00</div><div class="eq-l">one check at the moment of capture</div></div>
       <div class="op">vs.</div>
-      <div class="eq"><div class="eq-n">$700</div><div class="eq-l">one avoided re-climb / truck roll</div></div>
+      <div class="eq"><div class="eq-n">$337</div><div class="eq-l">the repeat trip it prevents</div></div>
       <div class="op">=</div>
-      <div class="eq win"><div class="eq-n">700×</div><div class="eq-l">ROI — billed to the client as a pass-through fee, not our COGS</div></div>
+      <div class="eq win"><div class="eq-n">337×</div><div class="eq-l">billed to the client rather than absorbed by us</div></div>
     </div>
-
-    <p>Because I could prove the 700× ROI, I moved the AI cost off our balance sheet entirely — it became a <strong>client-funded pass-through fee</strong>. Customers didn't see a cost line; they saw an insurance policy against project delays.</p>
   </div>
 
-  <!-- ============ §8 OUTCOME ============ -->
+  <!-- ============ §4 OUTCOME ============ -->
   <div class="cs-section">
     <div class="cs-label">Outcome</div>
-    <h2>The value chain shifted — from cleanup to prevention</h2>
+    <h2>What changed, and what I'll only claim carefully</h2>
+    <p>The check moved from a desk two days later to the tower, in the moment. The one number I trust most is the rejection rate, because it's measured the same way on both sides of the change.</p>
 
     <div class="cs-table-wrap">
       <table class="cs-table">
@@ -197,32 +224,37 @@
           <col style="width:34%"><col style="width:33%"><col style="width:33%">
         </colgroup>
         <thead>
-          <tr><th>Metric</th><th>Pre-AI · manual review</th><th>Post-AI · real-time gate</th></tr>
+          <tr><th></th><th>Before</th><th>After</th></tr>
         </thead>
         <tbody>
-          <tr><td><span class="cell-lead">COP rejection rate</span></td><td>18%</td><td><strong style="color:var(--teal);">&lt; 2%</strong></td></tr>
-          <tr><td><span class="cell-lead">Close-out cycle time</span></td><td>48–72 hours</td><td><strong style="color:var(--teal);">Instant (real-time)</strong></td></tr>
-          <tr><td><span class="cell-lead">Avg loss per site</span></td><td>$700 (1 in 6 sites)</td><td><strong style="color:var(--teal);">Eliminated (&lt;$1 premium)</strong></td></tr>
-          <tr><td><span class="cell-lead">Capital velocity</span></td><td>Stagnant (3-day float)</td><td><strong style="color:var(--teal);">Same-day unblocking</strong></td></tr>
+          <tr><td><span class="cell-lead">Submissions sent back for rework</span></td><td>18%</td><td><strong style="color:var(--teal);">under 2%</strong></td></tr>
+          <tr><td><span class="cell-lead">Time to find out a photo was bad</span></td><td>2–3 days</td><td><strong style="color:var(--teal);">while still on the tower</strong></td></tr>
+          <tr><td><span class="cell-lead">Cost of fixing one bad photo</span></td><td>$337 and a second climb</td><td><strong style="color:var(--teal);">under $1, ten seconds</strong></td></tr>
         </tbody>
       </table>
     </div>
 
-    <div class="pull-stats">
-      <div class="ps"><div class="n">90%+</div><div class="l">reduction in rejections — administrative re-climbs effectively eliminated</div></div>
-      <div class="ps"><div class="n">80% → exceptions</div><div class="l">reviewer time freed from catching "dumb" errors, redirected to real engineering judgment</div></div>
-      <div class="ps"><div class="n">~72h</div><div class="l">compressed off the site-to-payout window, unblocking frozen capital</div></div>
+    <div class="callout">
+      <div class="co-label">What I won't pretend to know</div>
+      <p>The $7.1M is what the problem <em>cost</em> over three years — not what we recovered. Repeat-visit change orders fell sharply after launch, since they're a direct consequence of rejections, but I'd be guessing if I attached a first-year dollar figure. I'd rather leave it as the rate.</p>
     </div>
 
+    <p>The layered checks don't have that clean before-and-after — they went in gradually, one at a time. So instead of a number I don't trust, here's what they now catch that nothing caught before:</p>
     <ul>
-      <li><strong>Operational transformation</strong> — the AI absorbed the high-volume, low-reasoning checks (blur, wrong angle, missing labels). Human experts moved to high-value exception handling on complex engineering anomalies.</li>
-      <li><strong>The safety dividend</strong> — hundreds of technicians were spared a second 200ft climb for a 10-second photo, cutting the company's physical-risk profile and insurance liability. Hard to price, and the impact I'm proudest of.</li>
-      <li><strong>Capital velocity</strong> — compressing the site-to-payout window by nearly 72 hours unblocked millions for suppliers and made payment cycles faster and more predictable.</li>
+      <li>A part that doesn't match the client's specification</li>
+      <li>A certificate belonging to someone who wasn't on site</li>
+      <li>A photo taken three weeks earlier, somewhere else</li>
     </ul>
+    <p>All three used to land on a reviewer's desk — or get approved.</p>
+
+    <p>Two things came out of it that weren't on the plan.</p>
+    <p>Reviewers stopped being the first line of defence. The obvious rejections — blur, wrong angle, missing shot — don't reach them any more, so what's left in the queue is the genuinely ambiguous: an install that looks unusual, a spec that doesn't quite match the site. That's the work that actually needs a person.</p>
+    <p>And people stopped climbing 200-foot towers to retake a photograph. That one has no number attached, and it's the one I care about most.</p>
 
     <div class="callout key">
-      <div class="co-label">The reusable lesson</div>
-      <p>The win wasn't the model — it was moving the feedback loop. The same real-time gate fixed quality, killed a fraud loop, improved safety, and accelerated cash, all by asking the question <strong>while it was still cheap to answer.</strong> Which raised the next problem: the photos were now sharp, but were they <em>correct</em>? <a href="case-7.html" style="color:var(--teal);">That became Stage 2 →</a></p>
+      <div class="co-label">What I'd take to the next one</div>
+      <p><strong>Shipping is when you learn what was actually wrong.</strong> The readable-photo fix worked — and the failures it cleared away were sitting on top of a second set underneath. If I'd stopped when the rejection rate dropped, the wrong-part, wrong-person, and recycled-photo checks would all still be missing.</p>
+      <p><strong>Not everything wants a model.</strong> Of the fixes here, one needed the model to read a spec, one needed two fields compared, and one just needed a timestamp. Working out which is which — and running the cheap, certain checks first — was most of the design.</p>
     </div>
   </div>
 
@@ -230,17 +262,12 @@
 
 <div class="wrap-narrow case-nav">
   <a href="case-5.html">← A weekend PR, 300+/day</a>
-  <a href="case-7.html">Next: From computer vision to contract-aware →</a>
+  <a href="index.html">Back to all work →</a>
 </div>
 
 <footer class="wrap-narrow">
   <div>Chandigarh, India · Built by hand, not by template.</div>
 </footer>
-
-<a class="fab-part" href="case-7.html" aria-label="Continue to Part 2 of 2: from computer vision to contract-aware execution">
-  <span class="fab-eyebrow">Part 2 of 2</span>
-  <span class="fab-title">From CV to contract-aware <span class="fab-arrow">→</span></span>
-</a>
 
 </body>
 </html>

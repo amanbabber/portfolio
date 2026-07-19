@@ -7,65 +7,27 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="styles.css?v=8">
+<link rel="stylesheet" href="styles.css?v=9">
 <style>
-/* ---- scoped styles for the embedded prototype ---- */
-#pmtc { border:1px solid var(--border); border-radius:14px; background:var(--surface); overflow:hidden; }
-#pmtc .pm-bar { display:flex; align-items:center; gap:8px; padding:11px 16px; background:var(--surface-2); border-bottom:1px solid var(--border); }
-#pmtc .pm-dot { width:10px; height:10px; border-radius:50%; background:#3a4557; }
-#pmtc .pm-dot.r{background:var(--red);} #pmtc .pm-dot.a{background:var(--amber);} #pmtc .pm-dot.g{background:var(--teal);}
-#pmtc .pm-bar .pm-title { margin-left:8px; font-family:var(--mono); font-size:12px; color:var(--text-dim); letter-spacing:.04em; }
-#pmtc .pm-body { padding:20px; }
-#pmtc .pm-step-label { font-family:var(--mono); font-size:10.5px; letter-spacing:.16em; text-transform:uppercase; color:var(--amber); margin-bottom:10px; }
-#pmtc textarea { width:100%; min-height:150px; resize:vertical; background:var(--bg); color:var(--text); border:1px solid var(--border); border-radius:8px; padding:13px 14px; font-family:var(--mono); font-size:12.5px; line-height:1.6; }
-#pmtc .pm-btn { font-family:var(--mono); font-size:12.5px; font-weight:600; border-radius:8px; padding:10px 18px; cursor:pointer; border:1px solid var(--amber); background:var(--amber); color:#1a1206; transition:opacity .15s; }
-#pmtc .pm-btn:hover { opacity:.88; }
-#pmtc .pm-btn.ghost { background:transparent; color:var(--text-dim); border-color:var(--border); }
-#pmtc .pm-btn.ghost:hover { color:var(--text); border-color:var(--text-faint); }
-#pmtc .pm-btn:disabled { opacity:.4; cursor:default; }
-#pmtc .pm-row { display:flex; align-items:center; gap:10px; flex-wrap:wrap; margin-top:14px; }
-#pmtc .pm-note { font-family:var(--mono); font-size:11px; color:var(--text-faint); }
-#pmtc .pm-phase { margin-top:22px; }
-#pmtc .pm-phase-h { font-family:var(--mono); font-size:11px; letter-spacing:.1em; text-transform:uppercase; color:var(--text-dim); padding-bottom:8px; border-bottom:1px solid var(--border-soft); margin-bottom:12px; }
-#pmtc .pm-test { border:1px solid var(--border); border-radius:10px; padding:14px 15px; margin-bottom:11px; background:var(--surface-2); }
-#pmtc .pm-test.pass { border-color:rgba(85,224,201,.45); }
-#pmtc .pm-test.fail, #pmtc .pm-test.known-issue { border-color:rgba(226,102,95,.45); }
-#pmtc .pm-test.skip, #pmtc .pm-test.blocked { opacity:.72; }
-#pmtc .pm-test-top { display:flex; align-items:baseline; gap:9px; margin-bottom:8px; }
-#pmtc .pm-ac { font-family:var(--mono); font-size:10px; font-weight:600; letter-spacing:.05em; color:var(--amber); background:rgba(226,160,63,.1); border:1px solid rgba(226,160,63,.25); border-radius:5px; padding:2px 6px; white-space:nowrap; }
-#pmtc .pm-ac.edge { color:var(--text-dim); background:rgba(183,192,206,.08); border-color:rgba(183,192,206,.22); }
-#pmtc .pm-test-title { font-family:var(--display); font-size:15px; font-weight:600; color:var(--text); }
-#pmtc .pm-steps { list-style:none; padding:0; margin:6px 0 10px; }
-#pmtc .pm-steps li { font-family:var(--mono); font-size:12px; color:var(--text-dim); padding:2px 0 2px 20px; position:relative; line-height:1.5; }
-#pmtc .pm-steps li:before { content:counter(s); counter-increment:s; position:absolute; left:0; top:2px; font-size:10px; color:var(--text-faint); }
-#pmtc .pm-steps { counter-reset:s; }
-#pmtc .pm-expected { font-size:12.5px; color:var(--text-dim); line-height:1.55; margin-bottom:12px; }
-#pmtc .pm-expected b { color:var(--text); font-weight:600; }
-#pmtc .pm-results { display:flex; gap:6px; flex-wrap:wrap; }
-#pmtc .pm-res { font-family:var(--mono); font-size:11px; font-weight:500; border-radius:6px; padding:5px 10px; cursor:pointer; border:1px solid var(--border); background:transparent; color:var(--text-dim); transition:all .12s; }
-#pmtc .pm-res:hover { border-color:var(--text-faint); color:var(--text); }
-#pmtc .pm-res.on-pass { background:rgba(85,224,201,.14); border-color:var(--teal); color:var(--teal); }
-#pmtc .pm-res.on-fail { background:rgba(226,102,95,.14); border-color:var(--red); color:var(--red); }
-#pmtc .pm-res.on-neutral { background:rgba(226,160,63,.14); border-color:var(--amber); color:var(--amber); }
-#pmtc .pm-bug { margin-top:12px; border:1px dashed rgba(226,102,95,.4); border-radius:9px; padding:13px 14px; background:rgba(226,102,95,.05); }
-#pmtc .pm-bug-h { font-family:var(--mono); font-size:10px; letter-spacing:.12em; text-transform:uppercase; color:var(--red); margin-bottom:9px; display:flex; align-items:center; justify-content:space-between; }
-#pmtc .pm-bug-title { font-family:var(--display); font-size:14px; font-weight:600; color:var(--text); margin-bottom:8px; }
-#pmtc .pm-bug-field { font-family:var(--mono); font-size:11.5px; color:var(--text-dim); line-height:1.55; margin:5px 0; }
-#pmtc .pm-bug-field .k { color:var(--text-faint); text-transform:uppercase; font-size:9.5px; letter-spacing:.08em; display:block; margin-bottom:2px; }
-#pmtc .pm-prio { font-family:var(--mono); font-size:10px; font-weight:600; border-radius:5px; padding:2px 7px; }
-#pmtc .pm-prio.High,#pmtc .pm-prio.Critical { background:rgba(226,102,95,.16); color:var(--red); }
-#pmtc .pm-prio.Medium { background:rgba(226,160,63,.16); color:var(--amber); }
-#pmtc .pm-prio.Low { background:rgba(183,192,206,.12); color:var(--text-dim); }
-#pmtc .pm-summary { margin-top:22px; border-top:1px solid var(--border); padding-top:18px; }
-#pmtc .pm-counts { display:flex; gap:14px; flex-wrap:wrap; margin-bottom:14px; }
-#pmtc .pm-count { font-family:var(--mono); font-size:12px; color:var(--text-dim); }
-#pmtc .pm-count b { color:var(--text); font-size:17px; font-weight:600; display:block; }
-#pmtc .pm-jira { background:var(--bg); border:1px solid var(--border); border-radius:8px; padding:14px 15px; font-family:var(--mono); font-size:12px; color:var(--text-dim); line-height:1.65; white-space:pre-wrap; margin-top:12px; }
-#pmtc .pm-jira .jb { color:var(--text); font-weight:600; }
-#pmtc .pm-hidden { display:none; }
-#pmtc .pm-spinner { display:inline-block; font-family:var(--mono); font-size:12px; color:var(--amber); }
-.demo-banner { font-family:var(--mono); font-size:11.5px; color:var(--text-faint); margin-top:12px; line-height:1.6; }
-.demo-banner strong { color:var(--text-dim); font-weight:600; }
+/* ---- live-app CTA ---- */
+.live-cta{
+  display:flex; align-items:center; justify-content:space-between;
+  gap:22px; flex-wrap:wrap;
+  border:1px solid var(--border); border-radius:14px;
+  background:var(--surface); padding:26px 28px;
+}
+.live-cta .lc-copy{max-width:520px;}
+.live-cta .lc-title{font-family:var(--display); font-size:17px; font-weight:600; margin-bottom:6px;}
+.live-cta .lc-sub{font-size:14px; color:var(--text-dim); line-height:1.55;}
+.live-cta .lc-btn{
+  font-family:var(--mono); font-size:13px; font-weight:600; white-space:nowrap;
+  border:1px solid var(--teal); border-radius:8px; padding:12px 20px;
+  background:rgba(85,224,201,0.08); color:var(--teal); text-decoration:none;
+  transition:background 0.15s ease;
+}
+.live-cta .lc-btn:hover{background:rgba(85,224,201,0.16);}
+.demo-banner{font-family:var(--mono); font-size:11.5px; color:var(--text-faint); margin-top:12px; line-height:1.6;}
+.demo-banner strong{color:var(--text-dim); font-weight:600;}
 </style>
 </head>
 <body>
@@ -75,9 +37,8 @@
     <a class="logo" href="index.html">aman<span>.</span>pm</a>
     <div class="nav-links">
       <a href="index.html#work"><span class="n">01</span>Work</a>
-      <a href="index.html#approach"><span class="n">02</span>Approach</a>
-      <a href="index.html#timeline"><span class="n">03</span>Timeline</a>
-      <a href="index.html#contact"><span class="n">04</span>Contact</a>
+      <a href="index.html#timeline"><span class="n">02</span>Timeline</a>
+      <a href="index.html#contact"><span class="n">03</span>Contact</a>
     </div>
   </div>
 </nav>
@@ -96,7 +57,7 @@
     <div class="m-item"><div class="l">My role</div><div class="v">Built it end to end — product, prompts, code, deploy</div></div>
     <div class="m-item"><div class="l">Stack</div><div class="v">Next.js 15 · Claude · Prisma + Neon · Vercel</div></div>
     <div class="m-item"><div class="l">Timeline</div><div class="v">A personal build, outside the day job</div></div>
-    <div class="m-item"><div class="l">Try it</div><div class="v hero-stat">Playable demo ↓</div></div>
+    <div class="m-item"><div class="l">Try it</div><div class="v hero-stat"><a href="https://pm-testing-companion.vercel.app" target="_blank" rel="noopener" style="color:inherit;">Live app ↗</a></div></div>
   </div>
 
   <div class="impact-strip">
@@ -144,35 +105,19 @@
   <!-- ============ TRY IT ============ -->
   <div class="cs-section" id="demo">
     <div class="cs-label">Try it</div>
-    <h2>A working prototype — run a session yourself</h2>
-    <p>This is a live, in-page prototype of the real flow. Generate the plan, walk the tests, mark a couple as failed, draft a bug, and produce the Jira summary. It's the actual experience — reproduced here on sample data.</p>
+    <h2>Run a real session yourself</h2>
+    <p>The app is deployed and running. Paste a user story, generate the plan, walk the tests, mark a couple as failed, draft a bug, and produce the Jira summary — the real flow, on live models, end to end.</p>
 
-    <div id="pmtc">
-      <div class="pm-bar">
-        <span class="pm-dot r"></span><span class="pm-dot a"></span><span class="pm-dot g"></span>
-        <span class="pm-title">🧪 PM Testing Companion — session</span>
+    <div class="live-cta">
+      <div class="lc-copy">
+        <div class="lc-title">PM Testing Companion</div>
+        <div class="lc-sub">Next.js 15 on Vercel, Claude (Sonnet + Haiku) behind the five jobs, Postgres holding projects and sessions.</div>
       </div>
-      <div class="pm-body">
-        <!-- step 1: story -->
-        <div id="pm-step-story">
-          <div class="pm-step-label">Paste a user story</div>
-          <textarea id="pm-story" spellcheck="false"></textarea>
-          <div class="pm-row">
-            <button class="pm-btn" id="pm-generate">Generate test plan →</button>
-            <span class="pm-note" id="pm-gen-note">Sonnet-quality plan · runs on sample data</span>
-          </div>
-        </div>
-
-        <!-- step 2: plan + walk -->
-        <div id="pm-step-plan" class="pm-hidden"></div>
-
-        <!-- step 3: summary -->
-        <div id="pm-step-summary" class="pm-hidden"></div>
-      </div>
+      <a class="lc-btn" href="https://pm-testing-companion.vercel.app" target="_blank" rel="noopener">Open the live app ↗</a>
     </div>
 
     <div class="demo-banner">
-      <strong>About this demo:</strong> it runs entirely in your browser on sample data — <strong>no live AI calls, no keys, nothing sent anywhere.</strong> The real app generates the plan, the bug ticket, and the summary with Claude (Sonnet + Haiku) and persists everything to Postgres. It isn't exposed publicly here because it needs an API key and a database — exactly the point of the sections below.
+      <strong>Note:</strong> this is the real application, not a mock — the test plan, the bug ticket, and the Jira summary are all generated by Claude at request time, and every session persists to Postgres.
     </div>
   </div>
 
@@ -294,7 +239,7 @@ this story."</span>
 </div>
 
 <div class="wrap-narrow case-nav">
-  <a href="case-7.html">← Contract-aware execution</a>
+  <a href="case-6.html">← Closing a $7.1M leak with AI</a>
   <a href="index.html">Back to all work →</a>
 </div>
 
@@ -302,211 +247,6 @@ this story."</span>
   <div>Chandigarh, India · Built by hand, not by template.</div>
 </footer>
 
-<script>
-(function () {
-  var SAMPLE_STORY =
-"SWS-4821 — Password reset via email\n\n" +
-"Background:\n" +
-"Users who forget their password need a way to reset it without contacting support. Reset links are emailed and expire after 30 minutes.\n\n" +
-"Acceptance criteria:\n" +
-"AC-1: A user can request a reset link by entering their registered email on the \"Forgot password\" screen.\n" +
-"AC-2: The reset link works within 30 minutes of being issued, and shows an \"expired link\" message after that.\n" +
-"AC-3: A reset link that has already been used cannot be used a second time.\n" +
-"AC-4: Entering an email that isn't registered shows the same confirmation screen — no account enumeration.\n\n" +
-"Environment: staging";
-
-  // Canned plan — mirrors what the real test-plan prompt produces:
-  // ACs merged into behaviors, an edge case only where the logic differs, ordered for state.
-  var PLAN = [
-    { name: "Phase 1 — Request & delivery", tests: [
-      { ac:"AC-1", title:"Request a reset link with a registered email",
-        steps:["Open the \"Forgot password\" screen on staging.","Enter a registered account's email.","Submit the form."],
-        expected:"A confirmation screen appears and a reset email arrives at the account's inbox within a minute.",
-        prio:"High",
-        actual:"Confirmation screen shows, but no email is received after 5 minutes." },
-      { ac:"AC-4", edge:true, title:"Unregistered email shows the same confirmation (no enumeration)",
-        steps:["Open the \"Forgot password\" screen.","Enter an email with no account.","Submit."],
-        expected:"The same confirmation screen appears as for a valid email — the UI gives no hint that the account doesn't exist.",
-        prio:"Medium",
-        actual:"An \"email not found\" error is shown, revealing whether an account exists." }
-    ]},
-    { name: "Phase 2 — Link validity", tests: [
-      { ac:"AC-2", title:"Reset link works within 30 minutes",
-        steps:["Request a reset link for the test account.","Open the link immediately.","Set a new password and submit."],
-        expected:"The new password is accepted and the user can sign in with it.",
-        prio:"High",
-        actual:"" },
-      { ac:"AC-2", edge:true, title:"Expired link (after 30 min) is rejected",
-        steps:["Request a reset link.","Wait past the 30-minute window (or use a pre-expired link).","Open the link."],
-        expected:"An \"expired link\" message is shown and no password change is allowed.",
-        prio:"High",
-        actual:"The expired link still opens the reset form and lets the password be changed." },
-      { ac:"AC-3", title:"A used link cannot be reused",
-        steps:["Complete a password reset with a fresh link.","Open the same link a second time."],
-        expected:"The second attempt is rejected with a \"link already used\" message.",
-        prio:"Medium",
-        actual:"" }
-    ]}
-  ];
-
-  var $ = function (id) { return document.getElementById(id); };
-  var storyEl = $("pm-story");
-  storyEl.value = SAMPLE_STORY;
-
-  var state = {}; // testKey -> result
-
-  $("pm-generate").addEventListener("click", function () {
-    var btn = this;
-    btn.disabled = true;
-    var note = $("pm-gen-note");
-    note.innerHTML = '<span class="pm-spinner">▍ splitting story… planning phases…</span>';
-    setTimeout(function () {
-      note.textContent = "Sonnet-quality plan · runs on sample data";
-      btn.disabled = false;
-      renderPlan();
-      $("pm-step-plan").scrollIntoView({ behavior: "smooth", block: "start" });
-    }, 1100);
-  });
-
-  function esc(s){ return String(s).replace(/[&<>"]/g, function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];}); }
-
-  function renderPlan() {
-    var host = $("pm-step-plan");
-    host.classList.remove("pm-hidden");
-    var html = '<div class="pm-step-label" style="margin-top:26px;">Generated test plan · 5 tests across 2 phases</div>';
-    PLAN.forEach(function (phase, pi) {
-      html += '<div class="pm-phase"><div class="pm-phase-h">' + esc(phase.name) + '</div>';
-      phase.tests.forEach(function (t, ti) {
-        var key = pi + "-" + ti;
-        html += '<div class="pm-test" id="t-' + key + '">' +
-          '<div class="pm-test-top"><span class="pm-ac' + (t.edge?' edge':'') + '">' + (t.edge?'Edge · ':'') + esc(t.ac) + '</span>' +
-          '<span class="pm-test-title">' + esc(t.title) + '</span></div>' +
-          '<ol class="pm-steps">' + t.steps.map(function(s){return '<li>'+esc(s)+'</li>';}).join('') + '</ol>' +
-          '<div class="pm-expected"><b>Expected:</b> ' + esc(t.expected) + '</div>' +
-          '<div class="pm-results">' +
-            resBtn(key,'pass','Pass') + resBtn(key,'fail','Fail') + resBtn(key,'known-issue','Known issue') +
-            resBtn(key,'skip','Skip') + resBtn(key,'blocked','Blocked') +
-          '</div>' +
-          '<div id="bug-' + key + '"></div>' +
-        '</div>';
-      });
-      html += '</div>';
-    });
-    html += '<div class="pm-row" style="margin-top:20px;"><button class="pm-btn" id="pm-finish">Finish & generate Jira summary →</button>' +
-            '<button class="pm-btn ghost" id="pm-autofill">Auto-fill a sample run</button></div>';
-    host.innerHTML = html;
-
-    PLAN.forEach(function (phase, pi) {
-      phase.tests.forEach(function (t, ti) {
-        var key = pi + "-" + ti;
-        ["pass","fail","known-issue","skip","blocked"].forEach(function (r) {
-          var b = document.getElementById("b-" + key + "-" + r);
-          if (b) b.addEventListener("click", function () { mark(pi, ti, r); });
-        });
-      });
-    });
-    $("pm-finish").addEventListener("click", finish);
-    $("pm-autofill").addEventListener("click", autofill);
-  }
-
-  function resBtn(key, r, label) {
-    return '<button class="pm-res" id="b-' + key + '-' + r + '" data-r="' + r + '">' + label + '</button>';
-  }
-
-  function mark(pi, ti, r) {
-    var key = pi + "-" + ti;
-    state[key] = r;
-    var test = PLAN[pi].tests[ti];
-    // toggle button states
-    ["pass","fail","known-issue","skip","blocked"].forEach(function (x) {
-      var b = document.getElementById("b-" + key + "-" + x);
-      if (!b) return;
-      b.className = "pm-res";
-      if (x === r) {
-        b.classList.add(x === "pass" ? "on-pass" : (x === "fail" || x === "known-issue") ? "on-fail" : "on-neutral");
-      }
-    });
-    var card = document.getElementById("t-" + key);
-    card.className = "pm-test " + r;
-    // bug draft on fail / known-issue
-    var bugHost = document.getElementById("bug-" + key);
-    if (r === "fail" || r === "known-issue") {
-      bugHost.innerHTML = bugDraft(test);
-    } else {
-      bugHost.innerHTML = "";
-    }
-  }
-
-  function bugDraft(t) {
-    var actual = t.actual || "[describe what you observed]";
-    var title = t.title.replace(/^[A-Z]/, function(c){return c.toLowerCase();});
-    return '<div class="pm-bug">' +
-      '<div class="pm-bug-h"><span>◆ Claude-drafted bug ticket</span><span class="pm-prio ' + t.prio + '">' + t.prio + '</span></div>' +
-      '<div class="pm-bug-title">' + esc("Reset flow: " + title + " fails") + '</div>' +
-      '<div class="pm-bug-field"><span class="k">Steps to reproduce</span>' + t.steps.map(function(s,i){return (i+1)+". "+esc(s);}).join('<br>') + '</div>' +
-      '<div class="pm-bug-field"><span class="k">Expected</span>' + esc(t.expected) + '</div>' +
-      '<div class="pm-bug-field"><span class="k">Actual</span>' + esc(actual) + '</div>' +
-      '<div class="pm-bug-field"><span class="k">AC reference · Environment</span>' + esc(t.ac) + ' · staging</div>' +
-    '</div>';
-  }
-
-  function autofill() {
-    // a realistic mixed run: 3 pass, 2 fail
-    mark(0,0,'fail'); mark(0,1,'fail'); mark(1,0,'pass'); mark(1,1,'fail'); mark(1,2,'pass');
-    // keep it to two clean fails for readability
-    mark(0,0,'pass');
-    finish();
-  }
-
-  function finish() {
-    var counts = { total:0, pass:0, fail:0, "known-issue":0, skip:0, blocked:0, pending:0 };
-    var fails = [];
-    PLAN.forEach(function (phase, pi) {
-      phase.tests.forEach(function (t, ti) {
-        counts.total++;
-        var r = state[pi + "-" + ti];
-        if (!r) { counts.pending++; return; }
-        counts[r]++;
-        if (r === "fail" || r === "known-issue") fails.push({ t: t, r: r });
-      });
-    });
-
-    var host = $("pm-step-summary");
-    host.classList.remove("pm-hidden");
-    var verdict = (counts.fail > 0) ? "FAIL — blocking issues found" :
-                  (counts["known-issue"] > 0) ? "PASS with known issues" :
-                  (counts.pending > 0) ? "Incomplete — tests still pending" : "PASS — all tests green";
-
-    var jira = "*QA summary — SWS-4821 · Password reset via email* (staging)\n\n";
-    jira += (counts.fail>0 ? "Result: *FAIL.* " : counts["known-issue"]>0 ? "Result: *Pass with known issues.* " : "Result: *Pass.* ");
-    jira += counts.pass + " of " + counts.total + " tests passed.\n\n";
-    if (fails.length) {
-      jira += "*Issues found:*\n";
-      fails.forEach(function (f) {
-        jira += "- [" + f.r.toUpperCase() + "] " + f.t.title + " (" + f.t.ac + ")\n";
-      });
-      jira += "\n";
-    }
-    jira += "*Verdict:* " + verdict + (counts.fail>0 ? " — recommend fixing the failing ACs before merge." : counts.pending>0 ? " — complete the remaining tests before sign-off." : " — cleared for merge.");
-
-    host.innerHTML =
-      '<div class="pm-summary"><div class="pm-step-label">QA summary</div>' +
-      '<div class="pm-counts">' +
-        countBox(counts.pass, "passed") + countBox(counts.fail, "failed") +
-        countBox(counts["known-issue"], "known") + countBox(counts.skip + counts.blocked, "skip / blocked") +
-        countBox(counts.pending, "pending") +
-      '</div>' +
-      '<div class="pm-note">Claude writes this as a Jira comment in wiki markup — ready to paste into the ticket:</div>' +
-      '<div class="pm-jira">' + jira.replace(/\*(.+?)\*/g, '<span class="jb">$1</span>') + '</div>' +
-      '</div>';
-    host.scrollIntoView({ behavior: "smooth", block: "start" });
-  }
-
-  function countBox(n, label) {
-    return '<div class="pm-count"><b>' + n + '</b>' + label + '</div>';
-  }
-})();
-</script>
 
 </body>
 </html>
