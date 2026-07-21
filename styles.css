@@ -59,7 +59,6 @@ nav{
 }
 .nav-links{display:flex; gap:28px; font-family:var(--mono); font-size:13px; color:var(--text-dim);}
 .nav-links a:hover{color:var(--text);}
-.nav-links .n{color:var(--text-faint); margin-right:6px;}
 
 /* ---------- HERO (index) ---------- */
 .hero{padding:88px 0 64px;}
@@ -274,8 +273,6 @@ section{padding:80px 0;}
 .btn.primary{background:var(--teal); color:#0C0F14; border-color:var(--teal); font-weight:600;}
 .btn:hover{border-color:var(--text-dim);}
 .btn.primary:hover{opacity:0.9;}
-
-footer{padding:32px 0 60px; text-align:left; font-family:var(--mono); font-size:12px; color:var(--text-faint);}
 
 /* ================= CASE STUDY DETAIL PAGE ================= */
 .breadcrumb{
