@@ -57,8 +57,10 @@ nav{
   font-family:var(--mono); font-weight:600; font-size:14px;
   letter-spacing:0.02em;
 }
-.nav-links{display:flex; gap:28px; font-family:var(--mono); font-size:13px; color:var(--text-dim);}
+.nav-links{display:flex; align-items:center; gap:28px; font-family:var(--mono); font-size:13px; color:var(--text-dim);}
 .nav-links a:hover{color:var(--text);}
+.nav-links .nav-resume{padding:6px 14px; border-radius:5px; border:1px solid var(--border); color:var(--text-dim);}
+.nav-links .nav-resume:hover{border-color:var(--text-dim); color:var(--text);}
 
 /* ---------- HERO (index) ---------- */
 .hero{padding:88px 0 64px;}
