@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ask it like you'd ask a person — natural-language queries for $8B in contracts — Aman</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css?v=11">
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a class="logo" href="index.html">Aman Babber</a>
+    <div class="nav-links">
+      <a href="index.html#work">Work</a>
+      <a href="index.html#timeline">Timeline</a>
+      <a href="index.html#contact">Contact</a>
+      <a class="btn nav-resume" href="assets/resume.pdf" target="_blank" rel="noopener">Resume</a>
+    </div>
+  </div>
+</nav>
+
+<div class="wrap-narrow breadcrumb">
+  <a href="index.html">← All case studies</a>
+</div>
+
+<!-- ============ §1 HERO ============ -->
+<header class="case-hero wrap-narrow">
+  <div class="eyebrow">AI product · Natural-language interface · Databricks</div>
+  <h1>Ask it like you'd ask a person: plain English, straight into a live procurement query</h1>
+  <p class="dek">ScopeWorker runs contract and procurement workflows for companies like T-Mobile, where buyers award billions of dollars in contracts to suppliers and routinely hit business questions the platform had no way to answer — <em>Is a specific buyer favoring one supplier? How much did competitive bidding save versus direct awards last year?</em> Answering meant exporting raw data and rebuilding the calculation in Excel, every time. As product owner, I scoped and led the rollout of a natural-language query layer: a buyer types the question in plain English, and the system translates it into a live Databricks SQL query against a curated analytics layer, runs it, and returns the answer — <strong style="color:var(--text);">no export, no spreadsheet, no engineering ticket.</strong></p>
+
+  <div class="case-meta">
+    <div class="m-item"><div class="l">My role</div><div class="v">Product owner — scoped &amp; led the rollout</div></div>
+    <div class="m-item"><div class="l">Piloted with</div><div class="v">T-Mobile &amp; Samsung admin teams</div></div>
+    <div class="m-item"><div class="l">Data layer</div><div class="v">MySQL + MongoDB → Databricks Lakehouse</div></div>
+    <div class="m-item"><div class="l">Scale</div><div class="v">~900K contracts/yr · $8B spend</div></div>
+    <div class="m-item"><div class="l">Status</div><div class="v hero-stat">91% accurate · live, read-only</div></div>
+  </div>
+
+  <p class="dek" style="margin-top:28px;">The risk wasn't accuracy alone — ScopeWorker is multi-tenant, so an LLM free to write its own database queries could just as easily hand one client another client's contracts. We closed that boundary <strong style="color:var(--text);">structurally, not with a prompt</strong>, tested the model against 57 hand-verified business questions, and launched to internal admins first — read-only, with the accuracy baseline disclosed — turning real usage into the feedback loop a perfect score would have made us wait for.</p>
+
+  <div class="impact-strip">
+    <div class="imp"><div class="n">900K</div><div class="l">contracts created on ScopeWorker a year — the volume the query layer runs against</div></div>
+    <div class="imp"><div class="n">$8B</div><div class="l">in annual procurement spend represented by that contract volume</div></div>
+    <div class="imp"><div class="n">91%</div><div class="l">of test attempts returned the correct answer — 57 questions, each phrased multiple ways</div></div>
+    <div class="imp"><div class="n">78%</div><div class="l">thumbs-up on 642 rated responses since launch — a self-selected sample</div></div>
+  </div>
+</header>
+
+<div class="case-body-page wrap-narrow">
+
+  <!-- ============ §2 THE PROBLEM ============ -->
+  <div class="cs-section">
+    <div class="cs-label">The problem</div>
+    <h2>$8B a year in spend, and no way to just ask</h2>
+    <p>Roughly 900,000 contracts get created on ScopeWorker in a single year — together representing about $8B in annual procurement spend. That volume is exactly why the same handful of questions kept surfacing, not as hypotheticals but as real asks, over and over, from real people:</p>
+    <ul>
+      <li>Is a specific buyer favoring one supplier?</li>
+      <li>How often are we approving duplicate work?</li>
+      <li>How much did competitive bidding save versus direct awards last year?</li>
+      <li>What's driving change-order spend in a given market, and who's approving it?</li>
+    </ul>
+    <p>In practice, answering any of them meant someone exporting raw data out of the platform, dropping it into multiple Excel sheets, and building the calculation by hand — every time. Admins reporting platform usage up to T-Mobile's CXO and finance teams were doing this regularly just to answer routine finance questions like bidding savings or change-order spend by market. The same questions kept resurfacing in user interviews and product-launch conversations with both T-Mobile and Samsung — the ask was almost always some version of "can we just see this?" The honest answer was: not without an export and an afternoon in Excel.</p>
+
+    <div class="callout warn">
+      <div class="co-label">What made it a missing capability, not a UX gap</div>
+      <p>At the scale we were operating at — nearly a million contracts a year, $8B in spend — the inability to ask and answer questions like these directly on the platform was a missing <strong>core enterprise capability</strong>, not a minor inconvenience. A platform processing that much contract volume was expected to have an equivalent depth of insight readily available. It didn't.</p>
+    </div>
+  </div>
+
+  <!-- ============ §3 THE SOLUTION ============ -->
+  <div class="cs-section">
+    <div class="cs-label">The solution</div>
+    <h2>"Ask it like you'd ask a person"</h2>
+    <p>Instead of adding another static report for every new question — a cycle that would never keep pace with how many different questions kept surfacing — we built a layer that could answer questions it had never seen a report for.</p>
+    <p>A buyer or admin types the question directly, in plain English, into a familiar chat interface. Behind that single sentence, the system reads the question and the asking user's context and translates it into a Databricks SQL query — the same query an engineer would have had to hand-write for a one-off report — executes it against a curated analytics layer, and returns a plain-language answer alongside the underlying numbers. Not a cached report, not an approximation: the real answer to the real question asked.</p>
+
+    <h3 style="font-size:17px; font-weight:600; margin-bottom:12px;">The data layer: a lakehouse, not the production databases</h3>
+    <p>ScopeWorker's transactional data spans both relational (MySQL) and document (MongoDB) stores. Querying either one directly from a chat feature would risk latency and performance bottlenecks on systems that also have to serve the live product — the last thing we wanted was a slow business question degrading contract creation for everyone else. So instead of teaching the model two query languages against two production systems, we routed around the problem entirely: ETL pipelines continuously ingest both sources into a single, unified <strong>Databricks Lakehouse</strong>, and the natural-language layer only ever talks to that curated copy.</p>
+
+    <div class="flow">
+      <div class="flow-node"><div class="fn-k">Sources</div><div class="fn-t">MySQL (relational) + MongoDB (document) — ScopeWorker's live transactional stores</div></div>
+      <div class="flow-arrow">↓ &nbsp;ETL pipelines, continuous</div>
+      <div class="flow-node l2"><div class="fn-k">Databricks Lakehouse</div><div class="fn-t">Curated, analytical tables — one schema, not two</div><div class="fn-d">Production databases are never queried directly by the chat feature.</div></div>
+      <div class="flow-arrow">↓</div>
+      <div class="flow-node terminal"><div class="fn-k">Natural-language layer</div><div class="fn-t">Every question becomes a single Databricks SQL query against this layer</div></div>
+    </div>
+
+    <div class="recon">
+      <div class="recon-label">Illustrative — reconstructed from the chat flow, values illustrative</div>
+      <div class="recon-body">
+        <div class="ord" style="margin-bottom:14px;">
+          <div class="ord-h"><span>BUYER ASKS · chat</span><span>plain English</span></div>
+          <div class="ord-desc">"What's the PO total of all contracts created in the last 12 months?"</div>
+        </div>
+        <div class="pe after" style="margin-bottom:14px;">
+          <div class="pe-h">✓ &nbsp;system translates to Databricks SQL, live</div>
+          <div class="pe-code">SELECT SUM(po_total)
+FROM curated.contracts
+WHERE <span class="k">tenant_id = 'TMO'</span>
+  AND created_at &gt;= NOW() - INTERVAL 12 MONTH;</div>
+        </div>
+        <div class="verdict">
+          <span class="v-score">$412.6M</span>
+          <span class="v-tag">"Total PO value across <b>3,140 contracts</b> created in the last 12 months." — a live query against curated tables, not a cached report</span>
+        </div>
+      </div>
+      <div class="recon-cap">The <code>tenant_id</code> clause isn't something the model chose to write — the system forces it onto every query before execution. More on why that had to be structural, not a prompt, below.</div>
+    </div>
+
+    <p>No export. No Excel. No waiting on an engineering ticket for a question that might only ever get asked once.</p>
+
+    <div class="callout key">
+      <div class="co-label">Where the build time actually went</div>
+      <p>One decision made this viable to ship rather than just prototype: we didn't build a chat UI from scratch. We built on top of OpenAI's existing chat interface — thread history, search, a familiar layout — so admins had zero learning curve, and engineering spent zero time reinventing a front-end that already exists. Every hour saved there went straight into the part that actually mattered: getting the query translation right.</p>
+    </div>
+  </div>
+
+  <!-- ============ §4 MULTI-TENANT SECURITY ============ -->
+  <div class="cs-section">
+    <div class="cs-label">The dealbreaker</div>
+    <h2>Multi-tenant security: zero tolerance, by design</h2>
+    <p>ScopeWorker is multi-tenant — T-Mobile, Samsung, and every other client's data lives in the same underlying system. Letting an LLM freely generate and run database queries against that system introduced one non-negotiable risk: a buyer at Company A asking a question and getting back Company B's contracts.</p>
+    <p>This couldn't be handled as a prompt instruction telling the model to "only look at the user's own data" — a model can be talked past, misinterpret a query, or simply get it wrong under the wrong phrasing, and the cost of being wrong here isn't a bad answer, it's a data breach. So the boundary was built structurally instead of behaviorally.</p>
+
+    <div class="split">
+      <div class="sp before">
+        <div class="sp-h">✕ &nbsp;Rejected · prompt-level instruction</div>
+        <dl>
+          <div class="sp-row"><dt>Boundary lives in</dt><dd>System-prompt wording</dd></div>
+          <div class="sp-row key"><dt>Who writes the filter</dt><dd>The model — if it remembers to</dd></div>
+          <div class="sp-row"><dt>Failure mode</dt><dd>Talked past, misread, or just wrong</dd></div>
+          <div class="sp-row"><dt>Cost of failure</dt><dd>Company A sees Company B's contracts</dd></div>
+        </dl>
+      </div>
+      <div class="sp after">
+        <div class="sp-h">✓ &nbsp;Shipped · structural enforcement</div>
+        <dl>
+          <div class="sp-row"><dt>Boundary lives in</dt><dd>Auth wrapper + query executor</dd></div>
+          <div class="sp-row key"><dt>Who writes the filter</dt><dd>The system — injected programmatically</dd></div>
+          <div class="sp-row"><dt>Failure mode</dt><dd>None available — a query missing the clause never runs</dd></div>
+          <div class="sp-row"><dt>Cost of failure</dt><dd>N/A — structurally impossible</dd></div>
+        </dl>
+      </div>
+    </div>
+
+    <div class="flow">
+      <div class="flow-node"><div class="fn-k">Input</div><div class="fn-t">A buyer's question, typed in plain English</div></div>
+      <div class="flow-arrow">↓</div>
+      <div class="flow-node l1"><div class="fn-k">Auth wrapper</div><div class="fn-t">Injects the asking user's tenant_id, company_id, and role permissions into the query-generation context</div></div>
+      <div class="flow-arrow">↓</div>
+      <div class="flow-node l2"><div class="fn-k">Query generation</div><div class="fn-t">The model writes Databricks SQL against the curated lakehouse tables, free to reason about the business question</div><div class="fn-d">Creative about the "how" — never trusted with the tenant boundary.</div></div>
+      <div class="flow-arrow">↓</div>
+      <div class="flow-node l1"><div class="fn-k">Programmatic filter</div><div class="fn-t">The system forces WHERE tenant_id = 'X' onto the query before it's passed to Databricks</div><div class="fn-d">The model doesn't get to author this clause — and the system won't run a query missing it.</div></div>
+      <div class="flow-arrow">↓</div>
+      <div class="flow-node terminal"><div class="fn-k">Execute &amp; answer</div><div class="fn-t">Only then does the query run — against the Databricks Lakehouse, never production directly</div></div>
+    </div>
+
+    <div class="callout key">
+      <div class="co-label">The one part with zero tolerance for "good enough"</div>
+      <p>The result: the model is free to be creative about how it answers a question, but structurally incapable of reaching outside the asking company's own data. Everything else in this project could ship at 91% and improve in production. This had to be closed before day one.</p>
+    </div>
+  </div>
+
+  <!-- ============ §5 TESTING & VALIDATION ============ -->
+  <div class="cs-section">
+    <div class="cs-label">Testing &amp; validation</div>
+    <h2>91% right — and the misses clustered on phrasing</h2>
+    <p>Given the stakes — these are the same kinds of cross-entity questions described above, now being answered by a model instead of a person — we needed an honest read on reliability, including whether the same question asked differently would get the same answer.</p>
+    <p>We tested 57 distinct business questions, each phrased 2–3 different ways with the same underlying intent — e.g., "How many contracts were created in the last 1 year?" vs. "Number of contracts created in the last 365 days?" For each attempt, we ran a hand-written query to establish the known-correct answer and compared it against the LLM-generated query's result.</p>
+
+    <div class="pull-stats">
+      <div class="ps"><div class="n">57</div><div class="l">distinct business questions tested, each phrased 2–3 ways</div></div>
+      <div class="ps"><div class="n">91%</div><div class="l">of individual attempts returned the correct answer</div></div>
+      <div class="ps"><div class="n">642</div><div class="l">responses rated by admins since launch</div></div>
+    </div>
+
+    <p>The failures weren't random — they clustered on phrasing. The model could reliably answer a direct version of a question but sometimes failed on a semantically identical rephrasing. Given that these questions inform decisions about buyer conduct, bidding versus direct-award savings, and change-order approvals, an admin getting a different answer depending on how they worded the question wasn't an acceptable risk to launch broadly.</p>
+
+    <div class="callout warn">
+      <div class="co-label">Why 91% didn't mean "ship broadly"</div>
+      <p>A 9-in-10 hit rate sounds strong until you notice the misses aren't spread evenly — they hide inside specific phrasings, invisible until an admin happens to word a question the wrong way. That inconsistency, not the raw percentage, was the actual risk.</p>
+    </div>
+
+    <p>Rather than shelve the project or wait for a perfect score, we launched to internal admins only, in read-only mode, with the accuracy baseline disclosed to them explicitly — turning real usage into a feedback loop to identify which phrasing patterns broke the model, ahead of a broader rollout.</p>
+
+    <div class="econ">
+      <div class="eq win"><div class="eq-n">501</div><div class="eq-l">thumbs-up ratings since launch</div></div>
+      <div class="op">+</div>
+      <div class="eq"><div class="eq-n">141</div><div class="eq-l">thumbs-down ratings since launch</div></div>
+      <div class="op">=</div>
+      <div class="eq win"><div class="eq-n">78%</div><div class="eq-l">positive, of 642 rated responses — self-selected, since most responses go unrated</div></div>
+    </div>
+
+    <p>We don't yet have usage logging on the tool itself, so this rating data is currently the closest thing we have to an instrumented adoption signal — closing that logging gap is one of the first things planned post-launch.</p>
+  </div>
+
+  <!-- ============ §6 TRADE-OFFS TABLE ============ -->
+  <div class="cs-section">
+    <div class="cs-label">Summary</div>
+    <h2>Product trade-offs</h2>
+    <div class="cs-table-wrap">
+      <table class="cs-table">
+        <colgroup>
+          <col style="width:18%"><col style="width:30%"><col style="width:52%">
+        </colgroup>
+        <thead>
+          <tr><th>Decision area</th><th>What we chose</th><th>Why we chose it</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><span class="cell-lead">Interface</span></td><td>Reused OpenAI's chat architecture</td><td>Avoided building a UI from scratch; leveraged a familiar layout and chat history admins already knew.</td></tr>
+          <tr><td><span class="cell-lead">Permissions</span></td><td>Read-only access only</td><td>Avoided any risk of data mutation while query-accuracy and validation guardrails were still unproven.</td></tr>
+          <tr><td><span class="cell-lead">Multi-tenancy</span></td><td>Programmatic query injection, enforced structurally</td><td>Prompt-level instructions weren't good enough for a zero-tolerance risk; the tenant boundary had to be unbypassable, not just recommended.</td></tr>
+          <tr><td><span class="cell-lead">Rollout scope</span></td><td>Internal admins first, accuracy disclosed</td><td>Delivered real value immediately while turning early usage into a feedback loop instead of waiting for a perfect score.</td></tr>
+          <tr><td><span class="cell-lead">Validation approach</span></td><td>Manual comparison against 57 hand-verified questions, phrased multiple ways</td><td>Proportionate rigor for a small, admin-only beta — not a formal benchmark suite, but enough to catch a real failure pattern (phrasing sensitivity) before wider exposure.</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- ============ §7 WHAT I'D DO DIFFERENTLY ============ -->
+  <div class="cs-section">
+    <div class="cs-label">What I'd do differently</div>
+    <h2>Test coverage was thin, in hindsight</h2>
+    <p>57 questions with 2–3 phrasing variants each was enough to detect that phrasing sensitivity was a real failure mode, but not enough to fully characterize it — which phrasings break, how often, and why. Given the chance again, I'd rely less on a pre-built test set and more on instrumenting real usage from day one, so we could learn which phrasings actually trip up the model from real admin behavior rather than from what we anticipated testing for.</p>
+  </div>
+
+  <!-- ============ §8 WHAT'S NEXT ============ -->
+  <div class="cs-section">
+    <div class="cs-label">What's next</div>
+    <h2>From a one-off answer to a durable, trusted artifact</h2>
+    <p>Right now, an admin who wants the same answer regularly — say, the duplicate-work rate for a specific market — has to re-ask the chat every time, re-exposing that query to the same phrasing risk we found in testing. A natural next step is letting admins save a verified query and its visualization to a personal analytics page: once a question has been asked, translated, and confirmed correct, it becomes a durable artifact that gets re-executed directly going forward, rather than re-derived from language each time it's asked.</p>
+    <p>This depends on two things we don't have yet: usage logging, so we can tell which queries are actually common enough to be worth saving, and investment in the analytics platform itself, since the current stack isn't well-suited to hosting ad-hoc saved views.</p>
+
+    <div class="callout key">
+      <div class="co-label">The reusable lesson</div>
+      <p>Conceptually, this turns the chat tool from a one-off Q&amp;A interface into a discovery layer that feeds a better, permanent analytics platform — the same pattern as the multi-tenant boundary: let the model be creative where creativity is safe, and make the trusted, repeated parts structural rather than re-derived from language every time.</p>
+    </div>
+  </div>
+
+</div>
+
+<div class="wrap-narrow case-nav">
+  <a href="case-8.html">← I built the QA tool I wished I had</a>
+  <a href="index.html">Back to all work →</a>
+</div>
+
+</body>
+</html>
