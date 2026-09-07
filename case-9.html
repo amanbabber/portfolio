@@ -27,6 +27,13 @@
   <a href="index.html">← All case studies</a>
 </div>
 
+<div class="wrap-narrow">
+  <div class="callout key">
+    <div class="co-label">TL;DR</div>
+    <p>Scoped and led the rollout of an AI feature into a $8B-revenue, multi-tenant enterprise platform. The hard part wasn't the model — it was making the tenant-security boundary structurally unbypassable, and staging a rollout around an honest 91% accuracy number instead of waiting for perfect. Read for: cross-functional risk ownership, AI product judgment, staged rollout under real stakes.</p>
+  </div>
+</div>
+
 <!-- ============ §1 HERO ============ -->
 <header class="case-hero wrap-narrow">
   <div class="eyebrow">AI product · Natural-language interface · Databricks</div>
@@ -77,6 +84,12 @@
     <div class="cs-label">The solution</div>
     <h2>"Ask it like you'd ask a person"</h2>
     <p>Instead of adding another static report for every new question — a cycle that would never keep pace with how many different questions kept surfacing — we built a layer that could answer questions it had never seen a report for.</p>
+
+    <div class="callout">
+      <div class="co-label">Build vs. extend</div>
+      <p>ScopeWorker already had its own analytics tool, and extending it to cover this was on the table. But it was a legacy system — upgrading it enough to carry a natural-language layer was its own ~6-month project. Rather than gate this feature behind that rebuild, we built the natural-language layer on top of a new curated Databricks lakehouse instead, decoupling the launch from the legacy tool's timeline.</p>
+    </div>
+
     <p>A buyer or admin types the question directly, in plain English, into a familiar chat interface. Behind that single sentence, the system reads the question and the asking user's context and translates it into a Databricks SQL query — the same query an engineer would have had to hand-write for a one-off report — executes it against a curated analytics layer, and returns a plain-language answer alongside the underlying numbers. Not a cached report, not an approximation: the real answer to the real question asked.</p>
 
     <h3 style="font-size:17px; font-weight:600; margin-bottom:12px;">The data layer: a lakehouse, not the production databases</h3>
